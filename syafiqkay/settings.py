@@ -111,8 +111,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
+# To support both British English and Japanese, set the default to British English.
+# For Japanese, you can use Django's translation framework.
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
