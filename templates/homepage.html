@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}ホーム | ノートの庭{% endblock %}
+
+{% block content %}
+  <section style="margin-bottom: 3rem;">
+    <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">ようこそ</h2>
+    <p style="max-width: 650px; margin: 0 auto; font-style: italic;">
+      静かな土に、思考は根を張る。<br>
+      春が還るように、ゆっくりと花開く。<br><br>
+      <span style="font-style: normal;">
+        In quiet soil, thoughts take root.<br>
+        They bloom in time — soft and slow, like spring returning home.
+      </span>
+    </p>
+  </section>
+
+  <hr style="margin: 3rem auto; width: 40%;">
+
+  <section>
+    <h3 style="font-size: 1.4rem;">🔗 Quick Links</h3>
+    <ul style="list-style: none; padding: 0;">
+      <li style="margin: 0.5rem 0;"><a href="{% url 'journals:coming_soon' %}">📘 ジャーナル / Journal</a></li>
+      <li style="margin: 0.5rem 0;"><a href="{% url 'notoGarden:coming_soon' %}">🌿 ノートの庭 / Note Garden</a></li>
+      <li style="margin: 0.5rem 0;">
+        <a href="https://www.linkedin.com/in/syafiqkay/" target="_blank" rel="noopener">🔗 LinkedIn Profile</a>
+      </li>
+    </ul>
+  </section>
+{% endblock %}
