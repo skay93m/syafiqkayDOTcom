@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}ノートの庭 | syafiqkay.com{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body style="font-family: sans-serif; background-color: #f9f9f3; color: #222; text-align: center; padding: 2rem;">
+
+  <header>
+    <h1>ノートの庭</h1>
+    <p>A quiet garden of thoughts by Syafiq Kay</p>
+    <nav style="margin-top: 2rem;">
+      <a href="{% url 'homepage:homepage' %}">ホーム</a> |
+      <a href="{% url 'journals:coming_soon' %}">ジャーナル</a> |
+      <a href="{% url 'notoGarden:coming_soon' %}">ノート</a>
+    </nav>
+  </header>
+
+  <main style="margin-top: 3rem;">
+    {% block content %}
+    <!-- Child templates will inject content here -->
+    {% endblock %}
+  </main>
+
+    <footer style="margin-top: 4rem; font-size: 0.9rem; color: #777;">
+    <hr style="margin-bottom: 1rem;">
+    <p>&copy; {{ now|date:"Y" }} Syafiq Kay ｜ 全ての権利を保有しています。</p>
+
+    <p>
+        Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a> ｜ このサイトのコードは
+        <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MITライセンス</a> のもとで公開されています。
+    </p>
+    </footer>
+</body>
+</html>
