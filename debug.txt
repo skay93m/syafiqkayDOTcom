@@ -1,0 +1,3 @@
+Debugging Django Azure SQL connection with Entra ID. 
+ODBC direct test works, Django still fails. 
+Last tried updating OPTIONS in settings.py.
