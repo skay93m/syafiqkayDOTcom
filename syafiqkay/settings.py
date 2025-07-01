@@ -11,10 +11,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security settings
 import os
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")  # Secret key for cryptographic signing
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key")  # Secret key for cryptographic signing (safe fallback for local dev)
 
 # Debug and allowed hosts
-DEBUG = False  # Never set True in production
+DEBUG = True  # Set True for local development to see error details
 ALLOWED_HOSTS = [
     'syafiqkay.com',
     'www.syafiqkay.com',
@@ -72,20 +72,29 @@ TEMPLATES = [
 WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 
 
-# Database configuration (Azure SQL with Entra ID authentication)
+
+# --- For production (SQL Server) ---
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'mssql',  # Use 'mssql' for mssql-django backend
+#         'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
+#         'USER': os.environ.get('AZURE_SQL_DB_USER'),
+#         'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
+#         'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
+#         'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 18 for SQL Server',
+#             'authentication': 'ActiveDirectoryPassword',
+#             'extra_params': 'Encrypt=yes;TrustServerCertificate=yes;MARS_Connection=yes;trusted_connection=no;',
+#         },
+#     }
+# }
+
+# --- For local development (SQLite) ---
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',  # Use 'mssql' for mssql-django backend
-        'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
-        'USER': os.environ.get('AZURE_SQL_DB_USER'),
-        'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
-        'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
-        'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
-        'OPTIONS': {
-            'driver': 'ODBC Driver 18 for SQL Server',
-            'authentication': 'ActiveDirectoryPassword',
-            'extra_params': 'Encrypt=yes;TrustServerCertificate=yes;MARS_Connection=yes;trusted_connection=no;',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
