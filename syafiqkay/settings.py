@@ -99,10 +99,10 @@ WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 # --- PostgreSQL Database Configuration on Render ---
 import dj_database_url
 DATABASES = {
-    'default': dj_database_url.config({
-        default= os.environ.get('DATABASE_URL'),
+    'default': dj_database_url.config(
+        env='DATABASE_URL',  # Use DATABASE_URL environment variable
         conn_max_age=600  # Connection max age in seconds
-    }
+    )
 }
 
 # Password validation
