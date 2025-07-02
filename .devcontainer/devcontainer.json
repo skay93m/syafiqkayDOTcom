@@ -1,0 +1,6 @@
+{
+    "name": "My Codespace",
+    "remoteEnv": {
+        "DATABASE_URL": "${localEnv:DATABASE_URL}"
+    }
+}

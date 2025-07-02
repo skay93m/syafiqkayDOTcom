@@ -88,22 +88,30 @@ WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 #     }
 # }
 
-# --- For local development (SQLite) ---
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 # --- PostgreSQL Database Configuration on Render ---
 import dj_database_url
-DATABASES = {
-    'default': dj_database_url.config(
-        env='DATABASE_URL',  # Use DATABASE_URL environment variable
-        conn_max_age=600  # Connection max age in seconds
-    )
-}
+# Set the database engine via environment variable, defaulting to PostgreSQL
+
+if 'DATABASE_URL' in os.environ:
+    DB_ENGINE = os.environ.get('DJANGO_DB_ENGINE', 'django.db.backends.postgresql')
+    DATABASES = {
+        'default': {
+            'ENGINE': DB_ENGINE,  # Use engine from environment variable
+            'NAME': os.environ.get('RENDER_POSTGRES_DB_NAME', 'default_db_name'),
+            'USER': os.environ.get('RENDER_POSTGRES_USER', 'default_user'),
+            'PASSWORD': os.environ.get('RENDER_POSTGRES_PASSWORD', 'default_password'),
+            'HOST': os.environ.get('RENDER_POSTGRES_HOST', 'localhost'),
+            'PORT': os.environ.get('RENDER_POSTGRES_PORT', '5432'),  # Default PostgreSQL port
+        }
+    }
+    # Example: set DJANGO_DB_ENGINE to 'django.db.backends.sqlite3' for SQLite, or 'django.db.backends.postgresql' for PostgreSQL
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
