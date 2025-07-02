@@ -37,7 +37,6 @@ seaborn==0.13.2
 setuptools==80.9.0
 six==1.17.0
 sqlparse==0.5.3
-torch==2.7.0+cpu
 typing_extensions==4.14.0
 tzdata==2025.2
 urllib3==2.5.0
