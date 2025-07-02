@@ -102,18 +102,8 @@ WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 # --- Azure SQL Database Configuration ---
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
-        'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
-        'USER': os.environ.get('AZURE_SQL_DB_USER'),
-        'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
-        'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
-        'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
-        'OPTIONS': {
-            'driver': 'ODBC Driver 18 for SQL Server',
-            'encrypt': True,
-            'trust_server_certificate': False,
-            'connection_timeout': 30,
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
