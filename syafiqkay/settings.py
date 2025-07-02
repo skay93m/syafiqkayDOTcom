@@ -14,7 +14,7 @@ import os
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key")  # Secret key for cryptographic signing (safe fallback for local dev)
 
 # Debug and allowed hosts
-DEBUG = True  # Set True for local development to see error details
+DEBUG = False  # Set True for local development to see error details
 ALLOWED_HOSTS = [
     'syafiqkay.com',
     'www.syafiqkay.com',
