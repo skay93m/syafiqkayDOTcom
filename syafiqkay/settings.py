@@ -71,8 +71,6 @@ TEMPLATES = [
 # WSGI application
 WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 
-
-
 # --- For production (SQL Server) ---
 # DATABASES = {
 #     'default': {
@@ -91,10 +89,19 @@ WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 # }
 
 # --- For local development (SQLite) ---
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# --- PostgreSQL Database Configuration on Render ---
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default': dj_database_url.config({
+        default= os.environ.get('DATABASE_URL'),
+        conn_max_age=600  # Connection max age in seconds
     }
 }
 
@@ -126,15 +133,9 @@ USE_TZ = True
 # AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')    # Azure Storage account key
 # AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER', 'static')  # Azure Blob container name
 
-# STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'  # Use Azure backend for static files
-# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'  # Azure Blob domain
-# STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'     # Public URL for static files
-
-# Static files (CSS, JavaScript, Images)
-# Use local static files for development, Azure Blob Storage for production
-STATIC_URL = '/static/' # URL to access static files
-STATICFILES_DIRS = [BASE_DIR / "static"] # Additional directories to search for static files
-STATIC_ROOT = BASE_DIR / "staticfiles"  # Directory where static files will be collected
+STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'  # Use Azure backend for static files
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'  # Azure Blob domain
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'     # Public URL for static files
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
