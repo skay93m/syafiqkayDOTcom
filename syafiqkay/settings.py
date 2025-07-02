@@ -120,15 +120,21 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images) with Azure Blob Storage
-# Use django-storages and Azure Blob Storage for serving static files in production
-AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')  # Azure Storage account name
-AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')    # Azure Storage account key
-AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER', 'static')  # Azure Blob container name
+# # Static files (CSS, JavaScript, Images) with Azure Blob Storage
+# # Use django-storages and Azure Blob Storage for serving static files in production
+# AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')  # Azure Storage account name
+# AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')    # Azure Storage account key
+# AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER', 'static')  # Azure Blob container name
 
-STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'  # Use Azure backend for static files
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'  # Azure Blob domain
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'     # Public URL for static files
+# STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'  # Use Azure backend for static files
+# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'  # Azure Blob domain
+# STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'     # Public URL for static files
+
+# Static files (CSS, JavaScript, Images)
+# Use local static files for development, Azure Blob Storage for production
+STATIC_URL = '/static/' # URL to access static files
+STATICFILES_DIRS = [BASE_DIR / "static"] # Additional directories to search for static files
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Directory where static files will be collected
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
