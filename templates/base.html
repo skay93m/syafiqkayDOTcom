@@ -4,14 +4,13 @@
   <meta charset="UTF-8" />
   <title>{% block title %} Welcome | syafiqkay.com {% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-honoka@4.5.2/dist/css/bootstrap.min.css">
 </head>
-<body style="font-family: sans-serif; background-color: #f9f9f3; color: #222; padding: 2rem;">
+<body>
 
   <header>
     <h1>Syafiq Kay</h1>
-    <p>Pharmacist with multidisciplinary expertise in law, ethics and technology | Lifelong learner and innovator</p>
+    <p>Pharmacist with interest in law, ethics and technology | Lifelong learner and innovator</p>
     <nav style="margin-top: 2rem;">
       <a href="{% url 'homepage:homepage' %}">ホーム</a> |
       <a href="{% url 'journals:coming_soon' %}">ジャーナル</a> |
@@ -19,14 +18,14 @@
     </nav>
   </header>
 
-  <main style="margin-top: 3rem;">
+  <main>
     {% block content %}
     <!-- Child templates will inject content here -->
     {% endblock %}
   </main>
 
-    <footer style="margin-top: 4rem; font-size: 0.9rem; color: #777;">
-    <hr style="margin-bottom: 1rem;">
+    <footer>
+    <hr>
     <p>&copy; {{ now|date:"Y" }} Syafiq Kay ｜ 全ての権利を保有しています。</p>
 
     <p>
@@ -34,5 +33,11 @@
         <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MITライセンス</a> のもとで公開されています。
     </p>
     </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-honoka@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add any JavaScript functionality here if needed
+    });
+  </script>
 </body>
 </html>
