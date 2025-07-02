@@ -13,9 +13,15 @@ class Rirekisho(models.Model):
         verbose_name_plural = '履歴書'
 =======
 
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='更新日時')
     class Meta:
         verbose_name = 'Statement'
+<<<<<<< HEAD
 >>>>>>> fec6094 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
+=======
+        verbose_name = '履歴書'
+        verbose_name_plural = '履歴書'
+>>>>>>> 66266e2 (Refactor code structure and remove redundant changes)
         ordering = ['-version']
 
     def __str__(self):
