@@ -1,30 +1,29 @@
 {% extends "base.html" %}
-
 {% block title %}ホーム | Welcome to my website!{% endblock %}
-
 {% block content %}
-<div>
-  <section>
-    <h1>ようこそ</h1>
+<div class="container justify-content-*-center">
+  <h1 class="display-4 text-center">ようこそ</h1>
+  <section class="jumbotron">
   {% if rirekisho %}
-
     <article>
-      <p>{{ rirekisho.personal_statement|linebreaks }}</p>
+      <p>{{ rirekisho.personal_statement|linebreaks }}</p><br>
+      <small class="text-*-right text-muted">Last updated: {{ rirekisho.updated_at }}</small>
     </article>
-    <small>(Last updated: {{ rirekisho.updated_at }})</small>
   </section>
   {% else %}
     <p>No data available yet.</p>
   </section>
   {% endif %}
   </section>
-
+</div>
+<div class="container">
   <section>
-    <h3>🔗 Full Profile on LinkedIn</h3>
-    <p>
-      詳しい履歴書は、<strong>LinkedIn</strong>の「四次元ポケット」にしまってあります。<br>
-      Need a gadget for more details? My full CV is tucked away in my LinkedIn pocket — just like Doraemon’s secret tools.<br>
-      <a href="https://www.linkedin.com/in/syafiqkay/" target="_blank" rel="noopener">🔗 LinkedIn Profile</a>
+    <h4 class="text-center">Full Profile on LinkedIn</h4>
+    <p class="text-center">
+      I keep my full professional background, experiences, and achievement on <strong>LinkedIn</strong>. Feel free to reach out <a href="https://www.linkedin.com/in/syafiqkay/" target="_blank" rel="noopener">🔗 here</a>—I'm always open to meaningful conversations and new opportunities.      
+    </p>
+    <p class="text-center">
+      私の職務経歴、経験、実績の詳細は<strong>LinkedIn</strong>に掲載しています。ご興味があれば、<a href="https://www.linkedin.com/in/syafiqkay/" target="_blank" rel="noopener">🔗 こちら</a>からお気軽にご連絡ください。新しいご縁やお話をいつでもお待ちしています。
     </p>
   </section>
 </div>
