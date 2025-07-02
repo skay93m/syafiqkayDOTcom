@@ -14,21 +14,14 @@ import os
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key")  # Secret key for cryptographic signing (safe fallback for local dev)
 
 # Debug and allowed hosts
-DEBUG = False  # Set True for local development to see error details
+DEBUG = True  # Set True for local development to see error details
 ALLOWED_HOSTS = [
     'syafiqkay.com',
     'www.syafiqkay.com',
-    'syafiqkay.local',
     'localhost',
     '127.0.0.1',
     'syafiq-kay.onrender.com',  # Render.com deployment
-    'syafiq-kay.onrender.com:443',  # Render.com deployment with port
-    'syafiq-kay.onrender.com:80',   # Render.com deployment
-    'syafiq-kay.onrender.com:8000',  # Render.com deployment
-    'syafiq-kay.onrender.com:5000',  # Render.com deployment
-    'syafiq-kay.onrender.com:3000',  # Render.com deployment
-    'syafiq-kay.onrender.com:8080',  # Render.com deployment
-    'syafiq-kay.onrender.com:5001',  # Render.com deployment
+    'syafiq-kay.onrender.com:10000',  # Render.com deployment with port
 ]
 
 # Application definition
