@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}ホーム | Welcome to my website!{% endblock %}
 {% block content %}
+<<<<<<< HEAD
 <div class="container justify-content-*-center">
   <h1 class="display-4 text-center">ようこそ</h1>
   <section class="jumbotron">
@@ -9,11 +10,83 @@
       <p>{{ rirekisho.personal_statement|linebreaks }}</p><br>
       <small class="text-*-right text-muted">Last updated: {{ rirekisho.updated_at }}</small>
     </article>
+=======
+  <section>
+    <h2>ようこそ</h2>
+    <p>
+      静かな土に、思考は根を張る。<br>
+      春が還るように、ゆっくりと花開く。<br><br>
+      <span>
+        In quiet soil, thoughts take root.<br>
+        They bloom in time — soft and slow, like spring returning home.
+      </span>
+    </p>
+  </section>
+
+  <hr>
+
+  {% if rirekisho %}
+  <section>
+    <div>
+      <h3>📄 履歴書 / Rirekisho <span>(v{{ rirekisho.version }})</span></h3>
+      <div>
+        <h4>Personal Statement</h4>
+        <p>{{ rirekisho.personal_statement|linebreaks }}</p>
+        <h4>Work Experience</h4>
+        {% if work_experiences %}
+          <ul>
+          {% for exp in work_experiences %}
+            <li>
+              <strong>{{ exp.role }}</strong> at <strong>{{ exp.company }}</strong><br>
+              <span>
+                {{ exp.start_date }} - {% if exp.end_date %}{{ exp.end_date }}{% else %}Present{% endif %}
+              </span>
+              {% if exp.description %}<br><span>{{ exp.description|linebreaks }}</span>{% endif %}
+            </li>
+          {% endfor %}
+          </ul>
+        {% else %}
+          <p>No work experience listed.</p>
+        {% endif %}
+        <h4>Education</h4>
+        {% if educations %}
+          <ul>
+          {% for edu in educations %}
+            <li>
+              <strong>{{ edu.degree }}</strong> at <strong>{{ edu.institution }}</strong>
+              {% if edu.field_of_study %} ({{ edu.field_of_study }}){% endif %}<br>
+              <span>
+                {{ edu.start_date }} - {% if edu.end_date %}{{ edu.end_date }}{% else %}Present{% endif %}
+              </span>
+              {% if edu.description %}<br><span>{{ edu.description|linebreaks }}</span>{% endif %}
+            </li>
+          {% endfor %}
+          </ul>
+        {% else %}
+          <p>No education listed.</p>
+        {% endif %}
+      </div>
+    </div>
+>>>>>>> 896496c (Refactor code structure and remove redundant changes for improved clarity and maintainability)
   </section>
   {% else %}
     <p>No data available yet.</p>
   </section>
   {% endif %}
+<<<<<<< HEAD
+=======
+{% endblock %}
+
+  <hr>
+
+  <section>
+    <h3>🔗 Quick Links</h3>
+    <ul>
+      <li>
+        <a href="https://www.linkedin.com/in/syafiqkay/" target="_blank" rel="noopener">🔗 LinkedIn Profile</a>
+      </li>
+    </ul>
+>>>>>>> 896496c (Refactor code structure and remove redundant changes for improved clarity and maintainability)
   </section>
 </div>
 <div class="container">

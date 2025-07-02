@@ -2,6 +2,7 @@
 <html lang="en" xml:lang="en-ja">
 {% load static %}
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Welcome | syafiqkay.com{% endblock %}</title>
@@ -42,5 +43,45 @@
       このサイトのコードは <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MITライセンス</a> のもとで公開されています。
     </small>
   </footer>
+=======
+  <meta charset="UTF-8" />
+  <title>{% block title %} Welcome | syafiqkay.com {% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-honoka@4.5.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+  <header>
+    <h1>Syafiq Kay</h1>
+    <p>Pharmacist with interest in law, ethics and technology | Lifelong learner and innovator</p>
+    <nav style="margin-top: 2rem;">
+      <a href="{% url 'homepage:homepage' %}">ホーム</a> |
+      <a href="{% url 'journals:coming_soon' %}">ジャーナル</a> |
+      <a href="{% url 'notoGarden:coming_soon' %}">ノート</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}
+    <!-- Child templates will inject content here -->
+    {% endblock %}
+  </main>
+
+    <footer>
+    <hr>
+    <p>&copy; {{ now|date:"Y" }} Syafiq Kay ｜ 全ての権利を保有しています。</p>
+
+    <p>
+        Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a> ｜ このサイトのコードは
+        <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MITライセンス</a> のもとで公開されています。
+    </p>
+    </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-honoka@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add any JavaScript functionality here if needed
+    });
+  </script>
+>>>>>>> 896496c (Refactor code structure and remove redundant changes for improved clarity and maintainability)
 </body>
 </html>

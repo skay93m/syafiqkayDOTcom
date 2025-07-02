@@ -92,19 +92,26 @@ WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 import dj_database_url
 # Set the database engine via environment variable, defaulting to PostgreSQL
 
-if 'DATABASE_URL' in os.environ:
+# Try using dj_database_url with DATABASE_URL
+database_url = "postgresql://syafiq:IF7utHmr4hHE2djGkvkBZqET3lCOU3Om@dpg-d1iipmqdbo4c73f8bg6g-a.frankfurt-postgres.render.com/syafiq_kay_dotcom"
+if database_url:
+    DATABASES = {
+        'default': dj_database_url.parse(database_url, conn_max_age=600)
+    }
+elif all(var in os.environ for var in [
+    'RENDER_POSTGRES_DB_NAME', 'RENDER_POSTGRES_USER', 'RENDER_POSTGRES_PASSWORD', 'RENDER_POSTGRES_HOST'
+]):
     DB_ENGINE = os.environ.get('DJANGO_DB_ENGINE', 'django.db.backends.postgresql')
     DATABASES = {
         'default': {
-            'ENGINE': DB_ENGINE,  # Use engine from environment variable
+            'ENGINE': DB_ENGINE,
             'NAME': os.environ.get('RENDER_POSTGRES_DB_NAME', 'default_db_name'),
             'USER': os.environ.get('RENDER_POSTGRES_USER', 'default_user'),
             'PASSWORD': os.environ.get('RENDER_POSTGRES_PASSWORD', 'default_password'),
             'HOST': os.environ.get('RENDER_POSTGRES_HOST', 'localhost'),
-            'PORT': os.environ.get('RENDER_POSTGRES_PORT', '5432'),  # Default PostgreSQL port
+            'PORT': os.environ.get('RENDER_POSTGRES_PORT', '5432'),
         }
     }
-    # Example: set DJANGO_DB_ENGINE to 'django.db.backends.sqlite3' for SQLite, or 'django.db.backends.postgresql' for PostgreSQL
 else:
     DATABASES = {
         'default': {
