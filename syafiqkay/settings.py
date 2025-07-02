@@ -21,6 +21,14 @@ ALLOWED_HOSTS = [
     'syafiqkay.local',
     'localhost',
     '127.0.0.1',
+    'syafiq-kay.onrender.com',  # Render.com deployment
+    'syafiq-kay.onrender.com:443',  # Render.com deployment with port
+    'syafiq-kay.onrender.com:80',   # Render.com deployment
+    'syafiq-kay.onrender.com:8000',  # Render.com deployment
+    'syafiq-kay.onrender.com:5000',  # Render.com deployment
+    'syafiq-kay.onrender.com:3000',  # Render.com deployment
+    'syafiq-kay.onrender.com:8080',  # Render.com deployment
+    'syafiq-kay.onrender.com:5001',  # Render.com deployment
 ]
 
 # Application definition
