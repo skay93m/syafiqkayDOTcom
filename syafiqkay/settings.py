@@ -72,6 +72,7 @@ INSTALLED_APPS = [
 # Middleware configuration
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',          # Security enhancements (e.g., HTTPS, HSTS)
+    'whitenoise.middleware.WhiteNoiseMiddleware',             # WhiteNoise for static file serving fallback
     'django.contrib.sessions.middleware.SessionMiddleware',   # Session management
     'django.middleware.common.CommonMiddleware',              # Common HTTP features (e.g., URL normalization)
     'django.middleware.csrf.CsrfViewMiddleware',              # CSRF protection
