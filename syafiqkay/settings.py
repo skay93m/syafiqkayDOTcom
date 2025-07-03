@@ -41,7 +41,6 @@ INSTALLED_APPS = [
 # Middleware configuration
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',          # Security enhancements (e.g., HTTPS, HSTS)
-    'whitenoise.middleware.WhiteNoiseMiddleware',             # WhiteNoise for static file serving fallback
     'django.contrib.sessions.middleware.SessionMiddleware',   # Session management
     'django.middleware.common.CommonMiddleware',              # Common HTTP features (e.g., URL normalization)
     'django.middleware.csrf.CsrfViewMiddleware',              # CSRF protection
@@ -72,42 +71,24 @@ TEMPLATES = [
 # WSGI application
 WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 
-# --- For production (SQL Server) ---
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'mssql',  # Use 'mssql' for mssql-django backend
-#         'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
-#         'USER': os.environ.get('AZURE_SQL_DB_USER'),
-#         'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
-#         'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
-#         'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
-#         'OPTIONS': {
-#             'driver': 'ODBC Driver 18 for SQL Server',
-#             'authentication': 'ActiveDirectoryPassword',
-#             'extra_params': 'Encrypt=yes;TrustServerCertificate=yes;MARS_Connection=yes;trusted_connection=no;',
-#         },
-#     }
-# }
-
-# --- PostgreSQL Database Configuration on Render ---
-import dj_database_url # type: ignore
-database_url = os.environ.get("DATABASE_URL")
-if database_url:
-    DATABASES = {
-        'default': dj_database_url.parse(database_url, conn_max_age=600)
-    }
-elif all(var in os.environ for var in [
-    'RENDER_POSTGRES_DB_NAME', 'RENDER_POSTGRES_USER', 'RENDER_POSTGRES_PASSWORD', 'RENDER_POSTGRES_HOST'
+# --- Azure SQL Database Configuration ---
+if all(var in os.environ for var in [
+    'AZURE_SQL_DB_NAME', 'AZURE_SQL_DB_USER', 'AZURE_SQL_DB_PASSWORD', 'AZURE_SQL_DB_HOST'
 ]):
-    DB_ENGINE = os.environ.get('DJANGO_DB_ENGINE', 'django.db.backends.postgresql')
     DATABASES = {
         'default': {
-            'ENGINE': DB_ENGINE,
-            'NAME': os.environ.get('RENDER_POSTGRES_DB_NAME', 'default_db_name'),
-            'USER': os.environ.get('RENDER_POSTGRES_USER', 'default_user'),
-            'PASSWORD': os.environ.get('RENDER_POSTGRES_PASSWORD', 'default_password'),
-            'HOST': os.environ.get('RENDER_POSTGRES_HOST', 'localhost'),
-            'PORT': os.environ.get('RENDER_POSTGRES_PORT', '5432'),
+            'ENGINE': 'mssql',
+            'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
+            'USER': os.environ.get('AZURE_SQL_DB_USER'),
+            'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
+            'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
+            'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
+            'OPTIONS': {
+            'driver': 'ODBC Driver 18 for SQL Server',
+            'encrypt': True,
+            'trust_server_certificate': False,
+            'connection_timeout': 30,
+            },
         }
     }
 else:
@@ -141,13 +122,17 @@ USE_I18N = True
 USE_TZ = True
 
 
-# --- static files configuration ---
-# Use local static files with WhiteNoise for all environments
-STATIC_URL = '/static/'  # URL to access static files
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Directory where static files will be collected
+# --- static files configuration for Azure Blob Storage ---
+AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME")
+AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")
+AZURE_CONTAINER = os.environ.get("AZURE_CONTAINER", "static")
+
+STATIC_LOCATION = AZURE_CONTAINER
+STATIC_URL = f"https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{STATIC_LOCATION}/"
+STATICFILES_STORAGE = "storages.backends.azure_storage.AzureStorage"
+AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
+AZURE_SSL = True
 STATICFILES_DIRS = [BASE_DIR / 'static']
-# Use WhiteNoise for static file serving in production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
