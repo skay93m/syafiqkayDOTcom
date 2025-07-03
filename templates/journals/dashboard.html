@@ -10,7 +10,7 @@
             <p class="mb-1">{{ journal.summary|truncatewords:20 }}</p>
         </a>
         {% empty %}
-        <p>No journals available.</p>
+        {% include "coming_soon.html" %}
         {% endfor %}
     </div>
 </div>
