@@ -14,6 +14,7 @@ idna==3.10
 isodate==0.7.2
 mssql-django==1.5
 packaging==25.0
+psycopg2>=2.9,<3.0
 pycparser==2.22
 pyodbc==5.2.0
 python-dotenv==1.1.1
