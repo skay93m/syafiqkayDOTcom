@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Journals Dashboard</h1>
+    <div class="list-group">
+        {% for journal in journals %}
+        <a href="{{ journal.get_absolute_url }}" class="list-group-item list-group-item-action">
+            <h5 class="mb-1">{{ journal.title }}</h5>
+            <small class="text-muted">{{ journal.created_at|date:'Y-m-d' }}</small>
+            <p class="mb-1">{{ journal.summary|truncatewords:20 }}</p>
+        </a>
+        {% empty %}
+        <p>No journals available.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

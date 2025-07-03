@@ -1,5 +1,5 @@
-from django.contrib import admin
-# from .models import YourModel  # Replace 'YourModel' with your actual model class
 
-# Register your models here.
-# admin.site.register(YourModel)  # Register your model with the admin site
+from django.contrib import admin
+from .models import Journal
+
+admin.site.register(Journal)

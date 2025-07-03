@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="container mt-5">
+    <a href="{% url 'journals:dashboard' %}" class="btn btn-secondary mb-3">&larr; Back to Dashboard</a>
+    <h1>{{ journal.title }}</h1>
+    <p class="text-muted">{{ journal.created_at|date:'Y-m-d' }}</p>
+    <div class="mt-4">
+        {{ journal.content|linebreaks }}
+    </div>
+</div>
+{% endblock %}
