@@ -12,8 +12,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key")  # Secret key for cryptographic signing (safe fallback for local dev)
 
-# Debug and allowed hosts
-DEBUG = False  # Set False to test custom error pages
+"""
+Set DEBUG based on environment variable DJANGO_DEBUG.
+If not set, default to False for safety.
+Set DJANGO_DEBUG=True in your .env for local development.
+"""
+DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() in ("1", "true", "yes")
 ALLOWED_HOSTS = [
     'syafiqkay.com',
     'www.syafiqkay.com',
@@ -72,32 +76,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 
 # --- Azure SQL Database Configuration ---
-if all(var in os.environ for var in [
-    'AZURE_SQL_DB_NAME', 'AZURE_SQL_DB_USER', 'AZURE_SQL_DB_PASSWORD', 'AZURE_SQL_DB_HOST'
-]):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'mssql',
-            'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
-            'USER': os.environ.get('AZURE_SQL_DB_USER'),
-            'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
-            'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
-            'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
-            'OPTIONS': {
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
+        'USER': os.environ.get('AZURE_SQL_DB_USER'),
+        'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
+        'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
+        'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
+        'OPTIONS': {
             'driver': 'ODBC Driver 18 for SQL Server',
             'encrypt': True,
             'trust_server_certificate': False,
             'connection_timeout': 30,
-            },
-        }
+        },
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
