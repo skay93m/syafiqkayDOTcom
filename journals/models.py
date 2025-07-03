@@ -1,5 +1,6 @@
 
 from django.db import models
+<<<<<<< HEAD
 
 
 from django.contrib.auth import get_user_model
@@ -43,3 +44,5 @@ class Journal(models.Model):
                 badges.append(f'<span class="badge bg-success me-1" style="background-color: #C8E6C9 !important; color: #333 !important;">{tag}</span>')
             return ' '.join(badges)
         return ''
+=======
+>>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)

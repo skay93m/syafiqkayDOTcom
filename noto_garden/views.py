@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -362,3 +363,10 @@ def validate_note_input(title, content):
             raise ValidationError("Content contains potentially unsafe elements")
     
     return title.strip(), content.strip()
+=======
+from django.shortcuts import render
+
+# noto_garden/views.py
+def coming_soon(request):
+    return render(request, "noto_garden/coming_soon.html")
+>>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)

@@ -1,4 +1,5 @@
 from django.contrib import admin
+<<<<<<< HEAD
 from .models import Note, Tag
 
 @admin.register(Tag)
@@ -28,3 +29,9 @@ class NoteAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+=======
+# from .models import YourModel  # Replace 'YourModel' with your actual model name
+
+# Register your models here.
+# admin.site.register(YourModel)  # Register your model with the admin site
+>>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)

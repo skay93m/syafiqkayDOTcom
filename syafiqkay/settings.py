@@ -61,8 +61,11 @@ INSTALLED_APPS = [
     'homepage',                     # Custom app: homepage
     'journals',                     # Custom app: journals
     'noto_garden',                   # Custom app: noto_garden
+<<<<<<< HEAD
     'reference',
     'experiments',                    # Custom app: reference
+=======
+>>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
     'storages',                   # Django-storages for cloud storage backends
 ]
 
@@ -99,11 +102,58 @@ TEMPLATES = [
 # WSGI application
 WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 
+<<<<<<< HEAD
 # --- Azure SQL Database Configuration ---
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+=======
+# --- For production (SQL Server) ---
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'mssql',  # Use 'mssql' for mssql-django backend
+#         'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
+#         'USER': os.environ.get('AZURE_SQL_DB_USER'),
+#         'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
+#         'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
+#         'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 18 for SQL Server',
+#             'authentication': 'ActiveDirectoryPassword',
+#             'extra_params': 'Encrypt=yes;TrustServerCertificate=yes;MARS_Connection=yes;trusted_connection=no;',
+#         },
+#     }
+# }
+
+# --- PostgreSQL Database Configuration on Render ---
+import dj_database_url
+database_url = os.environ.get("DATABASE_URL")
+if database_url:
+    DATABASES = {
+        'default': dj_database_url.parse(database_url, conn_max_age=600)
+    }
+elif all(var in os.environ for var in [
+    'RENDER_POSTGRES_DB_NAME', 'RENDER_POSTGRES_USER', 'RENDER_POSTGRES_PASSWORD', 'RENDER_POSTGRES_HOST'
+]):
+    DB_ENGINE = os.environ.get('DJANGO_DB_ENGINE', 'django.db.backends.postgresql')
+    DATABASES = {
+        'default': {
+            'ENGINE': DB_ENGINE,
+            'NAME': os.environ.get('RENDER_POSTGRES_DB_NAME', 'default_db_name'),
+            'USER': os.environ.get('RENDER_POSTGRES_USER', 'default_user'),
+            'PASSWORD': os.environ.get('RENDER_POSTGRES_PASSWORD', 'default_password'),
+            'HOST': os.environ.get('RENDER_POSTGRES_HOST', 'localhost'),
+            'PORT': os.environ.get('RENDER_POSTGRES_PORT', '5432'),
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+>>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
     }
 }
 
