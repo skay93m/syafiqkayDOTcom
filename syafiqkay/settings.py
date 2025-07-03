@@ -1,5 +1,5 @@
 # Load environment variables from .env before anything else
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 load_dotenv()
 
 # Path settings
@@ -13,7 +13,7 @@ import os
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key")  # Secret key for cryptographic signing (safe fallback for local dev)
 
 # Debug and allowed hosts
-DEBUG = True  # Set True for local development to see error details
+DEBUG = False  # Set False to test custom error pages
 ALLOWED_HOSTS = [
     'syafiqkay.com',
     'www.syafiqkay.com',
@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 # }
 
 # --- PostgreSQL Database Configuration on Render ---
-import dj_database_url
+import dj_database_url # type: ignore
 database_url = os.environ.get("DATABASE_URL")
 if database_url:
     DATABASES = {
