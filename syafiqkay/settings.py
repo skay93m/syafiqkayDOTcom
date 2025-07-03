@@ -8,7 +8,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Security settings
 import os
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key")  # Secret key for cryptographic signing (safe fallback for local dev)
@@ -35,8 +34,8 @@ INSTALLED_APPS = [
     # Project apps
     'homepage',                     # Custom app: homepage
     'journals',                     # Custom app: journals
-    'notoGarden',                   # Custom app: notoGarden
-    'storages',
+    'noto_garden',                   # Custom app: noto_garden
+    'storages',                   # Django-storages for cloud storage backends
 ]
 
 # Middleware configuration
@@ -91,10 +90,7 @@ WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 
 # --- PostgreSQL Database Configuration on Render ---
 import dj_database_url
-# Set the database engine via environment variable, defaulting to PostgreSQL
-
-# Try using dj_database_url with DATABASE_URL
-database_url = "postgresql://syafiq:IF7utHmr4hHE2djGkvkBZqET3lCOU3Om@dpg-d1iipmqdbo4c73f8bg6g-a.frankfurt-postgres.render.com/syafiq_kay_dotcom"
+database_url = os.environ.get("DATABASE_URL")
 if database_url:
     DATABASES = {
         'default': dj_database_url.parse(database_url, conn_max_age=600)
@@ -143,15 +139,24 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# # Static files (CSS, JavaScript, Images) with Azure Blob Storage
-# # Use django-storages and Azure Blob Storage for serving static files in production
-# AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')  # Azure Storage account name
-# AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')    # Azure Storage account key
-# AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER', 'static')  # Azure Blob container name
+# Static files (CSS, JavaScript, Images) with Azure Blob Storage
+# Use django-storages and Azure Blob Storage for serving static files in production
+AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')  # Azure Storage account name
 
-STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'  # Use Azure backend for static files
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'  # Azure Blob domain
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'     # Public URL for static files
+# --- static files configuration ---
+# Use Azure Blob Storage for static files if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY are set, else use local static files
+AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')
+AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')
+AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER', 'static')
+
+if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY and not DEBUG:
+    STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+    AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+    STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
+else:
+    STATIC_URL = '/static/'  # URL to access static files
+    STATIC_ROOT = BASE_DIR / 'staticfiles'  # Directory where static files will be collected
+    STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
