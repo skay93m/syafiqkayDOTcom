@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 # Middleware configuration
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',          # Security enhancements (e.g., HTTPS, HSTS)
+    'whitenoise.middleware.WhiteNoiseMiddleware',             # WhiteNoise for static file serving fallback
     'django.contrib.sessions.middleware.SessionMiddleware',   # Session management
     'django.middleware.common.CommonMiddleware',              # Common HTTP features (e.g., URL normalization)
     'django.middleware.csrf.CsrfViewMiddleware',              # CSRF protection
@@ -139,24 +140,14 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images) with Azure Blob Storage
-# Use django-storages and Azure Blob Storage for serving static files in production
-AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')  # Azure Storage account name
 
 # --- static files configuration ---
-# Use Azure Blob Storage for static files if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY are set, else use local static files
-AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')
-AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')
-AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER', 'static')
-
-if AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY and not DEBUG:
-    STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-    AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-    STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
-else:
-    STATIC_URL = '/static/'  # URL to access static files
-    STATIC_ROOT = BASE_DIR / 'staticfiles'  # Directory where static files will be collected
-    STATICFILES_DIRS = [BASE_DIR / 'static']
+# Use local static files with WhiteNoise for all environments
+STATIC_URL = '/static/'  # URL to access static files
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Directory where static files will be collected
+STATICFILES_DIRS = [BASE_DIR / 'static']
+# Use WhiteNoise for static file serving in production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
