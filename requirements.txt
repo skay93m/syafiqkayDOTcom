@@ -9,9 +9,11 @@ cryptography==45.0.4
 dj-database-url==3.0.1
 Django==5.0.14
 django-storages==1.14.6
+gunicorn==23.0.0
 idna==3.10
 isodate==0.7.2
 mssql-django==1.5
+packaging==25.0
 pycparser==2.22
 pyodbc==5.2.0
 python-dotenv==1.1.1
