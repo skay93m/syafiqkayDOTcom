@@ -72,7 +72,6 @@ INSTALLED_APPS = [
 # Middleware configuration
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',          # Security enhancements (e.g., HTTPS, HSTS)
-    'whitenoise.middleware.WhiteNoiseMiddleware',             # WhiteNoise for static file serving fallback
     'django.contrib.sessions.middleware.SessionMiddleware',   # Session management
     'django.middleware.common.CommonMiddleware',              # Common HTTP features (e.g., URL normalization)
     'django.middleware.csrf.CsrfViewMiddleware',              # CSRF protection
@@ -103,13 +102,6 @@ TEMPLATES = [
 # WSGI application
 WSGI_APPLICATION = 'syafiqkay.wsgi.application'
 
-<<<<<<< HEAD
-# --- Azure SQL Database Configuration ---
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-=======
 # --- For production (SQL Server) ---
 # DATABASES = {
 #     'default': {
@@ -128,7 +120,7 @@ DATABASES = {
 # }
 
 # --- PostgreSQL Database Configuration on Render ---
-import dj_database_url
+import dj_database_url # type: ignore
 database_url = os.environ.get("DATABASE_URL")
 if database_url:
     DATABASES = {
@@ -137,15 +129,20 @@ if database_url:
 elif all(var in os.environ for var in [
     'RENDER_POSTGRES_DB_NAME', 'RENDER_POSTGRES_USER', 'RENDER_POSTGRES_PASSWORD', 'RENDER_POSTGRES_HOST'
 ]):
-    DB_ENGINE = os.environ.get('DJANGO_DB_ENGINE', 'django.db.backends.postgresql')
     DATABASES = {
         'default': {
-            'ENGINE': DB_ENGINE,
-            'NAME': os.environ.get('RENDER_POSTGRES_DB_NAME', 'default_db_name'),
-            'USER': os.environ.get('RENDER_POSTGRES_USER', 'default_user'),
-            'PASSWORD': os.environ.get('RENDER_POSTGRES_PASSWORD', 'default_password'),
-            'HOST': os.environ.get('RENDER_POSTGRES_HOST', 'localhost'),
-            'PORT': os.environ.get('RENDER_POSTGRES_PORT', '5432'),
+            'ENGINE': 'mssql',
+            'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
+            'USER': os.environ.get('AZURE_SQL_DB_USER'),
+            'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
+            'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
+            'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
+            'OPTIONS': {
+            'driver': 'ODBC Driver 18 for SQL Server',
+            'encrypt': True,
+            'trust_server_certificate': False,
+            'connection_timeout': 30,
+            },
         }
     }
 else:
