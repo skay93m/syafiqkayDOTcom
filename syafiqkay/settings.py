@@ -17,7 +17,7 @@ Set DEBUG based on environment variable DJANGO_DEBUG.
 If not set, default to False for safety.
 Set DJANGO_DEBUG=True in your .env for local development.
 """
-DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() in ("1", "true", "yes")
+DEBUG = True
 ALLOWED_HOSTS = [
     'syafiqkay.com',
     'www.syafiqkay.com',
