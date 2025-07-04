@@ -1,10 +1,12 @@
-FROM python:3.13
 
-# Install system dependencies
+# Use a Debian base image compatible with Microsoft ODBC 18 driver
+FROM python:3.13-slim-bullseye
+
+# Install system dependencies and ODBC 18 driver
 RUN apt-get update && \
     ACCEPT_EULA=Y apt-get install -y curl gnupg apt-transport-https && \
     curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
-    curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
+    curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
     apt-get update && \
     ACCEPT_EULA=Y apt-get install -y msodbcsql18 unixodbc-dev
 
