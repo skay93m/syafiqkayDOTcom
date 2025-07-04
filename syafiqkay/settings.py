@@ -1,3 +1,12 @@
+# Custom 403 handler for admin and all views
+from django.conf import settings
+from django.conf.urls import handler403
+
+def custom_permission_denied_view(request, exception=None):
+    from django.shortcuts import render
+    return render(request, "403.html", status=403)
+
+handler403 = "syafiqkay.settings.custom_permission_denied_view"
 # Load environment variables from .env before anything else
 from dotenv import load_dotenv # type: ignore
 load_dotenv()
@@ -18,6 +27,7 @@ If not set, default to False for safety.
 Set DJANGO_DEBUG=True in your .env for local development.
 """
 DEBUG = True
+
 ALLOWED_HOSTS = [
     'syafiqkay.com',
     'www.syafiqkay.com',
@@ -26,6 +36,13 @@ ALLOWED_HOSTS = [
     'syafiq-kay.onrender.com',  # Render.com deployment (old)
     'syafiq-kay.onrender.com:10000',  # Render.com deployment with port (old)
     'syafiq-kay-1.onrender.com',  # Render.com deployment (new)
+]
+
+# CSRF trusted origins for production and staging
+CSRF_TRUSTED_ORIGINS = [
+    "https://syafiqkay.com",
+    "https://www.syafiqkay.com",
+    "https://syafiq-kay-1.onrender.com",
 ]
 
 # Application definition
