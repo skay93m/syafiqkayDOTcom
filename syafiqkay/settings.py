@@ -26,7 +26,7 @@ Set DEBUG based on environment variable DJANGO_DEBUG.
 If not set, default to False for safety.
 Set DJANGO_DEBUG=True in your .env for local development.
 """
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'syafiqkay.com',

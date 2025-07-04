@@ -15,7 +15,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Journal
 
 def coming_soon(request):
-    pass
+    return render(request, 'journals/coming_soon.html')
 
 def dashboard(request):
     journals = Journal.objects.all().order_by('-created_at')
