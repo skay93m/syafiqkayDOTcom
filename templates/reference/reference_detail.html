@@ -34,9 +34,14 @@
                             </div>
                             <div class="text-muted">
                                 <small>
-                                    Created: {{ reference.created_at|date:"M d, Y" }}
+                                    <span class="jp-text">作成: {{ reference.created_at|date:"Y年m月d日" }}</span>
+                                    <br>
+                                    <span>Created: {{ reference.created_at|date:"jS F Y" }}</span>
                                     {% if reference.updated_at != reference.created_at %}
-                                        <br>Updated: {{ reference.updated_at|date:"M d, Y" }}
+                                        <br>
+                                        <span class="jp-text">更新: {{ reference.updated_at|date:"Y年m月d日" }}</span>
+                                        <br>
+                                        <span>Updated: {{ reference.updated_at|date:"jS F Y" }}</span>
                                     {% endif %}
                                 </small>
                             </div>

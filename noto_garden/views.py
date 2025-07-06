@@ -6,9 +6,12 @@ from django.db.models import Q, Count
 from django.http import JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 import json
 import html
 import os
+import markdown
+import bleach
 from django.conf import settings
 
 from .models import Note, Tag
@@ -222,29 +225,81 @@ def search_notes(request):
     return JsonResponse({'results': []})
 
 def process_note_links(content):
-    """Convert [[note_id]] syntax to clickable links - XSS safe"""
+    """Convert markdown and [[note_id]] syntax to HTML - XSS safe"""
     import re
-    import html
     
-    # First escape HTML to prevent XSS
-    safe_content = html.escape(content)
-    
-    def replace_link(match):
+    # First process [[note_id]] links before markdown conversion
+    def replace_note_link(match):
         note_id = match.group(1)
-        # Validate note_id format (YYYYMMDDHHMMSS)
-        if not re.match(r'^\d{14}$', note_id):
-            return f'<span class="missing-link">[[{html.escape(note_id)}]]</span>'
-        
-        try:
-            note = Note.objects.get(unique_id=note_id)
-            # Escape the note title to prevent XSS
-            safe_title = html.escape(note.title)
-            return f'<a href="{note.get_absolute_url()}" class="note-link">{safe_title}</a>'
-        except Note.DoesNotExist:
-            return f'<span class="missing-link">[[{html.escape(note_id)}]]</span>'
+        # Check if it's a note ID (numeric) or a title
+        if re.match(r'^\d{14,}', note_id):  # Numeric ID
+            try:
+                note = Note.objects.get(unique_id=note_id)
+                return f'[{note.title}]({note.get_absolute_url()})'
+            except Note.DoesNotExist:
+                return f'**[[{note_id}]]** *(note not found)*'
+        else:  # Title-based link
+            try:
+                note = Note.objects.filter(title__icontains=note_id).first()
+                if note:
+                    return f'[{note.title}]({note.get_absolute_url()})'
+                else:
+                    return f'**[[{note_id}]]** *(note not found)*'
+            except:
+                return f'**[[{note_id}]]** *(note not found)*'
     
+    # Replace [[note_id]] or [[title]] with markdown links
     pattern = r'\[\[([^\]]+)\]\]'
-    return re.sub(pattern, replace_link, safe_content)
+    content_with_links = re.sub(pattern, replace_note_link, content)
+    
+    # Convert markdown to HTML
+    html_content = markdown.markdown(
+        content_with_links,
+        extensions=[
+            'tables',
+            'fenced_code',
+            'codehilite',
+            'toc',
+            'nl2br'
+        ],
+        extension_configs={
+            'codehilite': {
+                'css_class': 'highlight',
+                'use_pygments': True
+            }
+        }
+    )
+    
+    # Sanitize HTML to prevent XSS while allowing markdown elements
+    allowed_tags = [
+        'p', 'strong', 'em', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+        'blockquote', 'code', 'pre', 'a', 'table', 'thead', 'tbody', 'tr', 'td', 'th',
+        'div', 'span', 'br', 'hr', 'img'
+    ]
+    allowed_attributes = {
+        'a': ['href', 'title', 'target', 'rel', 'class'],
+        'img': ['src', 'alt', 'title', 'width', 'height'],
+        'table': ['class'],
+        'div': ['class', 'id'],
+        'span': ['class'],
+        'code': ['class'],
+        'pre': ['class'],
+        'h1': ['id'],
+        'h2': ['id'],
+        'h3': ['id'],
+        'h4': ['id'],
+        'h5': ['id'],
+        'h6': ['id']
+    }
+    
+    clean_html = bleach.clean(
+        html_content, 
+        tags=allowed_tags, 
+        attributes=allowed_attributes,
+        strip=True
+    )
+    
+    return mark_safe(clean_html)
 
 def guide_view(request):
     """Display the Noto Garden guide - Path traversal safe"""

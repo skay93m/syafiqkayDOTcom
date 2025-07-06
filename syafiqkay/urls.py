@@ -16,6 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import RedirectView
 from . import error_handlers
 
 urlpatterns = [
@@ -24,6 +27,8 @@ urlpatterns = [
     path("journals/", include("journals.urls")),
     path("noto_garden/", include("noto_garden.urls")),
     path("reference/", include("reference.urls")),
+    # Favicon handling
+    path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'favicon.ico', permanent=True)),
     # Error testing URLs
     path("test-401/", error_handlers.custom_401, name="test_401"),
     path("test-402/", error_handlers.custom_402, name="test_402"),
@@ -39,6 +44,10 @@ urlpatterns = [
     path("test-504/", error_handlers.custom_504, name="test_504"),
     path("test-505/", error_handlers.custom_505, name="test_505"),
 ]
+
+# Add static files serving for development
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Custom error handlers (for production)
 handler404 = error_handlers.custom_404
