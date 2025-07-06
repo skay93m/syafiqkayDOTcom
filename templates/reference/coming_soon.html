@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Reference Library - Coming Soon{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4 mb-4">Reference Library</h1>
+            <p class="lead mb-4">
+                A comprehensive collection of useful references, links, and resources is coming soon!
+            </p>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">What to Expect:</h5>
+                    <ul class="list-unstyled">
+                        <li>📚 Curated reference materials</li>
+                        <li>🔗 Useful links and resources</li>
+                        <li>🏷️ Categorized content</li>
+                        <li>🔍 Search functionality</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-4">
+                <a href="{% url 'homepage:index' %}" class="btn btn-primary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
