@@ -114,7 +114,7 @@ body {
 }
 
 .a4-width {
-  max-width: 540px;
+  max-width: 621px; /* Increased by 15% from 540px */
   margin-left: auto;
   margin-right: auto;
 }
@@ -430,6 +430,47 @@ small, .small {
 
 .btn-linkedin i {
   font-size: 1.2rem;
+}
+
+/* Homepage Banner and Jumbotron Styling - LinkedIn Section Style */
+.homepage-banner {
+  background: linear-gradient(135deg, var(--cloud-white) 0%, var(--pastel-yellow) 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 2px solid var(--sakura-pink);
+  margin: 2rem 0;
+}
+
+.homepage-jumbotron {
+  background: linear-gradient(135deg, var(--cloud-white) 0%, var(--pastel-green) 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 2px solid var(--dark-green);
+  margin: 2rem 0;
+}
+
+/* Homepage Banner Display Title */
+.homepage-banner .Display-1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--ninja-dark);
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments for banner and jumbotron */
+@media (max-width: 768px) {
+  .homepage-banner,
+  .homepage-jumbotron {
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  .homepage-banner h1 {
+    font-size: 2rem;
+  }
 }
 
 /* Journal Entry Styling */
@@ -784,5 +825,62 @@ small, .small {
   
   .zettelkasten-stats .stat-value {
     font-size: 1.5rem;
+  }
+}
+
+/* A4-width responsive adjustments */
+@media (max-width: 720px) {
+  .a4-width {
+    max-width: 95%;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .a4-width {
+    max-width: 100%;
+    padding: 0 0.75rem;
+  }
+}
+
+/* Ensure tables and forms fit within a4-width */
+.a4-width .table-responsive {
+  margin: 0 -0.5rem;
+}
+
+.a4-width .table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.a4-width .form-control {
+  max-width: 100%;
+}
+
+.a4-width .btn-group {
+  flex-wrap: wrap;
+}
+
+.a4-width .btn-group .btn {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Improved mobile navigation for filter buttons */
+@media (max-width: 576px) {
+  .a4-width .btn-group {
+    flex-direction: column;
+  }
+  
+  .a4-width .btn-group .btn {
+    margin-bottom: 0.25rem;
+  }
+  
+  .a4-width .d-flex {
+    flex-direction: column;
+  }
+  
+  .a4-width .d-flex > * {
+    margin-bottom: 0.5rem;
   }
 }

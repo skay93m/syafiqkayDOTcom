@@ -3,14 +3,20 @@
 <div class="container a4-width mt-5 justify-content-center">
   {% include "banner.html" %}
   {% if rirekisho %}
-    <div class="jumbotron bg-muted">
-      <div class="container a4-width">
-        <p>{{ rirekisho.personal_statement|linebreaks }}</p>
-        <small class="text-muted text-start d-block">作成日時: {{ rirekisho.created_at|date:"Y-m-d H:i" }}</small>
+    <div class="homepage-jumbotron">
+      <div class="text-center">
+        <h3 class="ninja-text mb-3 jp-text">🥷 個人声明 | Personal Statement</h3>
+        <p class="ninja-text jp-text">{{ rirekisho.personal_statement|linebreaks }}</p>
+        <small class="text-muted text-center d-block jp-text">作成日時: {{ rirekisho.created_at|date:"Y-m-d H:i" }}</small>
       </div>
     </div>
   {% else %}
-    <p>No Rirekisho data available.</p>
+    <div class="homepage-jumbotron">
+      <div class="text-center">
+        <h3 class="ninja-text mb-3">🥷 Welcome to the Digital Dojo</h3>
+        <p class="ninja-text">No Rirekisho data available. Please check back later.</p>
+      </div>
+    </div>
   {% endif %}
   
   <!-- LinkedIn Section -->
@@ -20,7 +26,7 @@
       <p class="ninja-text mb-3">
         Join my professional network on LinkedIn, where I share insights about pharmacy, technology, and the art of continuous learning.
       </p>
-      <p class="ninja-text mb-4">
+      <p class="ninja-text mb-4 jp-text">
         LinkedInで私のプロフェッショナルネットワークに参加し、薬学、技術、継続学習の技について洞察を共有しています。
       </p>
       <a href="https://www.linkedin.com/in/syafiqkay/" target="_blank" rel="noopener" class="btn btn-linkedin btn-lg">

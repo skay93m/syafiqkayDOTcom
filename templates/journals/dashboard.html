@@ -88,35 +88,37 @@
             </div>
             
             {% if journals %}
-                <div class="row">
+                <div class="journal-list">
                     {% for journal in journals %}
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="journal-entry h-100">
-                                <div class="journal-body">
-                                    <h5 class="journal-title">
-                                        <a href="{% url 'journals:journal_detail' journal.pk %}" class="text-decoration-none">
-                                            {{ journal.title }}
-                                        </a>
-                                    </h5>
-                                    {% if journal.author %}
-                                        <span class="badge bg-secondary mb-2">{{ journal.author.username }}</span>
-                                    {% endif %}
-                                    {% if journal.tags %}
-                                        <div class="mb-2">
+                        <div class="card mb-3 journal-card-horizontal">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <h5 class="card-title mb-2">
+                                            <a href="{% url 'journals:journal_detail' journal.pk %}" class="text-decoration-none">
+                                                {{ journal.title }}
+                                            </a>
+                                        </h5>
+                                        {% if journal.author %}
+                                            <span class="badge bg-secondary me-2">{{ journal.author.username }}</span>
+                                        {% endif %}
+                                        {% if journal.tags %}
                                             {% for tag in journal.get_tags %}
                                                 <span class="badge bg-success me-1" style="background-color: #C8E6C9 !important; color: #333 !important;">{{ tag }}</span>
                                             {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                    {% if journal.summary %}
-                                        <p class="journal-text">{{ journal.summary|truncatewords:20 }}</p>
-                                    {% endif %}
-                                    <small class="text-muted">
-                                        Created: {{ journal.created_at|date:"M d, Y" }}
-                                        {% if journal.updated_at != journal.created_at %}
-                                            <br>Updated: {{ journal.updated_at|date:"M d, Y" }}
                                         {% endif %}
-                                    </small>
+                                        {% if journal.summary %}
+                                            <p class="card-text mt-2">{{ journal.summary|truncatewords:25 }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-4 text-end">
+                                        <small class="text-muted">
+                                            Created: {{ journal.created_at|date:"M d, Y" }}
+                                            {% if journal.updated_at != journal.created_at %}
+                                                <br>Updated: {{ journal.updated_at|date:"M d, Y" }}
+                                            {% endif %}
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -135,6 +137,51 @@
 </div>
 
 <style>
+/* Journal Cards Horizontal Layout */
+.journal-card-horizontal {
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.journal-card-horizontal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-color: #C8E6C9;
+}
+
+.journal-card-horizontal .card-title a {
+    color: #333;
+    font-weight: 600;
+}
+
+.journal-card-horizontal .card-title a:hover {
+    color: #4CAF50;
+}
+
+.reference-card-horizontal {
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.reference-card-horizontal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-color: #FFB6C1;
+}
+
+.reference-card-horizontal .card-title a {
+    color: #333;
+    font-weight: 600;
+}
+
+.reference-card-horizontal .card-title a:hover {
+    color: #E91E63;
+}
+
 /* Journal Tags Styling */
 .tag-filter-buttons {
     display: flex;
@@ -196,6 +243,17 @@
     .tag-filter-buttons .btn {
         text-align: center;
         margin-bottom: 0.5rem;
+    }
+    
+    .journal-card-horizontal .row,
+    .reference-card-horizontal .row {
+        flex-direction: column;
+    }
+    
+    .journal-card-horizontal .col-md-4,
+    .reference-card-horizontal .col-md-4 {
+        text-align: left !important;
+        margin-top: 1rem;
     }
 }
 </style>

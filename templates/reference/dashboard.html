@@ -37,36 +37,38 @@
             </div>
             
             {% if references %}
-                <div class="row">
+                <div class="reference-list">
                     {% for reference in references %}
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <a href="{% url 'reference:reference_detail' reference.pk %}" class="text-decoration-none">
-                                            {{ reference.title }}
-                                        </a>
-                                    </h5>
-                                    {% if reference.category %}
-                                        <div class="mb-2">
+                        <div class="card mb-3 reference-card-horizontal">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <h5 class="card-title mb-2">
+                                            <a href="{% url 'reference:reference_detail' reference.pk %}" class="text-decoration-none">
+                                                {{ reference.title }}
+                                            </a>
+                                        </h5>
+                                        {% if reference.category %}
                                             {% for category in reference.get_categories %}
                                                 <span class="badge bg-secondary me-1" style="background-color: #FFB6C1 !important; color: #333 !important;">{{ category }}</span>
                                             {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                    {% if reference.summary %}
-                                        <p class="card-text">{{ reference.summary|truncatewords:20 }}</p>
-                                    {% endif %}
-                                    {% if reference.url %}
-                                        <p class="card-text">
-                                            <a href="{{ reference.url }}" target="_blank" class="text-muted">
-                                                <i class="fas fa-external-link-alt"></i> External Link
-                                            </a>
-                                        </p>
-                                    {% endif %}
-                                    <small class="text-muted">
-                                        Created: {{ reference.created_at|date:"M d, Y" }}
-                                    </small>
+                                        {% endif %}
+                                        {% if reference.summary %}
+                                            <p class="card-text mt-2">{{ reference.summary|truncatewords:25 }}</p>
+                                        {% endif %}
+                                        {% if reference.url %}
+                                            <p class="card-text">
+                                                <a href="{{ reference.url }}" target="_blank" class="text-muted">
+                                                    <i class="fas fa-external-link-alt"></i> External Link
+                                                </a>
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-4 text-end">
+                                        <small class="text-muted">
+                                            Created: {{ reference.created_at|date:"M d, Y" }}
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,4 +85,41 @@
         </div>
     </div>
 </div>
+
+<style>
+/* Reference Cards Horizontal Layout */
+.reference-card-horizontal {
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.reference-card-horizontal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-color: #FFB6C1;
+}
+
+.reference-card-horizontal .card-title a {
+    color: #333;
+    font-weight: 600;
+}
+
+.reference-card-horizontal .card-title a:hover {
+    color: #E91E63;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .reference-card-horizontal .row {
+        flex-direction: column;
+    }
+    
+    .reference-card-horizontal .col-md-4 {
+        text-align: left !important;
+        margin-top: 1rem;
+    }
+}
+</style>
 {% endblock %}
