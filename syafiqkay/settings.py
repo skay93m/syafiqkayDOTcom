@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',      # Messaging framework (flash messages)
     'django.contrib.staticfiles',   # Static file management
     # Project apps
+    'syafiqkay.apps.SyafiqkayConfig',  # Main project app with admin customizations
     'homepage',                     # Custom app: homepage
     'journals',                     # Custom app: journals
     'noto_garden',                   # Custom app: noto_garden
