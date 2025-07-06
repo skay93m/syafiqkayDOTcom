@@ -1,0 +1,84 @@
+{% extends "admin/index.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+    /* Custom dashboard styling */
+    .dashboard .module {
+        background: var(--cloud-white);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+    
+    .dashboard .module h2 {
+        background: linear-gradient(135deg, var(--fuji-blue) 0%, var(--sakura-pink) 100%) !important;
+        color: #333 !important;
+        font-family: 'Noto Sans JP', 'Yu Gothic', sans-serif !important;
+        font-weight: 700;
+        padding: 20px;
+        margin: 0;
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .dashboard .module th {
+        background: var(--pastel-yellow) !important;
+        color: #333 !important;
+        font-weight: 600;
+        padding: 15px;
+    }
+    
+    .dashboard .module td {
+        padding: 15px;
+        border-bottom: 1px solid var(--pastel-brown);
+    }
+    
+    .dashboard .module tr:hover {
+        background: var(--pastel-green) !important;
+    }
+    
+    .dashboard .module a {
+        color: var(--fuji-blue) !important;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .dashboard .module a:hover {
+        color: var(--sakura-pink) !important;
+    }
+    
+    /* Welcome message */
+    .dashboard-welcome {
+        background: linear-gradient(135deg, var(--sakura-pink) 0%, var(--fuji-blue) 100%);
+        color: #333;
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        text-align: center;
+        box-shadow: 0 6px 30px rgba(0,0,0,0.1);
+    }
+    
+    .dashboard-welcome h1 {
+        font-family: 'Noto Sans JP', 'Yu Gothic', sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .dashboard-welcome p {
+        font-size: 1.2rem;
+        margin: 0;
+        opacity: 0.9;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-welcome">
+    <h1>🌸 Syafiq Kay Admin Portal 🌸</h1>
+    <p>Welcome to your beautiful admin dashboard</p>
+</div>
+{{ block.super }}
+{% endblock %}

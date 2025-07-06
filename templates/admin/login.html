@@ -1,0 +1,143 @@
+{% extends "admin/login.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+    /* Custom login page styling */
+    body {
+        background: linear-gradient(135deg, var(--sakura-pink) 0%, var(--fuji-blue) 100%);
+        font-family: 'Noto Sans JP', 'Yu Gothic', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #container {
+        background: var(--cloud-white);
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        overflow: hidden;
+        max-width: 400px;
+        width: 100%;
+    }
+    
+    #header {
+        background: linear-gradient(135deg, var(--fuji-blue) 0%, var(--sakura-pink) 100%);
+        color: #333;
+        padding: 40px 30px;
+        text-align: center;
+    }
+    
+    #branding h1 {
+        font-size: 2.5rem;
+        margin: 0;
+        font-weight: 700;
+    }
+    
+    #branding h1:before {
+        content: "🌸 ";
+        font-size: 3rem;
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    #content {
+        padding: 40px 30px;
+    }
+    
+    .form-row {
+        margin-bottom: 25px;
+    }
+    
+    .form-row label {
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+    }
+    
+    .form-row input[type="text"],
+    .form-row input[type="password"] {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid var(--pastel-brown);
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: var(--cloud-white);
+        box-sizing: border-box;
+    }
+    
+    .form-row input[type="text"]:focus,
+    .form-row input[type="password"]:focus {
+        outline: none;
+        border-color: var(--sakura-pink);
+        box-shadow: 0 0 0 3px rgba(250, 218, 221, 0.3);
+    }
+    
+    .submit-row {
+        text-align: center;
+        margin-top: 30px;
+    }
+    
+    .submit-row input[type="submit"] {
+        background: var(--sakura-pink) !important;
+        color: #333 !important;
+        border: none;
+        padding: 15px 40px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+    
+    .submit-row input[type="submit"]:hover {
+        background: var(--fuji-blue) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+    
+    .login-form {
+        background: var(--cloud-white);
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    .errornote {
+        background: var(--pastel-brown);
+        color: #333;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 4px solid #F44336;
+        font-weight: 500;
+    }
+    
+    /* Hide the default header */
+    #header {
+        border-bottom: none;
+    }
+    
+    /* Footer styling */
+    #footer {
+        background: var(--fuji-blue);
+        color: #333;
+        padding: 20px 30px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="text-align: center; margin-bottom: 30px;">
+    <h2 style="color: #333; font-weight: 600; margin-bottom: 10px;">管理者ログイン</h2>
+    <p style="color: #666; font-size: 0.95rem;">Admin Portal Login</p>
+</div>
+{{ block.super }}
+{% endblock %}

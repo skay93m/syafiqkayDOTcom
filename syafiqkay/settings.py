@@ -149,3 +149,13 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Admin site customization
+ADMIN_SITE_HEADER = "Syafiq Kay Admin"
+ADMIN_SITE_TITLE = "Syafiq Kay Admin Portal"
+ADMIN_INDEX_TITLE = "Welcome to Syafiq Kay Admin Portal"
+
+# Admin CSS
+ADMIN_CSS = {
+    'all': ['css/admin-extra.css']
+}
