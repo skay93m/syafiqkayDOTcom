@@ -384,6 +384,50 @@ fieldset h2 {
     }
 }
 
+/* Mobile indicator for testing */
+    @media screen and (max-width: 768px) {
+        body:before {
+            content: "📱 Mobile Mode Active";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--sakura-pink);
+            color: #333;
+            text-align: center;
+            padding: 5px;
+            font-size: 12px;
+            z-index: 9999;
+            font-weight: bold;
+        }
+        
+        body {
+            padding-top: 30px;
+        }
+    }
+    
+    /* Desktop indicator for testing */
+    @media screen and (min-width: 769px) {
+        body:before {
+            content: "🖥️ Desktop Mode Active";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--fuji-blue);
+            color: #333;
+            text-align: center;
+            padding: 5px;
+            font-size: 12px;
+            z-index: 9999;
+            font-weight: bold;
+        }
+        
+        body {
+            padding-top: 30px;
+        }
+    }
+
 /* ========== CUSTOM HONOKA TOUCHES ========== */
 /* Add subtle animations and modern touches */
 * {
@@ -568,5 +612,296 @@ body {
     
     table {
         font-size: 0.9rem;
+    }
+}
+
+/* ========== MOBILE RESPONSIVENESS & FORM IMPROVEMENTS ========== */
+/* Fix admin form issues on mobile devices */
+
+/* Mobile viewport adjustments */
+@media screen and (max-width: 768px) {
+    /* Container adjustments */
+    #container {
+        padding: 10px;
+        max-width: 100%;
+    }
+    
+    /* Header adjustments */
+    #header {
+        padding: 0.5rem 0;
+    }
+    
+    #branding {
+        float: none;
+        text-align: center;
+        padding: 0 10px;
+    }
+    
+    #branding h1 {
+        font-size: 1.5rem;
+    }
+    
+    #user-tools {
+        float: none;
+        text-align: center;
+        padding: 0 10px;
+        margin-top: 10px;
+    }
+    
+    /* Form improvements */
+    .form-row {
+        padding: 10px 0;
+    }
+    
+    .form-row .field-box {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0;
+    }
+    
+    /* Textarea improvements for content fields */
+    textarea {
+        width: 100% !important;
+        min-height: 300px !important;
+        max-height: 60vh !important;
+        resize: vertical !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        box-sizing: border-box !important;
+        padding: 10px !important;
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        line-height: 1.5 !important;
+    }
+    
+    /* Specific targeting for content fields */
+    #id_content,
+    #id_summary,
+    textarea[name="content"],
+    textarea[name="summary"] {
+        width: 100% !important;
+        min-height: 300px !important;
+        max-height: 60vh !important;
+        resize: vertical !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        box-sizing: border-box !important;
+        padding: 10px !important;
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        border: 1px solid #ddd !important;
+        border-radius: 4px !important;
+    }
+    
+    /* Input field improvements */
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="number"],
+    select {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 10px !important;
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        border: 1px solid #ddd !important;
+        border-radius: 4px !important;
+    }
+    
+    /* Label adjustments */
+    label {
+        display: block !important;
+        margin-bottom: 5px !important;
+        font-weight: 600 !important;
+        font-size: 14px !important;
+    }
+    
+    /* Help text improvements */
+    .help {
+        font-size: 12px !important;
+        margin-top: 5px !important;
+        color: #666 !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Submit button improvements */
+    .submit-row {
+        padding: 20px 0 !important;
+        text-align: center !important;
+    }
+    
+    .submit-row input[type="submit"] {
+        width: 100% !important;
+        max-width: 300px !important;
+        padding: 12px 20px !important;
+        font-size: 16px !important;
+        margin: 5px 0 !important;
+        border-radius: 4px !important;
+        border: none !important;
+        background: var(--sakura-pink) !important;
+        color: #333 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Module adjustments */
+    .module {
+        margin-bottom: 20px !important;
+    }
+    
+    .module h2 {
+        font-size: 1.2rem !important;
+        padding: 10px !important;
+    }
+    
+    /* Table responsiveness */
+    .results {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    .results table {
+        min-width: 600px !important;
+    }
+    
+    /* Breadcrumb improvements */
+    .breadcrumbs {
+        padding: 10px !important;
+        font-size: 14px !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    /* Fieldset improvements */
+    fieldset {
+        padding: 15px 10px !important;
+        margin: 10px 0 !important;
+        border: 1px solid #ddd !important;
+        border-radius: 4px !important;
+    }
+    
+    fieldset h2 {
+        font-size: 1.1rem !important;
+        margin: 0 0 10px 0 !important;
+    }
+    
+    /* Inline form improvements */
+    .inline-group {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    .inline-group .tabular {
+        min-width: 600px !important;
+    }
+}
+
+/* Specific improvements for all screen sizes */
+/* Enhanced textarea styling for better content editing */
+textarea {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace !important;
+    tab-size: 4 !important;
+    -moz-tab-size: 4 !important;
+    word-wrap: break-word !important;
+    white-space: pre-wrap !important;
+}
+
+/* Content field specific improvements */
+#id_content,
+textarea[name="content"] {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace !important;
+    background-color: #f8f9fa !important;
+    border: 2px solid #e9ecef !important;
+    border-radius: 6px !important;
+    padding: 12px !important;
+    line-height: 1.6 !important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+}
+
+#id_content:focus,
+textarea[name="content"]:focus {
+    border-color: var(--sakura-pink) !important;
+    box-shadow: 0 0 0 0.2rem rgba(248, 187, 208, 0.25) !important;
+    outline: none !important;
+}
+
+/* Summary field styling */
+#id_summary,
+textarea[name="summary"] {
+    background-color: #f8f9fa !important;
+    border: 2px solid #e9ecef !important;
+    border-radius: 6px !important;
+    padding: 12px !important;
+    line-height: 1.6 !important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+}
+
+#id_summary:focus,
+textarea[name="summary"]:focus {
+    border-color: var(--fuji-blue) !important;
+    box-shadow: 0 0 0 0.2rem rgba(135, 206, 235, 0.25) !important;
+    outline: none !important;
+}
+
+/* Scrollbar styling for better UX */
+textarea::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+textarea::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+    border-radius: 4px !important;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background: #c1c1c1 !important;
+    border-radius: 4px !important;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8 !important;
+}
+
+/* Enhanced error styling */
+.errorlist {
+    background-color: #f8d7da !important;
+    border: 1px solid #f5c6cb !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+    margin: 10px 0 !important;
+    color: #721c24 !important;
+}
+
+.errorlist li {
+    list-style: none !important;
+    margin: 0 !important;
+}
+
+/* Success message styling */
+.success {
+    background-color: #d4edda !important;
+    border: 1px solid #c3e6cb !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+    margin: 10px 0 !important;
+    color: #155724 !important;
+}
+
+/* Toast improvements for mobile */
+@media screen and (max-width: 768px) {
+    .messagelist {
+        position: fixed !important;
+        top: 10px !important;
+        left: 10px !important;
+        right: 10px !important;
+        z-index: 9999 !important;
+        margin: 0 !important;
+    }
+    
+    .messagelist li {
+        padding: 15px !important;
+        margin-bottom: 10px !important;
+        border-radius: 6px !important;
+        font-size: 14px !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
     }
 }

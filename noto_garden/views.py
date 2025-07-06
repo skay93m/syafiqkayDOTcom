@@ -7,6 +7,7 @@ from django.http import JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
+from django.core.paginator import Paginator
 import json
 import html
 import os
@@ -34,6 +35,11 @@ def garden_dashboard(request):
             Q(content__icontains=search_query)
         )
     
+    # Pagination
+    paginator = Paginator(notes, 5)  # Show 5 notes per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     # Get all tags for filtering
     tags = Tag.objects.annotate(note_count=Count('notes')).order_by('name')
     
@@ -42,7 +48,7 @@ def garden_dashboard(request):
     total_connections = sum(note.connections.count() for note in Note.objects.all())
     
     context = {
-        'notes': notes,
+        'notes': page_obj,
         'tags': tags,
         'current_tag': tag_filter,
         'search_query': search_query,

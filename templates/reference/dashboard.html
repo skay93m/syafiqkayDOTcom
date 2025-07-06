@@ -9,19 +9,54 @@
         <div class="col-md-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h2">Reference Library</h1>
-                <div class="btn-group">
-                    <a href="{% url 'reference:dashboard' %}" class="btn btn-outline-secondary {% if not current_category %}active{% endif %}">
-                        All
-                    </a>
+            </div>
+            
+            <!-- Category Filter Section (Tag-style) -->
+            {% if categories %}
+            <div class="mb-4">
+                <h6 class="text-muted mb-2">
+                    <i class="fas fa-tags"></i> Filter by Categories:
+                </h6>
+                <div class="category-filter-buttons">
                     {% for category in categories %}
-                        {% if category %}
-                            <a href="{% url 'reference:dashboard' %}?category={{ category }}" 
-                               class="btn btn-outline-secondary {% if current_category == category %}active{% endif %}">
-                                {{ category }}
-                            </a>
-                        {% endif %}
+                        <a href="{% url 'reference:dashboard' %}?category={{ category }}" 
+                           class="btn btn-sm btn-outline-primary me-2 mb-2 {% if current_category == category %}active{% endif %}"
+                           style="{% if current_category == category %}background-color: #FFB6C1 !important; color: #333 !important; border-color: #FFB6C1 !important;{% endif %}">
+                            {{ category }}
+                        </a>
                     {% endfor %}
                 </div>
+            </div>
+            {% endif %}
+            
+            <!-- Current Filters Display -->
+            {% if current_category or search_query %}
+            <div class="mb-3">
+                <h6 class="text-muted">Active Filters:</h6>
+                <div class="d-flex align-items-center">
+                    {% if current_category %}
+                        <span class="badge bg-primary me-2" style="background-color: #FFB6C1 !important; color: #333 !important;">Category: {{ current_category }}</span>
+                    {% endif %}
+                    {% if search_query %}
+                        <span class="badge bg-info me-2">Search: {{ search_query }}</span>
+                    {% endif %}
+                    <a href="{% url 'reference:dashboard' %}" class="btn btn-sm btn-outline-secondary">Clear All</a>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Search Box -->
+            <div class="mb-4">
+                <form method="GET" class="row g-3">
+                    <div class="col-md-8">
+                        <input type="text" name="search" class="form-control" placeholder="Search references..." value="{{ search_query }}">
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-outline-secondary w-100">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </form>
             </div>
             
             <!-- Purpose Description -->
@@ -76,6 +111,37 @@
                         </div>
                     {% endfor %}
                 </div>
+                
+                <!-- Pagination -->
+                {% if references.has_other_pages %}
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if references.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ references.previous_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">&laquo; Previous</a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for num in references.paginator.page_range %}
+                            {% if references.number == num %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% elif num > references.number|add:'-3' and num < references.number|add:'3' %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if references.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ references.next_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Next &raquo;</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
             {% else %}
                 <div class="text-center">
                     <div class="alert alert-info">
@@ -112,8 +178,59 @@
     color: #E91E63;
 }
 
+/* Category Filter Buttons */
+.category-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.category-filter-buttons .btn {
+    transition: all 0.2s ease;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+}
+
+.category-filter-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.category-filter-buttons .btn.active {
+    background-color: #FFB6C1 !important;
+    color: #333 !important;
+    border-color: #FFB6C1 !important;
+}
+
+/* Search box styling */
+.search-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Active filters styling */
+.active-filters {
+    background-color: #f8f9fa;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    border-left: 4px solid #FFB6C1;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    .category-filter-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .category-filter-buttons .btn {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    
     .reference-card-horizontal .row {
         flex-direction: column;
     }
