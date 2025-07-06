@@ -1,6 +1,7 @@
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseBadRequest, Http404, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator
 from .models import Journal
 
 def trigger_400(request):
@@ -88,6 +89,11 @@ def dashboard(request):
     if search_query:
         journals = journals.filter(title__icontains=search_query)
     
+    # Pagination
+    paginator = Paginator(journals, 5)  # Show 5 journals per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     # Get unique authors for filtering
     authors = Journal.objects.values_list('author__username', flat=True).distinct()
     
@@ -100,7 +106,7 @@ def dashboard(request):
     unique_tags = sorted(list(set(all_tags)))
     
     context = {
-        'journals': journals,
+        'journals': page_obj,
         'authors': authors,
         'tags': unique_tags,
         'current_author': author_filter,

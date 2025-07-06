@@ -115,5 +115,144 @@
         color: var(--sakura-pink);
         font-weight: bold;
     }
+    
+    /* Mobile-specific form enhancements */
+    @media screen and (max-width: 768px) {
+        .form-row .field-box {
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row input[type="text"],
+        .form-row input[type="email"],
+        .form-row input[type="url"],
+        .form-row textarea,
+        .form-row select {
+            font-size: 16px !important; /* Prevents zoom on iOS */
+            padding: 15px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        
+        .form-row textarea {
+            min-height: 200px !important;
+            max-height: 50vh !important;
+            resize: vertical !important;
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+        }
+        
+        /* Specific improvements for content fields */
+        #id_content,
+        textarea[name="content"] {
+            min-height: 300px !important;
+            max-height: 60vh !important;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace !important;
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+        }
+        
+        /* Summary field improvements */
+        #id_summary,
+        textarea[name="summary"] {
+            min-height: 120px !important;
+            max-height: 40vh !important;
+        }
+        
+        .submit-row {
+            text-align: center !important;
+            padding: 20px 0 !important;
+        }
+        
+        .submit-row input[type="submit"] {
+            width: 100% !important;
+            max-width: 300px !important;
+            margin: 10px 0 !important;
+            padding: 15px 20px !important;
+            font-size: 16px !important;
+        }
+        
+        /* Better spacing for mobile */
+        .form-row {
+            margin-bottom: 20px !important;
+        }
+        
+        .form-row label {
+            font-size: 16px !important;
+            margin-bottom: 8px !important;
+        }
+        
+        .form-row .help {
+            font-size: 14px !important;
+            margin-top: 8px !important;
+            padding: 12px !important;
+        }
+    }
+    
+    /* Enhanced scrollbar for textareas */
+    textarea::-webkit-scrollbar {
+        width: 12px;
+    }
+    
+    textarea::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 6px;
+    }
+    
+    textarea::-webkit-scrollbar-thumb {
+        background: var(--sakura-pink);
+        border-radius: 6px;
+    }
+    
+    textarea::-webkit-scrollbar-thumb:hover {
+        background: var(--fuji-blue);
+    }
 </style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-resize textareas for better mobile experience
+    function autoResizeTextarea(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
+    
+    // Apply auto-resize to all textareas
+    var textareas = document.querySelectorAll('textarea');
+    textareas.forEach(function(textarea) {
+        // Set initial height
+        autoResizeTextarea(textarea);
+        
+        // Add event listener for input
+        textarea.addEventListener('input', function() {
+            autoResizeTextarea(this);
+        });
+        
+        // Add event listener for focus (mobile keyboard)
+        textarea.addEventListener('focus', function() {
+            // Small delay to ensure keyboard is shown
+            setTimeout(function() {
+                textarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        });
+    });
+    
+    // Improve form submission UX on mobile
+    var forms = document.querySelectorAll('form');
+    forms.forEach(function(form) {
+        form.addEventListener('submit', function() {
+            var submitButton = form.querySelector('input[type="submit"]');
+            if (submitButton) {
+                submitButton.value = 'Saving...';
+                submitButton.disabled = true;
+            }
+        });
+    });
+    
+    // Add touch-friendly scrolling for long forms
+    if ('ontouchstart' in window) {
+        document.body.style.overflowY = 'auto';
+        document.body.style.webkitOverflowScrolling = 'touch';
+    }
+});
+</script>
 {% endblock %}

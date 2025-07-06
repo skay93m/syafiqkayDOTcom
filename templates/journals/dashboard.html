@@ -129,6 +129,37 @@
                         </div>
                     {% endfor %}
                 </div>
+                
+                <!-- Pagination -->
+                {% if journals.has_other_pages %}
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if journals.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ journals.previous_page_number }}{% if current_author %}&author={{ current_author }}{% endif %}{% if current_tag %}&tag={{ current_tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">&laquo; Previous</a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for num in journals.paginator.page_range %}
+                            {% if journals.number == num %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% elif num > journals.number|add:'-3' and num < journals.number|add:'3' %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}{% if current_author %}&author={{ current_author }}{% endif %}{% if current_tag %}&tag={{ current_tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if journals.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ journals.next_page_number }}{% if current_author %}&author={{ current_author }}{% endif %}{% if current_tag %}&tag={{ current_tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Next &raquo;</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
             {% else %}
                 <div class="text-center">
                     <div class="alert alert-info">
