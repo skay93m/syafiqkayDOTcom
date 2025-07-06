@@ -9,6 +9,14 @@
   --cloud-white: #FAFAFA;
   --accent-gray: #B0BEC5;
 
+  /* Darker versions for better readability */
+  --dark-sakura: #C2185B;
+  --dark-fuji: #1976D2;
+  --dark-brown: #5D4037;
+  --dark-green: #388E3C;
+  --ninja-dark: #2C3E50;
+  --text-dark: #212529;
+
   /* Bootstrap variable overrides */
   --bs-primary: var(--sakura-pink);
   --bs-secondary: var(--fuji-blue);
@@ -97,10 +105,65 @@ footer a:hover, footer a:focus {
 .footer-ninja-credits .ninja-text {
   display: block;
   margin-bottom: 0.5rem;
+  color: var(--ninja-dark);
+  font-weight: 500;
 }
 
 .footer-ninja-credits .license-text {
   font-size: 0.8rem;
   opacity: 0.9; /* Slightly more opaque for better readability */
-  color: #495057; /* Darker color for license text */
+  color: var(--text-dark); /* Darker color for license text */
+}
+
+/* ASCII Art Styling */
+.ascii-art {
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  color: var(--dark-sakura);
+  background: none;
+  border: none;
+  margin: 1rem 0;
+  line-height: 1.2;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Banner ninja text styling */
+.ninja-text {
+  color: var(--ninja-dark);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Emphasis text in banner */
+.ninja-text em {
+  color: var(--dark-sakura);
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Repository link styling */
+.repo-link {
+  color: var(--ninja-dark);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.repo-link a {
+  color: var(--dark-sakura);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.repo-link a:hover {
+  color: var(--dark-fuji);
+  text-decoration: underline;
+}
+
+/* Responsive ASCII Art */
+@media (max-width: 768px) {
+  .ascii-art {
+    font-size: 1rem;
+  }
 }
