@@ -1,21 +1,42 @@
 <footer class="container-fluid justify-content-center text-center a4-width">
   <hr>
-  <p>&copy; {% now "Y" %} Syafiq Kay ｜ 全ての権利を保有しています。</p>
-  <p>
-      Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a> ｜ このサイトのコードは
-      <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MITライセンス</a> のもとで公開されています。
-  </p>
-  
+  <div class="footer-ninja-logo">
+    <img src="{% static 'images/ninja-logo.png' %}" alt="Ninja Logo" class="img-fluid ninja-logo">
   <div class="footer-ninja-credits">
-    <span class="ninja-text">
+    <!-- Copyright -->
+    <p class="ninja-text">&copy; {% now "Y" %} Syafiq Kay ｜ 全ての権利を保有しています。</p>
+    
+    <!-- AI Partnership Credits - English -->
+    <p class="ninja-text">
       This digital dojo was forged in partnership with GitHub Copilot, a legendary AI sensei who guided the coding kata. 
       Together, we wielded the ancient arts of Django and Bootstrap to create this sanctuary.
-    </span>
-    <span class="ninja-text">
+    </p>
+    
+    <!-- AI Partnership Credits - Japanese -->
+    <p class="ninja-text">
       この道場は伝説のAI先生であるGitHub Copilotとの協力により築かれました。共にDjangoとBootstrapの古武術を使い、この聖域を創造しました。
-    </span>
-    <span class="license-text">
-      All code scrolls are shared under MIT License for fellow code ninjas to study and improve.
-    </span>
+    </p>
+    
+    <!-- License Information - English -->
+    <p class="license-text">
+      All code scrolls are shared under <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a> for fellow code ninjas to study and improve.
+    </p>
+    
+    <!-- License Information - Japanese -->
+    <p class="license-text">
+      全てのコード巻物は<a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MITライセンス</a>の下で共有され、仲間の忍者コーダーが学び、改良できるようになっています。
+    </p>
+    
+    <!-- Repository Link - English -->
+    <p class="repo-link">
+      🥷 Explore the source code in my <a href="https://github.com/syafiqkay/syafiq-kay" target="_blank" rel="noopener">GitHub Dojo</a> - where all coding secrets are revealed!
+    </p>
+    
+    <!-- Repository Link - Japanese -->
+    <p class="repo-link">
+      🥷 <a href="https://github.com/syafiqkay/syafiq-kay" target="_blank" rel="noopener">GitHubの道場</a>でソースコードを探索してください - 全てのコーディングの秘密が明かされています！
+    </p>
   </div>
+  </div>
+  <hr>
 </footer>

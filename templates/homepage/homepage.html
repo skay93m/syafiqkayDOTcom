@@ -4,7 +4,7 @@
   {% include "banner.html" %}
   {% if rirekisho %}
     <div class="jumbotron bg-muted">
-      <div class="container">
+      <div class="container a4-width">
         <p>{{ rirekisho.personal_statement|linebreaks }}</p>
         <small class="text-muted text-start d-block">作成日時: {{ rirekisho.created_at|date:"Y-m-d H:i" }}</small>
       </div>
