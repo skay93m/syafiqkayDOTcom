@@ -135,14 +135,14 @@ body {
 }
 
 .footer-content {
-  padding: 1.5rem 0;
+  padding: 2rem 0; /* Increased from 1.5rem */
   text-align: center;
 }
 
 .footer-text {
-  font-size: 0.75rem;
-  line-height: 1.4;
-  margin-bottom: 0.5rem;
+  font-size: 0.85rem; /* Increased from 0.75rem */
+  line-height: 1.5; /* Increased from 1.4 */
+  margin-bottom: 0.75rem; /* Increased from 0.5rem */
   color: #333 !important;
   font-family: 
     'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 
@@ -398,11 +398,11 @@ small, .small {
 
 /* LinkedIn Section Styling */
 .linkedin-section {
-  background: linear-gradient(135deg, var(--cloud-white) 0%, var(--pastel-yellow) 100%);
+  background: linear-gradient(135deg, var(--sakura-pink) 0%, var(--cloud-white) 50%, var(--sakura-pink) 100%);
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  border: 2px solid var(--sakura-pink);
+  border: 2px solid var(--dark-sakura);
 }
 
 .btn-linkedin {
@@ -432,22 +432,22 @@ small, .small {
   font-size: 1.2rem;
 }
 
-/* Homepage Banner and Jumbotron Styling - LinkedIn Section Style */
+/* Homepage Banner and Jumbotron Styling - Unified Pink Sakura Style */
 .homepage-banner {
-  background: linear-gradient(135deg, var(--cloud-white) 0%, var(--pastel-yellow) 100%);
+  background: linear-gradient(135deg, var(--sakura-pink) 0%, var(--cloud-white) 50%, var(--sakura-pink) 100%);
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  border: 2px solid var(--sakura-pink);
+  border: 2px solid var(--dark-sakura);
   margin: 2rem 0;
 }
 
 .homepage-jumbotron {
-  background: linear-gradient(135deg, var(--cloud-white) 0%, var(--pastel-green) 100%);
+  background: linear-gradient(135deg, var(--sakura-pink) 0%, var(--cloud-white) 50%, var(--sakura-pink) 100%);
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  border: 2px solid var(--dark-green);
+  border: 2px solid var(--dark-sakura);
   margin: 2rem 0;
 }
 
@@ -807,6 +807,113 @@ small, .small {
 
 .login-prompt .btn {
   margin-top: 0.5rem;
+}
+
+/* Zen Landscape Section */
+.zen-landscape-section {
+  margin: 2rem 0;
+}
+
+.zen-image-container {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, var(--sakura-pink) 0%, var(--cloud-white) 100%);
+  padding: 1rem;
+}
+
+.zen-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.zen-image:hover {
+  transform: scale(1.02);
+}
+
+.zen-caption {
+  padding: 1.5rem 1rem 1rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 0 0 10px 10px;
+  margin-top: -5px;
+}
+
+.zen-caption .ninja-text {
+  color: var(--ninja-dark);
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  text-shadow: none;
+}
+
+.zen-caption .ninja-text.jp-text {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.image-source {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--muted-text);
+  font-style: italic;
+}
+
+.image-source a {
+  color: var(--dark-sakura);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.image-source a:hover {
+  text-decoration: underline;
+  color: var(--ninja-dark);
+}
+
+.image-source i {
+  margin-right: 0.5rem;
+  opacity: 0.7;
+}
+
+/* Responsive adjustments for zen landscape */
+@media (max-width: 768px) {
+  .zen-image {
+    height: 200px;
+  }
+  
+  .zen-caption {
+    padding: 1rem 0.75rem 0.75rem;
+  }
+  
+  .zen-caption .ninja-text {
+    font-size: 0.85rem;
+  }
+  
+  .zen-caption .ninja-text.jp-text {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .zen-image {
+    height: 180px;
+  }
+  
+  .zen-caption .ninja-text {
+    font-size: 0.8rem;
+  }
+  
+  .zen-caption .ninja-text.jp-text {
+    font-size: 0.75rem;
+  }
 }
 
 /* Responsive adjustments for Noto Garden */

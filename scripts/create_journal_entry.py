@@ -2,6 +2,9 @@
 """
 Script to create a journal entry from the development journal markdown file.
 Run this script after setting up Django environment.
+
+This is a utility script that was used to import the development journal
+markdown file into the Django database as a journal entry.
 """
 
 import os
@@ -17,8 +20,8 @@ from journals.models import Journal
 def create_journal_entry():
     """Create a journal entry from the development journal markdown file."""
     
-    # Read the markdown file
-    with open('/workspaces/syafiq-kay/static/development_journal.md', 'r', encoding='utf-8') as f:
+    # Read the markdown file from new location
+    with open('/workspaces/syafiq-kay/journals/docs/development_journal.md', 'r', encoding='utf-8') as f:
         content = f.read()
     
     # Get or create the GitHub Copilot user

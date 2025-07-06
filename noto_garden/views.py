@@ -248,11 +248,11 @@ def process_note_links(content):
 
 def guide_view(request):
     """Display the Noto Garden guide - Path traversal safe"""
-    # Use absolute path to prevent path traversal
-    guide_path = os.path.abspath(os.path.join(settings.BASE_DIR, 'static', 'noto_garden_guide.md'))
-    base_path = os.path.abspath(os.path.join(settings.BASE_DIR, 'static'))
+    # Use absolute path to prevent path traversal - updated to new location
+    guide_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'docs', 'noto_garden_guide.md'))
+    base_path = os.path.abspath(os.path.dirname(__file__))
     
-    # Ensure the file is within the static directory
+    # Ensure the file is within the app directory
     if not guide_path.startswith(base_path):
         raise Http404("Guide not found")
     
