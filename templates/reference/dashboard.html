@@ -63,7 +63,11 @@
                                         </a>
                                     </h5>
                                     {% if reference.category %}
-                                        <span class="badge bg-secondary mb-2">{{ reference.category }}</span>
+                                        <div class="mb-2">
+                                            {% for category in reference.get_categories %}
+                                                <span class="badge bg-secondary me-1" style="background-color: #FFB6C1 !important; color: #333 !important;">{{ category }}</span>
+                                            {% endfor %}
+                                        </div>
                                     {% endif %}
                                     {% if reference.summary %}
                                         <p class="card-text">{{ reference.summary|truncatewords:20 }}</p>
