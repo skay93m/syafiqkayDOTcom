@@ -1,11 +1,165 @@
 {% extends 'index.html' %}
+{% load static %}
+{% load journal_extras %}
 {% block content %}
 <div class="container a4-width mt-5">
     <a href="{% url 'journals:dashboard' %}" class="btn btn-secondary mb-3">&larr; Back to Dashboard</a>
-    <h1>{{ journal.title }}</h1>
-    <p class="text-muted">{{ journal.created_at|date:'Y-m-d' }}</p>
-    <div class="mt-4">
-        {{ journal.content|linebreaks }}
+    
+    <!-- Journal Header -->
+    <div class="journal-header mb-4">
+        <h1 class="journal-title">{{ journal.title }}</h1>
+        <div class="journal-meta">
+            <span class="text-muted">
+                <i class="fas fa-user"></i> {{ journal.author.get_full_name|default:journal.author.username }}
+            </span>
+            <span class="text-muted ms-3">
+                <i class="fas fa-calendar"></i> {{ journal.created_at|date:'F d, Y' }}
+            </span>
+            {% if journal.updated_at != journal.created_at %}
+            <span class="text-muted ms-3">
+                <i class="fas fa-edit"></i> Updated {{ journal.updated_at|date:'F d, Y' }}
+            </span>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Journal Content -->
+    <div class="journal-content">
+        {{ journal.content|markdown_safe }}
     </div>
 </div>
+
+<style>
+/* Journal-specific styling */
+.journal-header {
+    border-bottom: 3px solid #C8E6C9;
+    padding-bottom: 1rem;
+}
+
+.journal-title {
+    color: #2F4F2F;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.journal-meta {
+    font-size: 0.9rem;
+}
+
+.journal-content {
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.journal-content h1,
+.journal-content h2,
+.journal-content h3 {
+    color: #2F4F2F;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.journal-content h1 {
+    border-bottom: 2px solid #C8E6C9;
+    padding-bottom: 0.5rem;
+}
+
+.journal-content h2 {
+    border-bottom: 1px solid #E8F5E8;
+    padding-bottom: 0.3rem;
+}
+
+.journal-content code {
+    background-color: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    color: #d63384;
+}
+
+.journal-content pre {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 5px;
+    border-left: 4px solid #C8E6C9;
+    overflow-x: auto;
+}
+
+.journal-content pre code {
+    background-color: transparent;
+    padding: 0;
+    color: #212529;
+}
+
+.journal-content blockquote {
+    border-left: 4px solid #C8E6C9;
+    padding-left: 1rem;
+    margin-left: 0;
+    font-style: italic;
+    color: #666;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0 5px 5px 0;
+}
+
+.journal-content ul,
+.journal-content ol {
+    margin-left: 1.5rem;
+}
+
+.journal-content li {
+    margin-bottom: 0.5rem;
+}
+
+.journal-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.journal-content th,
+.journal-content td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.journal-content th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* Emoji styling */
+.emoji {
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+/* Syntax highlighting for code blocks */
+.journal-content .codehilite {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-left: 4px solid #C8E6C9;
+}
+
+.journal-content .codehilite pre {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .journal-content {
+        font-size: 1rem;
+    }
+    
+    .journal-content pre {
+        font-size: 0.9rem;
+    }
+}
+</style>
 {% endblock %}
