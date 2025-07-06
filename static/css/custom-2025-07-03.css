@@ -68,12 +68,39 @@ body {
 }
 
 footer a, footer a:visited, footer a:active {
-  color: var(--sakura-pink) !important;
+  color: #d63384 !important; /* Darker pink for better readability */
 }
 footer a:hover, footer a:focus {
-  color: #e573b7 !important; /* slightly deeper pink for hover */
+  color: #b02a5b !important; /* Even darker pink for hover */
 }
 
 .bg-sakura-pink {
   background-color: var(--sakura-pink) !important;
+}
+
+/* Footer ninja-style content */
+.footer-ninja-credits {
+  font-size: 0.85rem;
+  color: #6c757d; /* Darker gray for better readability */
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-top: 2px solid var(--pastel-brown);
+  font-style: italic;
+}
+
+.footer-ninja-credits::before {
+  content: "🥷 ";
+  font-size: 1.2em;
+}
+
+.footer-ninja-credits .ninja-text {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-ninja-credits .license-text {
+  font-size: 0.8rem;
+  opacity: 0.9; /* Slightly more opaque for better readability */
+  color: #495057; /* Darker color for license text */
 }
