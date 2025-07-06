@@ -1,0 +1,197 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container a4-width">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'noto_garden:dashboard' %}">Noto Garden</a></li>
+                    <li class="breadcrumb-item active">{{ note.unique_id }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Note Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="display-4">{{ note.title }}</h1>
+            <p class="text-muted">
+                <code>{{ note.unique_id }}</code> • 
+                Created {{ note.created_at|date:"M d, Y" }} • 
+                Updated {{ note.updated_at|date:"M d, Y" }} •
+                {{ note.get_word_count }} words
+            </p>
+        </div>
+        <div class="col-md-4 text-end">
+            {% if user.is_staff %}
+                <a href="{% url 'noto_garden:note_edit' note.unique_id %}" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Edit Note
+                </a>
+            {% endif %}
+            <a href="{% url 'noto_garden:graph' %}" class="btn btn-info">
+                <i class="fas fa-project-diagram"></i> Graph
+            </a>
+        </div>
+    </div>
+
+    <!-- Tags -->
+    {% if note.tags.exists %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <h6 class="text-muted">Tags:</h6>
+                {% for tag in note.tags.all %}
+                    <span class="badge bg-secondary me-2" 
+                          style="background-color: {{ tag.color }} !important;">
+                        {{ tag.name }}
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Note Content -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="note-content">
+                        {{ processed_content|safe|linebreaks }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Connected Notes -->
+            {% if connected_notes %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-link"></i> Connected Notes ({{ connected_notes.count }})
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        {% for connected_note in connected_notes %}
+                            <div class="d-flex align-items-center mb-2">
+                                <a href="{% url 'noto_garden:note_detail' connected_note.unique_id %}" 
+                                   class="text-decoration-none">
+                                    <strong>{{ connected_note.title }}</strong>
+                                </a>
+                                <small class="text-muted ms-auto">{{ connected_note.unique_id }}</small>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Backlinks -->
+            {% if backlinks %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-arrow-left"></i> Backlinks ({{ backlinks.count }})
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        {% for backlink in backlinks %}
+                            <div class="d-flex align-items-center mb-2">
+                                <a href="{% url 'noto_garden:note_detail' backlink.unique_id %}" 
+                                   class="text-decoration-none">
+                                    <strong>{{ backlink.title }}</strong>
+                                </a>
+                                <small class="text-muted ms-auto">{{ backlink.unique_id }}</small>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Quick Actions -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-bolt"></i> Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        {% if user.is_staff %}
+                            <a href="{% url 'noto_garden:note_create' %}" class="btn btn-outline-primary">
+                                <i class="fas fa-plus"></i> Create New Note
+                            </a>
+                        {% endif %}
+                        <a href="{% url 'noto_garden:guide' %}" class="btn btn-outline-success">
+                            <i class="fas fa-book"></i> User Guide
+                        </a>
+                        <a href="{% url 'noto_garden:dashboard' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to Garden
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.note-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+.note-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 2px 6px;
+    background-color: #e3f2fd;
+    border-radius: 4px;
+}
+
+.note-link:hover {
+    background-color: #bbdefb;
+    text-decoration: none;
+}
+
+.missing-link {
+    color: #dc3545;
+    font-style: italic;
+    padding: 2px 6px;
+    background-color: #ffebee;
+    border-radius: 4px;
+}
+
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+}
+
+.badge {
+    font-size: 0.8em;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+.text-muted code {
+    color: #6c757d;
+}
+</style>
+{% endblock %}
