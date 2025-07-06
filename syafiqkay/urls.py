@@ -22,4 +22,5 @@ urlpatterns = [
     path("", include("homepage.urls")),
     path("journals/", include("journals.urls")),
     path("noto_garden/", include("noto_garden.urls")),
+    path("reference/", include("reference.urls")),
 ]

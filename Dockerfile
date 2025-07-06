@@ -21,4 +21,4 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY . .
 
 # Collect static files, run migrations, and start server
-CMD ["sh", "-c", "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn syafiqkay.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate && gunicorn syafiqkay.wsgi:application --bind 0.0.0.0:8000"]

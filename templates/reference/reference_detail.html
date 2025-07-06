@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}{{ reference.title }} - Reference Library{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'homepage:index' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'reference:dashboard' %}">Reference Library</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ reference.title }}</li>
+                </ol>
+            </nav>
+            
+            <article class="card">
+                <div class="card-body">
+                    <header class="mb-4">
+                        <h1 class="h2">{{ reference.title }}</h1>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                {% if reference.category %}
+                                    <span class="badge bg-secondary">{{ reference.category }}</span>
+                                {% endif %}
+                                <small class="text-muted">
+                                    By {{ reference.author.get_full_name|default:reference.author.username }}
+                                </small>
+                            </div>
+                            <div class="text-muted">
+                                <small>
+                                    Created: {{ reference.created_at|date:"M d, Y" }}
+                                    {% if reference.updated_at != reference.created_at %}
+                                        <br>Updated: {{ reference.updated_at|date:"M d, Y" }}
+                                    {% endif %}
+                                </small>
+                            </div>
+                        </div>
+                    </header>
+                    
+                    {% if reference.url %}
+                        <div class="alert alert-info">
+                            <strong>External Link:</strong> 
+                            <a href="{{ reference.url }}" target="_blank" class="alert-link">
+                                {{ reference.url }} <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+                    
+                    {% if reference.summary %}
+                        <div class="mb-4">
+                            <h3 class="h5">Summary</h3>
+                            <p class="lead">{{ reference.summary|linebreaks }}</p>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="content">
+                        <h3 class="h5">Content</h3>
+                        {{ reference.content|linebreaks }}
+                    </div>
+                </div>
+            </article>
+            
+            <div class="mt-4">
+                <a href="{% url 'reference:dashboard' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Reference Library
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
