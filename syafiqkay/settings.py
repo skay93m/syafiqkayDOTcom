@@ -61,11 +61,8 @@ INSTALLED_APPS = [
     'homepage',                     # Custom app: homepage
     'journals',                     # Custom app: journals
     'noto_garden',                   # Custom app: noto_garden
-<<<<<<< HEAD
     'reference',
     'experiments',                    # Custom app: reference
-=======
->>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
     'storages',                   # Django-storages for cloud storage backends
 ]
 

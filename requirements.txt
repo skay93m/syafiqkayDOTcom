@@ -73,14 +73,11 @@ pyodbc==5.2.0
 python-dotenv==1.1.1
 pytz==2025.2
 requests==2.32.4
-<<<<<<< HEAD
 rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
 rpds-py==0.25.1
 Send2Trash==1.8.3
 setuptools==80.9.0
-=======
->>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
 six==1.17.0
 sqlparse==0.5.3
 stack-data==0.6.3

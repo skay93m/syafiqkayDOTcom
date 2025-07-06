@@ -76,13 +76,17 @@ def dashboard(request):
     
     # Get filter parameters
     author_filter = request.GET.get('author')
+<<<<<<< HEAD
     tag_filter = request.GET.get('tag')
+=======
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
     search_query = request.GET.get('search')
     
     # Apply filters
     if author_filter:
         journals = journals.filter(author__username=author_filter)
     
+<<<<<<< HEAD
     if tag_filter:
         journals = journals.filter(tags__icontains=tag_filter)
     
@@ -111,6 +115,18 @@ def dashboard(request):
         'tags': unique_tags,
         'current_author': author_filter,
         'current_tag': tag_filter,
+=======
+    if search_query:
+        journals = journals.filter(title__icontains=search_query)
+    
+    # Get unique authors for filtering
+    authors = Journal.objects.values_list('author__username', flat=True).distinct()
+    
+    context = {
+        'journals': journals,
+        'authors': authors,
+        'current_author': author_filter,
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
         'search_query': search_query,
     }
     return render(request, 'journals/dashboard.html', context)

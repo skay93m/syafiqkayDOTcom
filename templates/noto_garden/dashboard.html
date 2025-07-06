@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base/index.html" %}
 {% load static %}
 
@@ -67,12 +68,74 @@
                             <br>Tags
                         </div>
                     </div>
+=======
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container a4-width">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-4 text-center mb-4">🌸 Noto Garden | ノートの庭 🌸</h1>
+            
+            <!-- Purpose Description -->
+            <div class="purpose-description mb-4">
+                <p class="ninja-text">
+                    🌸 Enter the Zen Garden of Digital Thoughts, where fleeting ideas take root and grow into profound insights. 
+                    This sacred space nurtures the seeds of creativity and wisdom, where a ninja's mind finds peace among blooming concepts.
+                </p>
+                <p class="ninja-text">
+                    🌸 一瞬のアイデアが根を張り、深い洞察へと成長するデジタル思考の禅庭へお入りください。
+                    この聖なる空間では創造性と智慧の種を育み、忍者の心が花咲く概念の中で平安を見つけます。
+                </p>
+                
+                <!-- Access Level Indicator -->
+                <div class="access-indicator mt-3">
+                    {% if user.is_staff %}
+                        <span class="badge bg-success">
+                            <i class="fas fa-key"></i> Admin Access - Full Garden Control
+                        </span>
+                    {% else %}
+                        <span class="badge bg-info">
+                            <i class="fas fa-eye"></i> Visitor Access - View Only
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Row -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <h5 class="card-title">📝 Total Notes</h5>
+                    <h3 class="text-primary">{{ total_notes }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <h5 class="card-title">🔗 Connections</h5>
+                    <h3 class="text-success">{{ total_connections }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <h5 class="card-title">🏷️ Tags</h5>
+                    <h3 class="text-info">{{ tags.count }}</h3>
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Action Buttons -->
+<<<<<<< HEAD
     <div class="actions-card mb-4">
         <div class="card-body text-center">
             <h3 class="card-title mb-4">
@@ -145,10 +208,53 @@
                         </div>
                     </div>
                 </div>
+=======
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            {% if user.is_staff %}
+                <a href="{% url 'noto_garden:note_create' %}" class="btn btn-primary btn-lg mx-2">
+                    <i class="fas fa-plus"></i> Create New Note
+                </a>
+            {% endif %}
+            <a href="{% url 'noto_garden:graph' %}" class="btn btn-info btn-lg mx-2">
+                <i class="fas fa-project-diagram"></i> View Graph
+            </a>
+            <a href="{% url 'noto_garden:guide' %}" class="btn btn-success btn-lg mx-2">
+                <i class="fas fa-book"></i> User Guide
+            </a>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <form method="get" class="d-flex align-items-center">
+                <div class="form-group me-3">
+                    <input type="text" 
+                           class="form-control" 
+                           name="search" 
+                           placeholder="Search notes..." 
+                           value="{{ search_query }}"
+                           style="width: 300px;">
+                </div>
+                <div class="form-group me-3">
+                    <select name="tag" class="form-control" style="width: 200px;">
+                        <option value="">All Tags</option>
+                        {% for tag in tags %}
+                            <option value="{{ tag.name }}" {% if current_tag == tag.name %}selected{% endif %}>
+                                {{ tag.name }} ({{ tag.note_count }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-secondary me-2">Filter</button>
+                <a href="{% url 'noto_garden:dashboard' %}" class="btn btn-outline-secondary">Clear</a>
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
             </form>
         </div>
     </div>
 
+<<<<<<< HEAD
     <!-- Notes List Section -->
     <div class="notes-list-card">
         <div class="card-body">
@@ -186,6 +292,23 @@
                                     <span class="jp-text japanese-text"><ruby>操作<rt>そうさ</rt></ruby></span>
                                     <br><small>Actions</small>
                                 </th>
+=======
+    <!-- Notes List -->
+    <div class="row">
+        <div class="col-12">
+            {% if notes %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Tags</th>
+                                <th>Connections</th>
+                                <th>Word Count</th>
+                                <th>Updated</th>
+                                <th>Actions</th>
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
                             </tr>
                         </thead>
                         <tbody>
@@ -217,11 +340,15 @@
                                         <span class="text-muted">{{ note.get_word_count }} words</span>
                                     </td>
                                     <td>
+<<<<<<< HEAD
                                         <small class="text-muted">
                                             <span class="jp-text japanese-text">{{ note.updated_at|date:"Y年m月d日" }}</span>
                                             <br>
                                             <span>{{ note.updated_at|date:"jS M Y" }}</span>
                                         </small>
+=======
+                                        <small class="text-muted">{{ note.updated_at|date:"M d, Y" }}</small>
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
                                     </td>
                                     <td>
                                         <a href="{% url 'noto_garden:note_detail' note.unique_id %}" 
@@ -240,6 +367,7 @@
                         </tbody>
                     </table>
                 </div>
+<<<<<<< HEAD
                 
                 <!-- Pagination -->
                 {% if notes.has_other_pages %}
@@ -279,11 +407,14 @@
                     </ul>
                 </nav>
                 {% endif %}
+=======
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
             {% else %}
                 <div class="text-center py-5">
                     <div class="mb-3">
                         <i class="fas fa-seedling fa-3x text-muted"></i>
                     </div>
+<<<<<<< HEAD
                     <h4 class="text-muted">
                         <span class="jp-text japanese-text"><ruby>庭<rt>にわ</rt></ruby>にまだ<ruby>ノート<rt>Note</rt></ruby>がありません</span>
                     </h4>
@@ -302,6 +433,13 @@
                             <i class="fas fa-plus"></i> 
                             <span class="jp-text japanese-text">最初の<ruby>ノート<rt>Note</rt></ruby></span>
                             <br><small>Create First Note</small>
+=======
+                    <h4 class="text-muted">No notes in the garden yet</h4>
+                    <p class="text-muted">{% if user.is_staff %}Plant your first seed of thought!{% else %}The garden is growing quietly. Admin access required to plant new seeds.{% endif %}</p>
+                    {% if user.is_staff %}
+                        <a href="{% url 'noto_garden:note_create' %}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Create First Note
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
                         </a>
                     {% endif %}
                 </div>
@@ -311,6 +449,7 @@
 </div>
 
 <style>
+<<<<<<< HEAD
 /* Card styling to match experiments app */
 .header-card, .statistics-card, .actions-card, .filters-card, .notes-list-card {
     background: white;
@@ -512,6 +651,64 @@
     margin-bottom: 1rem;
     font-weight: 600;
     color: #495057;
+=======
+.purpose-description {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.ninja-text {
+    color: #fff;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.ninja-text:last-child {
+    margin-bottom: 0;
+}
+
+.note-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.note-link:hover {
+    text-decoration: underline;
+}
+
+.missing-link {
+    color: #dc3545;
+    font-style: italic;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.badge {
+    font-size: 0.75em;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-lg {
+    padding: 12px 30px;
+    font-size: 1.1em;
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
 }
 </style>
 {% endblock %}

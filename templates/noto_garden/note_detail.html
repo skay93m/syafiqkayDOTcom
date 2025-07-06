@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base/index.html" %}
 {% load static %}
 {% load furigana_extras %}
@@ -15,6 +16,19 @@
                             <span class="d-none d-md-inline">Noto Garden</span>
                         </a>
                     </li>
+=======
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container a4-width">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'noto_garden:dashboard' %}">Noto Garden</a></li>
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
                     <li class="breadcrumb-item active">{{ note.unique_id }}</li>
                 </ol>
             </nav>
@@ -22,6 +36,7 @@
     </div>
 
     <!-- Note Header -->
+<<<<<<< HEAD
     <div class="note-header-card mb-4">
         <div class="card-body">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start">
@@ -84,14 +99,60 @@
         </div>
     </div>
 
+=======
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="display-4">{{ note.title }}</h1>
+            <p class="text-muted">
+                <code>{{ note.unique_id }}</code> • 
+                Created {{ note.created_at|date:"M d, Y" }} • 
+                Updated {{ note.updated_at|date:"M d, Y" }} •
+                {{ note.get_word_count }} words
+            </p>
+        </div>
+        <div class="col-md-4 text-end">
+            {% if user.is_staff %}
+                <a href="{% url 'noto_garden:note_edit' note.unique_id %}" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Edit Note
+                </a>
+            {% endif %}
+            <a href="{% url 'noto_garden:graph' %}" class="btn btn-info">
+                <i class="fas fa-project-diagram"></i> Graph
+            </a>
+        </div>
+    </div>
+
+    <!-- Tags -->
+    {% if note.tags.exists %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <h6 class="text-muted">Tags:</h6>
+                {% for tag in note.tags.all %}
+                    <span class="badge bg-secondary me-2" 
+                          style="background-color: {{ tag.color }} !important;">
+                        {{ tag.name }}
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
     <!-- Main Content -->
     <div class="row">
         <div class="col-lg-8">
             <!-- Note Content -->
+<<<<<<< HEAD
             <div class="note-content-card mb-4">
                 <div class="card-body">
                     <div class="note-content">
                         {{ processed_content|safe }}
+=======
+            <div class="card">
+                <div class="card-body">
+                    <div class="note-content">
+                        {{ processed_content|safe|linebreaks }}
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
                     </div>
                 </div>
             </div>
@@ -101,6 +162,7 @@
         <div class="col-lg-4">
             <!-- Connected Notes -->
             {% if connected_notes %}
+<<<<<<< HEAD
                 <div class="connections-card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -121,12 +183,31 @@
                                 </div>
                             {% endfor %}
                         </div>
+=======
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-link"></i> Connected Notes ({{ connected_notes.count }})
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        {% for connected_note in connected_notes %}
+                            <div class="d-flex align-items-center mb-2">
+                                <a href="{% url 'noto_garden:note_detail' connected_note.unique_id %}" 
+                                   class="text-decoration-none">
+                                    <strong>{{ connected_note.title }}</strong>
+                                </a>
+                                <small class="text-muted ms-auto">{{ connected_note.unique_id }}</small>
+                            </div>
+                        {% endfor %}
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
                     </div>
                 </div>
             {% endif %}
 
             <!-- Backlinks -->
             {% if backlinks %}
+<<<<<<< HEAD
                 <div class="backlinks-card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -147,11 +228,30 @@
                                 </div>
                             {% endfor %}
                         </div>
+=======
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-arrow-left"></i> Backlinks ({{ backlinks.count }})
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        {% for backlink in backlinks %}
+                            <div class="d-flex align-items-center mb-2">
+                                <a href="{% url 'noto_garden:note_detail' backlink.unique_id %}" 
+                                   class="text-decoration-none">
+                                    <strong>{{ backlink.title }}</strong>
+                                </a>
+                                <small class="text-muted ms-auto">{{ backlink.unique_id }}</small>
+                            </div>
+                        {% endfor %}
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
                     </div>
                 </div>
             {% endif %}
 
             <!-- Quick Actions -->
+<<<<<<< HEAD
             <div class="actions-card">
                 <div class="card-body">
                     <h5 class="card-title">
@@ -176,6 +276,26 @@
                             <i class="fas fa-arrow-left"></i>
                             <span class="jp-text japanese-text"><ruby>庭<rt>にわ</rt></ruby>に<ruby>戻<rt>もど</rt></ruby>る</span>
                             <br><small>Back to Garden</small>
+=======
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-bolt"></i> Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        {% if user.is_staff %}
+                            <a href="{% url 'noto_garden:note_create' %}" class="btn btn-outline-primary">
+                                <i class="fas fa-plus"></i> Create New Note
+                            </a>
+                        {% endif %}
+                        <a href="{% url 'noto_garden:guide' %}" class="btn btn-outline-success">
+                            <i class="fas fa-book"></i> User Guide
+                        </a>
+                        <a href="{% url 'noto_garden:dashboard' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to Garden
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
                         </a>
                     </div>
                 </div>
@@ -185,6 +305,7 @@
 </div>
 
 <style>
+<<<<<<< HEAD
 /* Card styling to match experiments app */
 .navigation-card, .note-header-card, .note-content-card, .connections-card, .backlinks-card, .actions-card {
     background: white;
@@ -400,6 +521,17 @@
     color: #007bff;
     text-decoration: none;
     font-weight: 600;
+=======
+.note-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+.note-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
     padding: 2px 6px;
     background-color: #e3f2fd;
     border-radius: 4px;
@@ -418,6 +550,7 @@
     border-radius: 4px;
 }
 
+<<<<<<< HEAD
 /* Sidebar styling */
 .connections-list, .backlinks-list {
     max-height: 300px;
@@ -528,6 +661,33 @@
     overflow-x: auto;
     white-space: pre-wrap;
     word-wrap: break-word;
+=======
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+}
+
+.badge {
+    font-size: 0.8em;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+.text-muted code {
+    color: #6c757d;
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
 }
 </style>
 {% endblock %}

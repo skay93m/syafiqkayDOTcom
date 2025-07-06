@@ -1,15 +1,91 @@
+<<<<<<< HEAD
 {% extends 'base/index.html' %}
+=======
+{% extends 'index.html' %}
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
 {% load static %}
 
 {% block title %}Journal Library{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 <div class="container mt-5">
     <!-- Header Section -->
     <div class="text-center mb-5">
         <h1 class="display-4 mb-3">📚 <ruby>ジャーナル<rt>Journal</rt></ruby><ruby>図書館<rt>としょかん</rt></ruby> 📚</h1>
         <h2 class="h3 text-muted mb-4">Journal Library</h2>
         <p class="lead">Where insights and reflections are collected and organized for continuous learning.</p>
+=======
+<div class="container a4-width mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2">Journal Library</h1>
+                <div class="btn-group">
+                    <a href="{% url 'journals:dashboard' %}" class="btn btn-outline-secondary {% if not current_author %}active{% endif %}">
+                        All
+                    </a>
+                    {% for author in authors %}
+                        {% if author %}
+                            <a href="{% url 'journals:dashboard' %}?author={{ author }}" 
+                               class="btn btn-outline-secondary {% if current_author == author %}active{% endif %}">
+                                {{ author }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Purpose Description -->
+            <div class="purpose-description mb-4">
+                <p class="ninja-text">
+                    📖 Welcome to the Journal Scroll Archive, where the chronicles of a digital samurai's journey are preserved. 
+                    Each entry captures insights, reflections, and wisdom gained through the battles of learning and growth.
+                </p>
+                <p class="ninja-text">
+                    📖 デジタル侍の旅の記録が保存されている日記巻物庫へようこそ。
+                    各エントリーは、学習と成長の戦いを通じて得られた洞察、反省、そして智慧を記録しています。
+                </p>
+            </div>
+            
+            {% if journals %}
+                <div class="row">
+                    {% for journal in journals %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="journal-entry h-100">
+                                <div class="journal-body">
+                                    <h5 class="journal-title">
+                                        <a href="{% url 'journals:journal_detail' journal.pk %}" class="text-decoration-none">
+                                            {{ journal.title }}
+                                        </a>
+                                    </h5>
+                                    {% if journal.author %}
+                                        <span class="badge bg-secondary mb-2">{{ journal.author.username }}</span>
+                                    {% endif %}
+                                    {% if journal.summary %}
+                                        <p class="journal-text">{{ journal.summary|truncatewords:20 }}</p>
+                                    {% endif %}
+                                    <small class="text-muted">
+                                        Created: {{ journal.created_at|date:"M d, Y" }}
+                                        {% if journal.updated_at != journal.created_at %}
+                                            <br>Updated: {{ journal.updated_at|date:"M d, Y" }}
+                                        {% endif %}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center">
+                    <div class="alert alert-info">
+                        <h4>No journals found</h4>
+                        <p>{% if current_author %}No journals by "{{ current_author }}" yet.{% else %}No journals have been added yet.{% endif %}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
     </div>
     
     <!-- Filter Section -->

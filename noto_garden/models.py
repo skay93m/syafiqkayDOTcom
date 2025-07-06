@@ -1,5 +1,8 @@
 from django.db import models
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 import re
@@ -87,5 +90,8 @@ class Note(models.Model):
     
     class Meta:
         ordering = ['-updated_at']
+<<<<<<< HEAD
 =======
 >>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
+=======
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)

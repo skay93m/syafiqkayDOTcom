@@ -23,6 +23,7 @@
                     <h4 class="card-title mb-0">🔍 Categories & Search</h4>
                     <h5 class="card-subtitle mb-0 jp-text japanese-text">🔍 <ruby>カテゴリー<rt>Category</rt></ruby>と<ruby>検索<rt>けんさく</rt></ruby></h5>
                 </div>
+<<<<<<< HEAD
                 <div class="card-body">
                     <!-- Category Filter Buttons -->
                     {% if categories %}
@@ -35,6 +36,51 @@
                                     {{ category }}
                                 </a>
                             {% endfor %}
+=======
+            </div>
+            
+            <!-- Purpose Description -->
+            <div class="purpose-description mb-4">
+                <p class="ninja-text">
+                    📚 Behold the Sacred Reference Vault, where ancient scrolls of knowledge and modern digital wisdom converge. 
+                    This arsenal contains the essential tools and references that guide a code ninja's path to mastery.
+                </p>
+                <p class="ninja-text">
+                    📚 古代の知識の巻物と現代のデジタル智慧が融合する聖なる参考資料庫をご覧ください。
+                    この武器庫には、コード忍者が熟練への道を歩むために不可欠なツールと参考資料が収められています。
+                </p>
+            </div>
+            
+            {% if references %}
+                <div class="row">
+                    {% for reference in references %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="{% url 'reference:reference_detail' reference.pk %}" class="text-decoration-none">
+                                            {{ reference.title }}
+                                        </a>
+                                    </h5>
+                                    {% if reference.category %}
+                                        <span class="badge bg-secondary mb-2">{{ reference.category }}</span>
+                                    {% endif %}
+                                    {% if reference.summary %}
+                                        <p class="card-text">{{ reference.summary|truncatewords:20 }}</p>
+                                    {% endif %}
+                                    {% if reference.url %}
+                                        <p class="card-text">
+                                            <a href="{{ reference.url }}" target="_blank" class="text-muted">
+                                                <i class="fas fa-external-link-alt"></i> External Link
+                                            </a>
+                                        </p>
+                                    {% endif %}
+                                    <small class="text-muted">
+                                        Created: {{ reference.created_at|date:"M d, Y" }}
+                                    </small>
+                                </div>
+                            </div>
+>>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
                         </div>
                     </div>
                     {% endif %}
