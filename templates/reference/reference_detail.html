@@ -4,12 +4,12 @@
 {% block title %}{{ reference.title }} - Reference Library{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="container mt-4 a4-width">
     <div class="row">
         <div class="col-md-8 mx-auto">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'homepage:index' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'homepage:homepage' %}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{% url 'reference:dashboard' %}">Reference Library</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ reference.title }}</li>
                 </ol>
