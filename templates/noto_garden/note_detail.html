@@ -17,24 +17,22 @@
 
     <!-- Note Header -->
     <div class="row mb-4">
-        <div class="col-md-8">
-            <h1 class="display-4">{{ note.title }}</h1>
-            <p class="text-muted">
-                <code>{{ note.unique_id }}</code> • 
-                Created {{ note.created_at|date:"M d, Y" }} • 
-                Updated {{ note.updated_at|date:"M d, Y" }} •
-                {{ note.get_word_count }} words
-            </p>
-        </div>
-        <div class="col-md-4 text-end">
-            {% if user.is_staff %}
-                <a href="{% url 'noto_garden:note_edit' note.unique_id %}" class="btn btn-primary">
-                    <i class="fas fa-edit"></i> Edit Note
-                </a>
-            {% endif %}
-            <a href="{% url 'noto_garden:graph' %}" class="btn btn-info">
-                <i class="fas fa-project-diagram"></i> Graph
-            </a>
+        <div class="col-12">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start">
+                <div class="mb-3 mb-md-0">
+                    <h1 class="display-4 mb-2">{{ note.title }}</h1>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                    {% if user.is_staff %}
+                        <a href="{% url 'noto_garden:note_edit' note.unique_id %}" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Edit Note
+                        </a>
+                    {% endif %}
+                    <a href="{% url 'noto_garden:graph' %}" class="btn btn-info">
+                        <i class="fas fa-project-diagram"></i> Graph
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -60,7 +58,31 @@
             <div class="card">
                 <div class="card-body">
                     <div class="note-content">
-                        {{ processed_content|safe|linebreaks }}
+                        {{ processed_content|safe }}
+                    </div>
+                </div>
+                <div class="card-footer bg-light">
+                    <div class="text-muted small">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Note ID:</strong> <code>{{ note.unique_id }}</code>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <span class="jp-text">作成: {{ note.created_at|date:"Y年m月d日" }}</span><br>
+                                <span>Created: {{ note.created_at|date:"jS M Y" }}</span>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="jp-text">更新: {{ note.updated_at|date:"Y年m月d日" }}</span><br>
+                                <span>Updated: {{ note.updated_at|date:"jS M Y" }}</span>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <strong>Word Count:</strong> {{ note.get_word_count }} words
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -78,12 +100,13 @@
                     </div>
                     <div class="card-body">
                         {% for connected_note in connected_notes %}
-                            <div class="d-flex align-items-center mb-2">
+                            <div class="mb-3 border-bottom pb-2">
                                 <a href="{% url 'noto_garden:note_detail' connected_note.unique_id %}" 
                                    class="text-decoration-none">
                                     <strong>{{ connected_note.title }}</strong>
                                 </a>
-                                <small class="text-muted ms-auto">{{ connected_note.unique_id }}</small>
+                                <br>
+                                <small class="text-muted">ID: {{ connected_note.unique_id }}</small>
                             </div>
                         {% endfor %}
                     </div>
@@ -100,12 +123,13 @@
                     </div>
                     <div class="card-body">
                         {% for backlink in backlinks %}
-                            <div class="d-flex align-items-center mb-2">
+                            <div class="mb-3 border-bottom pb-2">
                                 <a href="{% url 'noto_garden:note_detail' backlink.unique_id %}" 
                                    class="text-decoration-none">
                                     <strong>{{ backlink.title }}</strong>
                                 </a>
-                                <small class="text-muted ms-auto">{{ backlink.unique_id }}</small>
+                                <br>
+                                <small class="text-muted">ID: {{ backlink.unique_id }}</small>
                             </div>
                         {% endfor %}
                     </div>
@@ -143,6 +167,117 @@
 .note-content {
     font-size: 1.1em;
     line-height: 1.8;
+}
+
+/* Markdown styling */
+.note-content h1,
+.note-content h2,
+.note-content h3,
+.note-content h4,
+.note-content h5,
+.note-content h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+}
+
+.note-content h1 {
+    font-size: 1.8em;
+    border-bottom: 2px solid #e1e4e8;
+    padding-bottom: 0.3em;
+}
+
+.note-content h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 0.3em;
+}
+
+.note-content h3 {
+    font-size: 1.3em;
+}
+
+.note-content ul,
+.note-content ol {
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+.note-content li {
+    margin-bottom: 0.3em;
+}
+
+.note-content blockquote {
+    border-left: 4px solid #ddd;
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    background-color: #f8f9fa;
+    font-style: italic;
+}
+
+.note-content code {
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0;
+    padding: 0.2em 0.4em;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.note-content pre {
+    background-color: #f6f8fa;
+    border-radius: 6px;
+    font-size: 85%;
+    line-height: 1.45;
+    overflow: auto;
+    padding: 16px;
+    margin: 1em 0;
+}
+
+.note-content pre code {
+    background-color: transparent;
+    border: 0;
+    display: inline;
+    line-height: inherit;
+    margin: 0;
+    max-width: auto;
+    overflow: visible;
+    padding: 0;
+    word-wrap: normal;
+}
+
+.note-content table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.note-content table th,
+.note-content table td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.note-content table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.note-content hr {
+    background-color: #e1e4e8;
+    border: 0;
+    height: 2px;
+    margin: 1.5em 0;
+}
+
+.note-content strong {
+    font-weight: 600;
+}
+
+.note-content p {
+    margin-bottom: 1em;
 }
 
 .note-link {
@@ -192,6 +327,48 @@
 
 .text-muted code {
     color: #6c757d;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .note-content {
+        font-size: 1rem;
+    }
+    
+    .a4-width {
+        padding: 0 15px;
+    }
+}
+
+/* Ensure code blocks don't overflow */
+.note-content code {
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.note-content pre {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Better spacing for metadata in footer */
+.card-footer.bg-light {
+    background-color: #f8f9fa !important;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Sidebar improvements */
+.border-bottom {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.border-bottom:last-child {
+    border-bottom: none !important;
 }
 </style>
 {% endblock %}

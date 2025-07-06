@@ -160,7 +160,11 @@
                                         <span class="text-muted">{{ note.get_word_count }} words</span>
                                     </td>
                                     <td>
-                                        <small class="text-muted">{{ note.updated_at|date:"M d, Y" }}</small>
+                                        <small class="text-muted">
+                                            <span class="jp-text">{{ note.updated_at|date:"Y年m月d日" }}</span>
+                                            <br>
+                                            <span>{{ note.updated_at|date:"jS M Y" }}</span>
+                                        </small>
                                     </td>
                                     <td>
                                         <a href="{% url 'noto_garden:note_detail' note.unique_id %}" 

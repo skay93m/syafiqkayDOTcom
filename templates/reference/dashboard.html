@@ -66,7 +66,9 @@
                                     </div>
                                     <div class="col-md-4 text-end">
                                         <small class="text-muted">
-                                            Created: {{ reference.created_at|date:"M d, Y" }}
+                                            <span class="jp-text">作成: {{ reference.created_at|date:"Y年m月d日" }}</span>
+                                            <br>
+                                            <span>Created: {{ reference.created_at|date:"jS M Y" }}</span>
                                         </small>
                                     </div>
                                 </div>

@@ -113,9 +113,14 @@
                                     </div>
                                     <div class="col-md-4 text-end">
                                         <small class="text-muted">
-                                            Created: {{ journal.created_at|date:"M d, Y" }}
+                                            <span class="jp-text">作成: {{ journal.created_at|date:"Y年m月d日" }}</span>
+                                            <br>
+                                            <span>Created: {{ journal.created_at|date:"jS M Y" }}</span>
                                             {% if journal.updated_at != journal.created_at %}
-                                                <br>Updated: {{ journal.updated_at|date:"M d, Y" }}
+                                                <br>
+                                                <span class="jp-text">更新: {{ journal.updated_at|date:"Y年m月d日" }}</span>
+                                                <br>
+                                                <span>Updated: {{ journal.updated_at|date:"jS M Y" }}</span>
                                             {% endif %}
                                         </small>
                                     </div>
