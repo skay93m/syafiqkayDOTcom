@@ -1,0 +1,273 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container a4-width">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'noto_garden:dashboard' %}">Noto Garden</a></li>
+                    {% if note %}
+                        <li class="breadcrumb-item"><a href="{% url 'noto_garden:note_detail' note.unique_id %}">{{ note.unique_id }}</a></li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    {% else %}
+                        <li class="breadcrumb-item active">Create Note</li>
+                    {% endif %}
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Main Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-{% if note %}edit{% else %}plus{% endif %}"></i> 
+                        {{ action }} Note
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="title" 
+                                   name="title" 
+                                   value="{{ note.title|default:'' }}"
+                                   required>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <textarea class="form-control" 
+                                      id="content" 
+                                      name="content" 
+                                      rows="20" 
+                                      required>{{ note.content|default:'' }}</textarea>
+                            <div class="form-text">
+                                Use [[note_id]] to link to other notes. Links will be created automatically.
+                            </div>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="mb-3">
+                            <label for="tags" class="form-label">Tags</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="tags" 
+                                   name="tags" 
+                                   value="{{ tag_string|default:'' }}"
+                                   placeholder="tag1, tag2, tag3">
+                            <div class="form-text">
+                                Separate tags with commas. Tags will be created automatically if they don't exist.
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <a href="{% if note %}{% url 'noto_garden:note_detail' note.unique_id %}{% else %}{% url 'noto_garden:dashboard' %}{% endif %}" 
+                               class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Note
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Help Card -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-question-circle"></i> Zettelkasten Tips
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <strong>🔗 Link Notes:</strong> Use [[note_id]] to connect ideas
+                        </li>
+                        <li class="mb-2">
+                            <strong>🏷️ Tag Wisely:</strong> Use tags to categorize and find notes
+                        </li>
+                        <li class="mb-2">
+                            <strong>💭 Think Small:</strong> Focus on one concept per note
+                        </li>
+                        <li class="mb-2">
+                            <strong>🌱 Let Ideas Grow:</strong> Connect related thoughts over time
+                        </li>
+                    </ul>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'noto_garden:guide' %}" class="btn btn-success btn-sm">
+                            <i class="fas fa-book"></i> Read Full Guide
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Notes -->
+            {% if action == 'Edit' %}
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-search"></i> Find Notes to Link
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <input type="text" 
+                               class="form-control mb-3" 
+                               id="note-search" 
+                               placeholder="Search notes...">
+                        <div id="search-results"></div>
+                        <p class="text-muted small">
+                            Click on a note to copy its ID for linking
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+.form-control {
+    border-radius: 6px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.btn {
+    border-radius: 6px;
+}
+
+.search-result {
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 4px;
+}
+
+.search-result:hover {
+    background-color: #f8f9fa;
+}
+
+.note-id {
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #6c757d;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const noteSearch = document.getElementById('note-search');
+    const searchResults = document.getElementById('search-results');
+    
+    if (noteSearch) {
+        let searchTimeout;
+        
+        noteSearch.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            const query = this.value.trim();
+            
+            if (query.length < 2) {
+                searchResults.innerHTML = '';
+                return;
+            }
+            
+            searchTimeout = setTimeout(() => {
+                fetch('{% url "noto_garden:search_notes" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    body: JSON.stringify({query: query})
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Search failed');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    searchResults.innerHTML = '';
+                    
+                    if (data.error) {
+                        searchResults.innerHTML = '<p class="text-danger small">' + data.error + '</p>';
+                        return;
+                    }
+                    
+                    if (data.results.length === 0) {
+                        searchResults.innerHTML = '<p class="text-muted small">No notes found</p>';
+                        return;
+                    }
+                    
+                    data.results.forEach(note => {
+                        const div = document.createElement('div');
+                        div.className = 'search-result';
+                        div.innerHTML = `
+                            <div class="fw-bold">${note.title}</div>
+                            <div class="note-id">${note.id}</div>
+                        `;
+                        
+                        div.addEventListener('click', function() {
+                            navigator.clipboard.writeText(note.id).then(() => {
+                                // Show copied feedback
+                                const originalText = div.innerHTML;
+                                div.innerHTML = '<div class="text-success">ID copied!</div>';
+                                setTimeout(() => {
+                                    div.innerHTML = originalText;
+                                }, 1000);
+                            });
+                        });
+                        
+                        searchResults.appendChild(div);
+                    });
+                })
+                .catch(error => {
+                    console.error('Search error:', error);
+                    searchResults.innerHTML = '<p class="text-danger small">Search failed</p>';
+                });
+            }, 300);
+        });
+    }
+});
+</script>
+{% endblock %}

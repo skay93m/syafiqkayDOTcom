@@ -161,9 +161,393 @@ footer a:hover, footer a:focus {
   text-decoration: underline;
 }
 
-/* Responsive ASCII Art */
+/* LinkedIn Section Styling */
+.linkedin-section {
+  background: linear-gradient(135deg, var(--cloud-white) 0%, var(--pastel-yellow) 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 2px solid var(--sakura-pink);
+}
+
+.btn-linkedin {
+  background: linear-gradient(135deg, #0077B5 0%, #005885 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
+}
+
+.btn-linkedin:hover {
+  background: linear-gradient(135deg, #005885 0%, #003d5c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 119, 181, 0.4);
+  color: white;
+  text-decoration: none;
+}
+
+.btn-linkedin i {
+  font-size: 1.2rem;
+}
+
+/* Journal Entry Styling */
+.journal-entry {
+  background: var(--cloud-white);
+  border: 2px solid var(--pastel-green);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.journal-entry:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-color: var(--dark-green);
+}
+
+.journal-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.journal-title {
+  color: var(--ninja-dark);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+.journal-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.journal-title a:hover {
+  color: var(--dark-green);
+}
+
+.journal-text {
+  color: var(--ninja-dark);
+  line-height: 1.5;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.journal-entry .badge {
+  background-color: var(--dark-green) !important;
+  color: white;
+}
+
+.journal-entry .text-muted {
+  color: var(--accent-gray) !important;
+  font-size: 0.85rem;
+  margin-top: auto;
+}
+
+/* Purpose Description Styling */
+.purpose-description {
+  background: linear-gradient(135deg, var(--pastel-yellow) 0%, var(--cloud-white) 50%, var(--pastel-purple) 100%);
+  border-left: 4px solid var(--dark-sakura);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.purpose-description .ninja-text {
+  margin-bottom: 0.75rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.purpose-description .ninja-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Noto Garden (Zettelkasten) Styling */
+.noto-garden-header {
+  background: linear-gradient(135deg, var(--pastel-purple) 0%, var(--cloud-white) 50%, var(--pastel-yellow) 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.note-card {
+  background: var(--cloud-white);
+  border: 2px solid var(--pastel-purple);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  margin-bottom: 1rem;
+}
+
+.note-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-color: var(--dark-fuji);
+}
+
+.note-id {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--accent-gray);
+  background: var(--pastel-yellow);
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.note-title {
+  color: var(--ninja-dark);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.note-title:hover {
+  color: var(--dark-fuji);
+  text-decoration: none;
+}
+
+.note-content {
+  color: var(--ninja-dark);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.note-link {
+  color: var(--dark-fuji);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 2px 6px;
+  background-color: var(--pastel-yellow);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.note-link:hover {
+  background-color: var(--sakura-pink);
+  color: var(--ninja-dark);
+  text-decoration: none;
+}
+
+.missing-link {
+  color: var(--dark-sakura);
+  font-style: italic;
+  padding: 2px 6px;
+  background-color: var(--pastel-brown);
+  border-radius: 4px;
+  opacity: 0.7;
+}
+
+.connection-count {
+  background-color: var(--dark-fuji);
+  color: white;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.tag-badge {
+  background-color: var(--pastel-green);
+  color: var(--ninja-dark);
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 15px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.zettelkasten-stats {
+  background: linear-gradient(135deg, var(--fuji-blue) 0%, var(--pastel-purple) 100%);
+  border-radius: 10px;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.zettelkasten-stats .stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  display: block;
+}
+
+.zettelkasten-stats .stat-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.graph-container {
+  background: var(--cloud-white);
+  border: 2px solid var(--pastel-purple);
+  border-radius: 12px;
+  min-height: 500px;
+  position: relative;
+}
+
+.graph-node {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.graph-node:hover {
+  stroke: var(--dark-sakura);
+  stroke-width: 3px;
+}
+
+.graph-legend {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255,255,255,0.9);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.search-result {
+  padding: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--pastel-purple);
+  transition: all 0.3s ease;
+}
+
+.search-result:hover {
+  background-color: var(--pastel-yellow);
+  border-color: var(--dark-fuji);
+}
+
+.breadcrumb {
+  background: transparent;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "🌸";
+  color: var(--dark-sakura);
+}
+
+.btn-zettel {
+  background: linear-gradient(135deg, var(--pastel-purple) 0%, var(--fuji-blue) 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-zettel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  color: white;
+}
+
+.form-control-zettel {
+  border: 2px solid var(--pastel-purple);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control-zettel:focus {
+  border-color: var(--dark-fuji);
+  box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
+}
+
+/* Access Control Styling */
+.access-indicator {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.access-indicator .badge {
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.access-indicator .badge i {
+  margin-right: 6px;
+}
+
+/* Admin-only elements styling */
+.admin-only {
+  position: relative;
+}
+
+.admin-only.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.admin-only.disabled::after {
+  content: "🔒 Admin Only";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  z-index: 10;
+}
+
+/* Login prompt styling */
+.login-prompt {
+  background: linear-gradient(135deg, var(--pastel-yellow) 0%, var(--cloud-white) 100%);
+  border: 2px solid var(--dark-sakura);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.login-prompt .btn {
+  margin-top: 0.5rem;
+}
+
+/* Responsive adjustments for Noto Garden */
 @media (max-width: 768px) {
-  .ascii-art {
-    font-size: 1rem;
+  .noto-garden-header {
+    padding: 1.5rem;
+  }
+  
+  .note-card {
+    padding: 1rem;
+  }
+  
+  .zettelkasten-stats {
+    margin-bottom: 1rem;
+  }
+  
+  .zettelkasten-stats .stat-value {
+    font-size: 1.5rem;
   }
 }

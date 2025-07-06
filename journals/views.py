@@ -71,7 +71,28 @@ def coming_soon(request):
 
 def dashboard(request):
     journals = Journal.objects.all().order_by('-created_at')
-    return render(request, 'journals/dashboard.html', {'journals': journals})
+    
+    # Get filter parameters
+    author_filter = request.GET.get('author')
+    search_query = request.GET.get('search')
+    
+    # Apply filters
+    if author_filter:
+        journals = journals.filter(author__username=author_filter)
+    
+    if search_query:
+        journals = journals.filter(title__icontains=search_query)
+    
+    # Get unique authors for filtering
+    authors = Journal.objects.values_list('author__username', flat=True).distinct()
+    
+    context = {
+        'journals': journals,
+        'authors': authors,
+        'current_author': author_filter,
+        'search_query': search_query,
+    }
+    return render(request, 'journals/dashboard.html', context)
 
 def journal_detail(request, pk):
     journal = get_object_or_404(Journal, pk=pk)
