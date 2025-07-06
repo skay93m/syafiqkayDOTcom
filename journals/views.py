@@ -1,5 +1,8 @@
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponseBadRequest, Http404, HttpResponse
+from django.http import HttpResponseBadRequest, Http404, HttpResponse, JsonResponse
+from django.shortcuts import render, get_object_or_404
+from .models import Journal
+
 def trigger_400(request):
     return HttpResponseBadRequest("Bad request test")
 
@@ -63,8 +66,6 @@ def trigger_409(request):
 def trigger_410(request):
     response = HttpResponse("Gone test", status=410)
     return response
-from django.shortcuts import render, get_object_or_404
-from .models import Journal
 
 def coming_soon(request):
     return render(request, 'journals/coming_soon.html')
@@ -74,11 +75,15 @@ def dashboard(request):
     
     # Get filter parameters
     author_filter = request.GET.get('author')
+    tag_filter = request.GET.get('tag')
     search_query = request.GET.get('search')
     
     # Apply filters
     if author_filter:
         journals = journals.filter(author__username=author_filter)
+    
+    if tag_filter:
+        journals = journals.filter(tags__icontains=tag_filter)
     
     if search_query:
         journals = journals.filter(title__icontains=search_query)
@@ -86,10 +91,20 @@ def dashboard(request):
     # Get unique authors for filtering
     authors = Journal.objects.values_list('author__username', flat=True).distinct()
     
+    # Get unique tags for filtering
+    all_tags = []
+    for journal in Journal.objects.exclude(tags=''):
+        if journal.tags:
+            tags = [tag.strip() for tag in journal.tags.split(',')]
+            all_tags.extend(tags)
+    unique_tags = sorted(list(set(all_tags)))
+    
     context = {
         'journals': journals,
         'authors': authors,
+        'tags': unique_tags,
         'current_author': author_filter,
+        'current_tag': tag_filter,
         'search_query': search_query,
     }
     return render(request, 'journals/dashboard.html', context)
@@ -97,3 +112,14 @@ def dashboard(request):
 def journal_detail(request, pk):
     journal = get_object_or_404(Journal, pk=pk)
     return render(request, 'journals/journal_detail.html', {'journal': journal})
+
+def get_all_tags(request):
+    """API endpoint to get all available tags"""
+    all_tags = []
+    for journal in Journal.objects.exclude(tags=''):
+        if journal.tags:
+            tags = [tag.strip() for tag in journal.tags.split(',')]
+            all_tags.extend(tags)
+    
+    unique_tags = sorted(list(set(all_tags)))
+    return JsonResponse({'tags': unique_tags})

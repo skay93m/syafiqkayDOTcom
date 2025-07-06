@@ -29,8 +29,8 @@ def create_journal_entry():
             'email': 'copilot@github.com',
             'first_name': 'GitHub',
             'last_name': 'Copilot',
-            'is_staff': True,
-            'is_superuser': True,
+            'is_staff': False,
+            'is_superuser': False,
         }
     )
     

@@ -21,6 +21,14 @@
             </span>
             {% endif %}
         </div>
+        {% if journal.tags %}
+        <div class="journal-tags mt-2">
+            <i class="fas fa-tags text-muted me-2"></i>
+            {% for tag in journal.get_tags %}
+                <span class="badge bg-success me-1" style="background-color: #C8E6C9 !important; color: #333 !important;">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
     
     <!-- Journal Content -->

@@ -10,7 +10,7 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h2">Journal Library</h1>
                 <div class="btn-group">
-                    <a href="{% url 'journals:dashboard' %}" class="btn btn-outline-secondary {% if not current_author %}active{% endif %}">
+                    <a href="{% url 'journals:dashboard' %}" class="btn btn-outline-secondary {% if not current_author and not current_tag %}active{% endif %}">
                         All
                     </a>
                     {% for author in authors %}
@@ -22,6 +22,57 @@
                         {% endif %}
                     {% endfor %}
                 </div>
+            </div>
+            
+            <!-- Tag Filter Section -->
+            {% if tags %}
+            <div class="mb-4">
+                <h6 class="text-muted mb-2">
+                    <i class="fas fa-tags"></i> Filter by Tags:
+                </h6>
+                <div class="tag-filter-buttons">
+                    {% for tag in tags %}
+                        <a href="{% url 'journals:dashboard' %}?tag={{ tag }}" 
+                           class="btn btn-sm btn-outline-success me-2 mb-2 {% if current_tag == tag %}active{% endif %}"
+                           style="{% if current_tag == tag %}background-color: #C8E6C9 !important; color: #333 !important; border-color: #C8E6C9 !important;{% endif %}">
+                            {{ tag }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Current Filters Display -->
+            {% if current_author or current_tag or search_query %}
+            <div class="mb-3">
+                <h6 class="text-muted">Active Filters:</h6>
+                <div class="d-flex align-items-center">
+                    {% if current_author %}
+                        <span class="badge bg-secondary me-2">Author: {{ current_author }}</span>
+                    {% endif %}
+                    {% if current_tag %}
+                        <span class="badge bg-success me-2" style="background-color: #C8E6C9 !important; color: #333 !important;">Tag: {{ current_tag }}</span>
+                    {% endif %}
+                    {% if search_query %}
+                        <span class="badge bg-info me-2">Search: {{ search_query }}</span>
+                    {% endif %}
+                    <a href="{% url 'journals:dashboard' %}" class="btn btn-sm btn-outline-secondary">Clear All</a>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Search Box -->
+            <div class="mb-4">
+                <form method="GET" class="row g-3">
+                    <div class="col-md-8">
+                        <input type="text" name="search" class="form-control" placeholder="Search journals..." value="{{ search_query }}">
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-outline-secondary w-100">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </form>
             </div>
             
             <!-- Purpose Description -->
@@ -50,6 +101,13 @@
                                     {% if journal.author %}
                                         <span class="badge bg-secondary mb-2">{{ journal.author.username }}</span>
                                     {% endif %}
+                                    {% if journal.tags %}
+                                        <div class="mb-2">
+                                            {% for tag in journal.get_tags %}
+                                                <span class="badge bg-success me-1" style="background-color: #C8E6C9 !important; color: #333 !important;">{{ tag }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
                                     {% if journal.summary %}
                                         <p class="journal-text">{{ journal.summary|truncatewords:20 }}</p>
                                     {% endif %}
@@ -75,4 +133,70 @@
         </div>
     </div>
 </div>
+
+<style>
+/* Journal Tags Styling */
+.tag-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-filter-buttons .btn {
+    transition: all 0.3s ease;
+}
+
+.tag-filter-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.tag-filter-buttons .btn.active {
+    background-color: #C8E6C9 !important;
+    color: #333 !important;
+    border-color: #C8E6C9 !important;
+}
+
+.journal-tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.journal-tags .badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+}
+
+/* Search box styling */
+.search-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Active filters styling */
+.active-filters {
+    background-color: #f8f9fa;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    border-left: 4px solid #C8E6C9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tag-filter-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .tag-filter-buttons .btn {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+}
+</style>
 {% endblock %}
