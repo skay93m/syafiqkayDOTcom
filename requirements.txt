@@ -15,7 +15,6 @@ cryptography==45.0.4
 dj-database-url==3.0.1
 Django==5.0.14
 django-storages==1.14.6
-<<<<<<< HEAD
 executing==2.2.0
 fastjsonschema==2.21.1
 filelock==3.13.1
@@ -63,12 +62,6 @@ psycopg==3.2.9
 psycopg2-binary==2.9.10
 ptyprocess==0.7.0
 pure_eval==0.2.3
-=======
-idna==3.10
-isodate==0.7.2
-Markdown==3.8.2
-mssql-django==1.5
->>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
 pycparser==2.22
 pyodbc==5.2.0
 python-dotenv==1.1.1

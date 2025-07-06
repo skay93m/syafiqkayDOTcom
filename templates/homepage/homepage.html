@@ -1,5 +1,6 @@
 {% extends "base/index.html" %}
 {% load static %}
+<<<<<<< HEAD
 {% load furigana_extras %}
 {% block content %}
 <div class="container mt-5">
@@ -28,6 +29,32 @@
     </div>
   </div>
   <!-- Personal Statement Section -->
+=======
+{% block content %}
+<div class="container a4-width mt-5 justify-content-center">
+  {% include "components/banner.html" %}
+  
+  <!-- Zen Landscape Section -->
+  <section class="zen-landscape-section mt-4 mb-4">
+    <div class="zen-image-container">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+           alt="Zen landscape with leafless trees near lake and mountains" 
+           class="zen-image">
+      <div class="zen-caption">
+        <p class="ninja-text">
+          🍃 Like the ancient trees that stand resilient by the tranquil waters, a ninja's spirit remains unshaken through all seasons of learning and growth.
+        </p>
+        <p class="ninja-text jp-text">
+          🍃 静寂な水辺に立つ古木のように、忍者の精神は学びと成長の全ての季節を通して不動のままです。
+        </p>
+        <small class="image-source">
+          <i class="fas fa-camera"></i> Photo by <a href="https://unsplash.com/photos/leafless-trees-near-lake-and-mountains-during-daytime-gNZ6MHqtsLY" target="_blank" rel="noopener">Unsplash</a>
+        </small>
+      </div>
+    </div>
+  </section>
+  
+>>>>>>> 87187f4 (Add utility scripts and reorganize templates for improved structure)
   {% if rirekisho %}
   <div class="row mb-5">
     <div class="col-md-12">
