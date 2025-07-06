@@ -1,2 +1,572 @@
 @import url('custom-2025-07-03.css');
-/* You can add admin-specific tweaks here if needed */
+
+/* Django Admin Bootstrap + Honoka Styling */
+/* Override Django's default admin styles with Bootstrap + Honoka + Sakura theme */
+
+/* ========== GENERAL LAYOUT ========== */
+#container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ========== HEADER ========== */
+#header {
+    background: linear-gradient(135deg, var(--fuji-blue) 0%, var(--sakura-pink) 100%) !important;
+    color: #333 !important;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-bottom: none;
+}
+
+#branding {
+    float: left;
+    padding: 0 20px;
+}
+
+#branding h1 {
+    font-family: 'Noto Sans JP', 'Yu Gothic', sans-serif;
+    font-weight: 700;
+    color: #333 !important;
+    margin: 0;
+    font-size: 2rem;
+}
+
+#branding h1 a:link, #branding h1 a:visited {
+    color: #333 !important;
+    text-decoration: none;
+}
+
+#user-tools {
+    float: right;
+    padding: 0 20px;
+    font-size: 0.9rem;
+    line-height: 2.5;
+}
+
+#user-tools a {
+    color: #333 !important;
+    text-decoration: none;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+#user-tools a:hover {
+    background: rgba(255,255,255,0.2);
+    color: #111 !important;
+}
+
+/* ========== BREADCRUMBS ========== */
+.breadcrumbs {
+    background: var(--cloud-white) !important;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--pastel-brown);
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.breadcrumbs a {
+    color: var(--fuji-blue) !important;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumbs a:hover {
+    color: var(--sakura-pink) !important;
+}
+
+/* ========== CONTENT AREA ========== */
+#content {
+    background: var(--cloud-white);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+}
+
+/* ========== FORMS ========== */
+.form-row {
+    margin-bottom: 20px;
+}
+
+.form-row label {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="url"], 
+input[type="number"], input[type="date"], input[type="datetime-local"], 
+textarea, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--pastel-brown);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: var(--cloud-white);
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, 
+input[type="url"]:focus, input[type="number"]:focus, input[type="date"]:focus, 
+input[type="datetime-local"]:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--sakura-pink);
+    box-shadow: 0 0 0 3px rgba(250, 218, 221, 0.3);
+}
+
+/* ========== BUTTONS ========== */
+.default, input[type="submit"], input[type="button"], .button, button {
+    background: var(--sakura-pink) !important;
+    color: #333 !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Noto Sans JP', sans-serif;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.default:hover, input[type="submit"]:hover, input[type="button"]:hover, 
+.button:hover, button:hover {
+    background: var(--fuji-blue) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.default:active, input[type="submit"]:active, input[type="button"]:active, 
+.button:active, button:active {
+    transform: translateY(0);
+}
+
+/* Secondary button style */
+.button.secondary {
+    background: var(--pastel-green) !important;
+    color: #333 !important;
+}
+
+.button.secondary:hover {
+    background: var(--pastel-purple) !important;
+}
+
+/* ========== TABLES ========== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: var(--cloud-white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--pastel-brown);
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+th {
+    background: var(--fuji-blue) !important;
+    color: #333 !important;
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+tr:hover {
+    background: var(--pastel-yellow) !important;
+}
+
+tr:nth-child(even) {
+    background: rgba(250, 218, 221, 0.3);
+}
+
+/* ========== CHANGE LIST ========== */
+.results {
+    margin-top: 20px;
+}
+
+.results table {
+    margin-bottom: 0;
+}
+
+.paginator {
+    background: var(--cloud-white);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.paginator a {
+    color: var(--fuji-blue) !important;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 0 3px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.paginator a:hover {
+    background: var(--sakura-pink);
+    color: #333 !important;
+}
+
+.paginator .this-page {
+    background: var(--sakura-pink);
+    color: #333 !important;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* ========== MESSAGES ========== */
+.messagelist {
+    margin: 0 0 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.messagelist li {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.messagelist .success {
+    background: var(--pastel-green) !important;
+    color: #333 !important;
+    border-left: 4px solid #4CAF50;
+}
+
+.messagelist .warning {
+    background: var(--pastel-yellow) !important;
+    color: #333 !important;
+    border-left: 4px solid #FF9800;
+}
+
+.messagelist .error {
+    background: var(--pastel-brown) !important;
+    color: #333 !important;
+    border-left: 4px solid #F44336;
+}
+
+.messagelist .info {
+    background: var(--pastel-purple) !important;
+    color: #333 !important;
+    border-left: 4px solid #2196F3;
+}
+
+/* ========== SIDEBAR ========== */
+#changelist-sidebar {
+    background: var(--cloud-white);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-left: 20px;
+}
+
+#changelist-sidebar h2 {
+    color: #333;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+#changelist-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#changelist-sidebar li {
+    margin-bottom: 8px;
+}
+
+#changelist-sidebar a {
+    color: var(--fuji-blue) !important;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+#changelist-sidebar a:hover {
+    background: var(--sakura-pink);
+    color: #333 !important;
+}
+
+/* ========== FIELDSETS ========== */
+fieldset {
+    border: 2px solid var(--pastel-brown);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: var(--cloud-white);
+}
+
+fieldset h2 {
+    color: #333;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--sakura-pink);
+}
+
+/* ========== INLINE FORMS ========== */
+.inline-group {
+    background: var(--cloud-white);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.inline-group h2 {
+    color: #333;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* ========== HELP TEXT ========== */
+.help {
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    #container {
+        padding: 10px;
+    }
+    
+    #header {
+        padding: 0.5rem 0;
+    }
+    
+    #branding, #user-tools {
+        float: none;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    #content {
+        padding: 20px;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+    
+    th, td {
+        padding: 10px;
+    }
+}
+
+/* ========== CUSTOM HONOKA TOUCHES ========== */
+/* Add subtle animations and modern touches */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Subtle hover effects */
+.module h2, .module caption {
+    background: var(--fuji-blue) !important;
+    color: #333 !important;
+    font-weight: 700;
+    border-radius: 8px 8px 0 0;
+    padding: 15px 20px;
+    margin: 0;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--cloud-white);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--sakura-pink);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--fuji-blue);
+}
+
+/* Focus states for accessibility */
+*:focus {
+    outline: 2px solid var(--sakura-pink);
+    outline-offset: 2px;
+}
+
+/* Make the admin feel more modern */
+body {
+    background: linear-gradient(135deg, var(--cloud-white) 0%, rgba(250, 218, 221, 0.1) 100%);
+    min-height: 100vh;
+}
+
+/* Add some spacing to the bottom */
+#footer {
+    margin-top: 50px;
+    padding: 30px 20px;
+    background: var(--fuji-blue);
+    border-radius: 12px;
+    text-align: center;
+    color: #333;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* Add some final polish touches */
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    }
+    
+    #content {
+        background: #333;
+        color: #fff;
+    }
+    
+    input[type="text"], input[type="password"], input[type="email"], input[type="url"], 
+    textarea, select {
+        background: #444;
+        color: #fff;
+        border-color: #555;
+    }
+    
+    th {
+        background: #555 !important;
+        color: #fff !important;
+    }
+    
+    .breadcrumbs {
+        background: #444 !important;
+        color: #fff;
+    }
+}
+
+/* Print styles */
+@media print {
+    #header, #footer, .breadcrumbs, .submit-row {
+        display: none !important;
+    }
+    
+    #content {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+    
+    table {
+        border-collapse: collapse !important;
+    }
+    
+    th, td {
+        border: 1px solid #ccc !important;
+        padding: 8px !important;
+    }
+}
+
+/* Accessibility improvements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    input[type="text"], input[type="password"], input[type="email"], input[type="url"], 
+    textarea, select {
+        border: 3px solid #000;
+    }
+    
+    .default, input[type="submit"], input[type="button"], .button, button {
+        border: 2px solid #000;
+    }
+    
+    th {
+        border: 2px solid #000;
+    }
+}
+
+/* Animation performance */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 480px) {
+    #content {
+        padding: 15px;
+        margin: 10px;
+    }
+    
+    .form-row input[type="text"], .form-row input[type="password"], 
+    .form-row input[type="email"], .form-row input[type="url"], 
+    .form-row textarea, .form-row select {
+        padding: 10px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    .submit-row input[type="submit"] {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    
+    table {
+        font-size: 0.8rem;
+    }
+    
+    th, td {
+        padding: 8px 5px;
+    }
+}
+
+/* Tablet styles */
+@media (min-width: 481px) and (max-width: 1024px) {
+    #container {
+        padding: 15px;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+}
