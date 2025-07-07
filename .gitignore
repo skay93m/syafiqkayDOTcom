@@ -70,3 +70,4 @@ venv.bak/
 .vscode/
 marimo/_lsp/
 __marimo__/
+env_config.json

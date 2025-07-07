@@ -27,6 +27,7 @@ urlpatterns = [
     path("journals/", include("journals.urls")),
     path("noto_garden/", include("noto_garden.urls")),
     path("reference/", include("reference.urls")),
+    path("experiments/", include("experiments.urls")),
     # Favicon handling
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'favicon.ico', permanent=True)),
     # Error testing URLs
