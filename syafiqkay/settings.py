@@ -36,6 +36,7 @@ ALLOWED_HOSTS = [
     'syafiq-kay.onrender.com',  # Render.com deployment (old)
     'syafiq-kay.onrender.com:10000',  # Render.com deployment with port (old)
     'syafiq-kay-1.onrender.com',  # Render.com deployment (new)
+    'sk-dxgmhag5dtcsamfh.uksouth-01.azurewebsites.net',  # Azure App Service deployment
 ]
 
 # CSRF trusted origins for production and staging
@@ -43,6 +44,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://syafiqkay.com",
     "https://www.syafiqkay.com",
     "https://syafiq-kay-1.onrender.com",
+    "https://sk-dxgmhag5dtcsamfh.uksouth-01.azurewebsites.net",
+    "https://syafiq-kay.onrender.com",
 ]
 
 # Application definition
