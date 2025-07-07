@@ -61,7 +61,8 @@ INSTALLED_APPS = [
     'homepage',                     # Custom app: homepage
     'journals',                     # Custom app: journals
     'noto_garden',                   # Custom app: noto_garden
-    'reference',                    # Custom app: reference
+    'reference',
+    'experiments',                    # Custom app: reference
     'storages',                   # Django-storages for cloud storage backends
 ]
 

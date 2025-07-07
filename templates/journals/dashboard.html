@@ -83,7 +83,7 @@
                 </p>
                 <p class="ninja-text">
                     📖 デジタル侍の旅の記録が保存されている日記巻物庫へようこそ。
-                    各エントリーは、学習と成長の戦いを通じて得られた洞察、反省、そして智慧を記録しています。
+                    <ruby>各<rt>かく</rt></ruby>エントリーは、<ruby>学習<rt>がくしゅう</rt></ruby>と<ruby>成長<rt>せいちょう</rt></ruby>の<ruby>戦<rt>たたか</rt></ruby>いを<ruby>通<rt>とお</rt></ruby>じて<ruby>得<rt>え</rt></ruby>られた<ruby>洞察<rt>どうさつ</rt></ruby>、<ruby>反省<rt>はんせい</rt></ruby>、そして<ruby>智慧<rt>ちえ</rt></ruby>を<ruby>記録<rt>きろく</rt></ruby>しています。
                 </p>
             </div>
             
@@ -113,12 +113,12 @@
                                     </div>
                                     <div class="col-md-4 text-end">
                                         <small class="text-muted">
-                                            <span class="jp-text">作成: {{ journal.created_at|date:"Y年m月d日" }}</span>
+                                            <span class="jp-text japanese-text">作成: {{ journal.created_at|date:"Y年m月d日" }}</span>
                                             <br>
                                             <span>Created: {{ journal.created_at|date:"jS M Y" }}</span>
                                             {% if journal.updated_at != journal.created_at %}
                                                 <br>
-                                                <span class="jp-text">更新: {{ journal.updated_at|date:"Y年m月d日" }}</span>
+                                                <span class="jp-text japanese-text">更新: {{ journal.updated_at|date:"Y年m月d日" }}</span>
                                                 <br>
                                                 <span>Updated: {{ journal.updated_at|date:"jS M Y" }}</span>
                                             {% endif %}
