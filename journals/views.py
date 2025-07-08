@@ -113,7 +113,7 @@ def dashboard(request):
         'current_tag': tag_filter,
         'search_query': search_query,
     }
-    return render(request, 'journals/dashboard_new.html', context)
+    return render(request, 'journals/dashboard.html', context)
 
 def journal_detail(request, pk):
     journal = get_object_or_404(Journal, pk=pk)
