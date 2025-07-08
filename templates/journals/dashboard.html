@@ -10,18 +10,14 @@
         <h1 class="display-4 mb-3">📚 <ruby>ジャーナル<rt>Journal</rt></ruby><ruby>図書館<rt>としょかん</rt></ruby> 📚</h1>
         <h2 class="h3 text-muted mb-4">Journal Library</h2>
         <p class="lead">Where insights and reflections are collected and organized for continuous learning.</p>
-        <p class="japanese-text jp-text text-center mb-4">
-            📚 <ruby>洞察<rt>どうさつ</rt></ruby>と<ruby>反省<rt>はんせい</rt></ruby>が<ruby>継続<rt>けいぞく</rt></ruby><ruby>学習<rt>がくしゅう</rt></ruby>のために<ruby>収集<rt>しゅうしゅう</rt></ruby>され<ruby>整理<rt>せいり</rt></ruby>される<ruby>場所<rt>ばしょ</rt></ruby>。
-        </p>
     </div>
-
+    
     <!-- Filter Section -->
     <div class="row mb-5">
         <div class="col-12">
             <div class="card border">
                 <div class="card-header">
                     <h4 class="card-title mb-0">🔍 Filters & Search</h4>
-                    <h5 class="card-subtitle mb-0 jp-text japanese-text">🔍 <ruby>フィルター<rt>Filter</rt></ruby>と<ruby>検索<rt>けんさく</rt></ruby></h5>
                 </div>
                 <div class="card-body">
                     <!-- Author Filter Buttons -->
@@ -41,20 +37,6 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <!-- Tag Filter Section -->
-                    {% if tags %}
-                    <div class="mb-3">
-                        <h6 class="text-muted mb-2">🏷️ Filter by Tags:</h6>
-                        <div class="tag-filter-buttons">
-                            {% for tag in tags %}
-                                <a href="{% url 'journals:dashboard' %}?tag={{ tag }}" 
-                                   class="btn btn-sm btn-outline-success me-2 mb-2 {% if current_tag == tag %}active{% endif %}">
-                                    {{ tag }}
-                                </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endif %}
                     
                     <!-- Search Box -->
                     <div class="mb-3">
@@ -72,210 +54,105 @@
             </div>
         </div>
     </div>
-    <!-- Active Filters Display -->
-    {% if current_author or current_tag or search_query %}
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card border">
-                <div class="card-body">
-                    <h6 class="card-title">Active Filters:</h6>
-                    <div class="d-flex align-items-center flex-wrap">
-                        {% if current_author %}
-                            <span class="badge bg-secondary me-2 mb-1">Author: {{ current_author }}</span>
-                        {% endif %}
-                        {% if current_tag %}
-                            <span class="badge bg-success me-2 mb-1">Tag: {{ current_tag }}</span>
-                        {% endif %}
-                        {% if search_query %}
-                            <span class="badge bg-info me-2 mb-1">Search: {{ search_query }}</span>
-                        {% endif %}
-                        <a href="{% url 'journals:dashboard' %}" class="btn btn-sm btn-outline-secondary">Clear All</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-outline-secondary w-100">
-                            <i class="fas fa-search"></i> Search
-                        </button>
-    <!-- Purpose Description -->
-    <div class="row mb-5">
-        <div class="col-md-12">
-            <div class="card border-primary">
-                <div class="card-body text-center py-4">
-                    <h4 class="card-title mb-3 text-primary">📖 Journal Scroll Archive</h4>
-                    <p class="card-text">
-                        Welcome to the Journal Scroll Archive, where the chronicles of a digital samurai's journey are preserved.
-                    </p>
-                    <p class="card-text jp-text japanese-text">
-                        📖 <ruby>デジタル<rt>Digital</rt></ruby><ruby>侍<rt>さむらい</rt></ruby>の<ruby>旅<rt>たび</rt></ruby>の<ruby>記録<rt>きろく</rt></ruby>が<ruby>保存<rt>ほぞん</rt></ruby>されている<ruby>日記<rt>にっき</rt></ruby><ruby>巻物<rt>まきもの</rt></ruby><ruby>庫<rt>こ</rt></ruby>へようこそ。
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Journal Entries -->
     <div class="row mb-4">
         <div class="col-12">
             <h3>📚 Journal Entries</h3>
-            <h4 class="text-muted jp-text japanese-text">📚 <ruby>ジャーナル<rt>Journal</rt></ruby>エントリー</h4>
         </div>
     </div>
     
     {% if journals %}
     <div class="row">
         <div class="col-12">
-            <div class="journal-list">
-                {% for journal in journals %}
-                <div class="card mb-4 border shadow-sm">
-                    <div class="card-body p-4">
-                        <h3 class="card-title mb-3">
-                            <a href="{% url 'journals:journal_detail' journal.pk %}" class="text-decoration-none text-primary">
-                                {{ journal.title }}
-                            </a>
-                        </h3>
-                        
-                        <!-- Tags -->
-                        {% if journal.tags %}
-                        <div class="mb-3">
-                            {% for tag in journal.get_tags %}
-                            <span class="badge bg-secondary me-1 mb-1">{{ tag }}</span>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-                        
-                        <!-- Summary -->
-                        {% if journal.summary %}
-                        <p class="card-text lead">{{ journal.summary|truncatewords:30 }}</p>
-                        {% endif %}
-                        
-                        <!-- Meta Information -->
-                        <div class="mt-3 mb-3">
-                            <div class="d-flex flex-wrap">
-                                {% if journal.author %}
-                                <div class="me-3 mb-2">
-                                    <span class="text-muted"><i class="fas fa-user me-1"></i> {{ journal.author.username }}</span>
-                                </div>
-                                {% endif %}
-                                <div class="me-3 mb-2">
-                                    <span class="text-muted"><i class="far fa-calendar-alt me-1"></i> {{ journal.created_at|date:"M d, Y" }}</span>
-                                </div>
-                                {% if journal.updated_at != journal.created_at %}
-                                <div class="mb-2">
-                                    <span class="text-muted"><i class="fas fa-sync-alt me-1"></i> {{ journal.updated_at|date:"M d, Y" }}</span>
-                                </div>
-                                {% endif %}
+            {% for journal in journals %}
+            <div class="card mb-4 border shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-3">
+                        <a href="{% url 'journals:journal_detail' journal.pk %}" class="text-decoration-none text-primary">
+                            {{ journal.title }}
+                        </a>
+                    </h3>
+                    
+                    <!-- Tags -->
+                    {% if journal.tags %}
+                    <div class="mb-3">
+                        {% for tag in journal.get_tags %}
+                        <span class="badge bg-secondary me-1 mb-1">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if journal.summary %}
+                    <p class="card-text lead">{{ journal.summary|truncatewords:30 }}</p>
+                    {% endif %}
+                    
+                    <!-- Meta Information -->
+                    <div class="mt-3 mb-3">
+                        <div class="d-flex flex-wrap">
+                            {% if journal.author %}
+                            <div class="me-3 mb-2">
+                                <span class="text-muted"><i class="fas fa-user me-1"></i> {{ journal.author.username }}</span>
                             </div>
-                            
-                            <div class="jp-text japanese-text text-muted small">
-                                {% if journal.author %}
-                                <span class="me-2"><i class="fas fa-user me-1"></i> {{ journal.author.username }}</span>
-                                {% endif %}
-                                <span class="me-2"><i class="far fa-calendar-alt me-1"></i> <ruby>作成<rt>さくせい</rt></ruby>: {{ journal.created_at|date:"Y年m月d日" }}</span>
-                                {% if journal.updated_at != journal.created_at %}
-                                <span><i class="fas fa-sync-alt me-1"></i> <ruby>更新<rt>こうしん</rt></ruby>: {{ journal.updated_at|date:"Y年m月d日" }}</span>
-                                {% endif %}
+                            {% endif %}
+                            <div class="me-3 mb-2">
+                                <span class="text-muted"><i class="far fa-calendar-alt me-1"></i> {{ journal.created_at|date:"M d, Y" }}</span>
                             </div>
-                        </div>
-                        
-                        <!-- Action Buttons -->
-                        <div class="d-flex justify-content-end mt-4">
-                            <a href="{% url 'journals:journal_detail' journal.pk %}" class="btn btn-outline-primary">
-                                <i class="fas fa-book-reader me-1"></i> View Entry
-                            </a>
+                            {% if journal.updated_at != journal.created_at %}
+                            <div class="mb-2">
+                                <span class="text-muted"><i class="fas fa-sync-alt me-1"></i> {{ journal.updated_at|date:"M d, Y" }}</span>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
+                    
+                    <div class="d-flex justify-content-end mt-4">
+                        <a href="{% url 'journals:journal_detail' journal.pk %}" class="btn btn-outline-primary">
+                            <i class="fas fa-book-reader me-1"></i> View Entry
+                        </a>
                     </div>
                 </div>
-                {% endfor %}
             </div>
-        </div>
-    </div>
-                
-    <!-- Pagination -->
-    {% if journals.has_other_pages %}
-    <div class="row">
-        <div class="col-12">
+            {% endfor %}
+            
+            <!-- Pagination -->
+            {% if journals.has_other_pages %}
             <nav aria-label="Journal pagination" class="mt-4">
                 <ul class="pagination justify-content-center">
                     {% if journals.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ journals.previous_page_number }}{% if current_author %}&author={{ current_author }}{% endif %}{% if current_tag %}&tag={{ current_tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">
-                                <i class="fas fa-chevron-left"></i> Previous
-                            </a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <span class="page-link"><i class="fas fa-chevron-left"></i> Previous</span>
-                        </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ journals.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </a>
+                    </li>
                     {% endif %}
                     
                     {% for num in journals.paginator.page_range %}
-                        {% if journals.number == num %}
-                            <li class="page-item active">
-                                <span class="page-link">{{ num }}</span>
-                            </li>
-                        {% elif num > journals.number|add:'-3' and num < journals.number|add:'3' %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ num }}{% if current_author %}&author={{ current_author }}{% endif %}{% if current_tag %}&tag={{ current_tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">{{ num }}</a>
-                            </li>
-                        {% endif %}
+                    <li class="page-item {% if journals.number == num %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}{% if search_query %}&search={{ search_query }}{% endif %}">
+                            {{ num }}
+                        </a>
+                    </li>
                     {% endfor %}
                     
                     {% if journals.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ journals.next_page_number }}{% if current_author %}&author={{ current_author }}{% endif %}{% if current_tag %}&tag={{ current_tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">
-                                Next <i class="fas fa-chevron-right"></i>
-                            </a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <span class="page-link">Next <i class="fas fa-chevron-right"></i></span>
-                        </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ journals.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
                     {% endif %}
                 </ul>
             </nav>
-            <div class="text-center mt-2 jp-text japanese-text">
-                <small>
-                    {{ journals.paginator.num_pages }}<ruby>ページ<rt>Page</rt></ruby>中の{{ journals.number }}<ruby>ページ<rt>Page</rt></ruby>目
-                </small>
-            </div>
-        </nav>
-        {% endif %}
-    {% else %}
-        <!-- No Journals Message -->
-        <div class="text-center py-5">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">📚 No Journals Found</h4>
-                    <p class="card-text">{% if current_author %}No journals by "{{ current_author }}" yet.{% else %}No journals have been added yet.{% endif %}</p>
-                    <div class="jp-text japanese-text">
-                        <h5 class="card-title">📚 <ruby>ジャーナル<rt>Journal</rt></ruby>が<ruby>見<rt>み</rt></ruby>つかりません</h5>
-                        <p class="card-text">{% if current_author %}"{{ current_author }}"による<ruby>ジャーナル<rt>Journal</rt></ruby>はまだありません。{% else %}<ruby>ジャーナル<rt>Journal</rt></ruby>はまだ<ruby>追加<rt>ついか</rt></ruby>されていません。{% endif %}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-                <small class="text-muted jp-text japanese-text">
-                    <ruby>ページ<rt>Page</rt></ruby> {{ journals.number }} / {{ journals.paginator.num_pages }}
-                </small>
-            </div>
+            {% endif %}
         </div>
     </div>
-    {% endif %}
     {% else %}
-    <!-- No journals found -->
     <div class="row">
         <div class="col-12">
             <div class="alert alert-info" role="alert">
                 <h4 class="alert-heading">No journals found</h4>
                 <p>No journal entries match your search criteria. Try adjusting your filters or search terms.</p>
-                <p class="jp-text japanese-text mb-0">
-                    <ruby>検索<rt>けんさく</rt></ruby><ruby>条件<rt>じょうけん</rt></ruby>に<ruby>一致<rt>いっち</rt></ruby>する<ruby>ジャーナル<rt>Journal</rt></ruby>エントリーがありません。<ruby>フィルター<rt>Filter</rt></ruby>または<ruby>検索<rt>けんさく</rt></ruby><ruby>用語<rt>ようご</rt></ruby>を<ruby>調整<rt>ちょうせい</rt></ruby>してください。
-                </p>
             </div>
         </div>
     </div>
@@ -283,7 +160,6 @@
 </div>
 
 <style>
-/* Journal styling */
 .card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     border-radius: 0.5rem;
@@ -292,129 +168,6 @@
 .card:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.jp-text {
-    font-size: 0.9em;
-}
-
-.japanese-text {
-    font-family: 'Noto Sans JP', sans-serif;
-}
-
-.journal-card-horizontal:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    border-color: #dee2e6;
-}
-
-.journal-card-horizontal .card-title a {
-    color: #333;
-    font-weight: 600;
-}
-
-.journal-card-horizontal .card-title a:hover {
-    color: #0d6efd;
-}
-
-.reference-card-horizontal {
-    transition: all 0.3s ease;
-    border: 1px solid #e9ecef;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.reference-card-horizontal:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    border-color: #dee2e6;
-}
-
-.reference-card-horizontal .card-title a {
-    color: #333;
-    font-weight: 600;
-}
-
-.reference-card-horizontal .card-title a:hover {
-    color: #0d6efd;
-}
-
-/* Journal Tags Styling */
-.tag-filter-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.tag-filter-buttons .btn {
-    transition: all 0.3s ease;
-}
-
-.tag-filter-buttons .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.tag-filter-buttons .btn.active {
-    background-color: #f8f9fa !important;
-    color: #333 !important;
-    border-color: #dee2e6 !important;
-}
-
-.journal-tags {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.journal-tags .badge {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.375rem;
-}
-
-/* Search box styling */
-.search-container {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
-/* Active filters styling */
-.active-filters {
-    background-color: #f8f9fa;
-    border-radius: 0.375rem;
-    padding: 0.75rem;
-    border-left: 4px solid #C8E6C9;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .tag-filter-buttons {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .tag-filter-buttons .btn {
-        text-align: center;
-        margin-bottom: 0.5rem;
-    }
-}
-</style>
-{% endblock %}
-    
-    .journal-card-horizontal .row,
-    .reference-card-horizontal .row {
-        flex-direction: column;
-    }
-    
-    .journal-card-horizontal .col-md-4,
-    .reference-card-horizontal .col-md-4 {
-        text-align: left !important;
-        margin-top: 1rem;
-    }
 }
 </style>
 {% endblock %}
