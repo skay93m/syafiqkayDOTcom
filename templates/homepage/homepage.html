@@ -2,342 +2,210 @@
 {% load static %}
 {% load furigana_extras %}
 {% block content %}
-<div class="container a4-width mt-5 justify-content-center">
-  {% include "components/banner.html" %}
-  
-  <!-- Zen Landscape Section -->
-  <section class="zen-landscape-section mt-4 mb-4">
-    <div class="zen-image-container">
-      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-           alt="Zen landscape with leafless trees near lake and mountains" 
-           class="zen-image">
-      <div class="zen-caption">
-        <p class="ninja-text">
-          🍃 Like the ancient trees that stand resilient by the tranquil waters, a ninja's spirit remains unshaken through all seasons of learning and growth.
-        </p>
-        <p class="ninja-text jp-text japanese-text">
-          🍃 静寂な水辺に立つ古木のように、忍者の精神は学びと成長の全ての季節を通して不動のままです。
-        </p>
-        <small class="image-source">
-          <i class="fas fa-camera"></i> Photo by <a href="https://unsplash.com/photos/leafless-trees-near-lake-and-mountains-during-daytime-gNZ6MHqtsLY" target="_blank" rel="noopener">Unsplash</a>
-        </small>
+<div class="container mt-5">
+  <!-- Header Section -->
+  <div class="text-center mb-5">
+    <h1 class="display-4 mb-3">🥷 <ruby>道場<rt>どうじょう</rt></ruby> 🥷</h1>
+    <h2 class="h3 text-muted mb-4">Digital Dojo</h2>
+    <p class="lead">Where ancient wisdom meets modern technology in the pursuit of mastery.</p>
+    <p class="japanese-text jp-text text-center mb-4">
+      🥷 <ruby>古代<rt>こだい</rt></ruby>の<ruby>知恵<rt>ちえ</rt></ruby>と<ruby>現代<rt>げんだい</rt></ruby>の<ruby>技術<rt>ぎじゅつ</rt></ruby>が<ruby>熟練<rt>じゅくれん</rt></ruby>の<ruby>追求<rt>ついきゅう</rt></ruby>で<ruby>出会<rt>であ</rt></ruby>う<ruby>場所<rt>ばしょ</rt></ruby>。
+    </p>
+  </div>
+
+  <!-- Philosophy Section -->
+  <div class="row mb-5">
+    <div class="col-md-12">
+      <div class="card border-primary">
+        <div class="card-body text-center">
+          <h3 class="card-title mb-3 text-primary">「<ruby>七転<rt>ななころ</rt></ruby>び<ruby>八起<rt>やお</rt></ruby>き」</h3>
+          <p class="card-text">Fall seven times, stand up eight.</p>
+          <small class="jp-text japanese-text">
+            <ruby>薬学<rt>やくがく</rt></ruby>、<ruby>法律<rt>ほうりつ</rt></ruby>、<ruby>技術<rt>ぎじゅつ</rt></ruby>の<ruby>古武術<rt>こぶじゅつ</rt></ruby>を<ruby>修<rt>おさ</rt></ruby>める<ruby>デジタル<rt>Digital</rt></ruby><ruby>侍<rt>さむらい</rt></ruby>
+          </small>
+        </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+  <!-- Personal Statement Section -->
   {% if rirekisho %}
-    <div class="homepage-jumbotron">
-      <div class="text-center">
-        <h3 class="ninja-text mb-3 jp-text japanese-text">🥷 <ruby>個人<rt>こじん</rt></ruby><ruby>声明<rt>せいめい</rt></ruby> | Personal Statement</h3>
-        <p class="ninja-text jp-text japanese-text">{{ rirekisho.personal_statement|linebreaks }}</p>
-        <small class="text-muted text-center d-block">
-          <span class="jp-text japanese-text"><ruby>作成<rt>さくせい</rt></ruby><ruby>日時<rt>にちじ</rt></ruby>: {{ rirekisho.created_at|date:"Y年m月d日 H:i" }}</span>
-          <br>
-          <span>Created: {{ rirekisho.created_at|date:"jS F Y, H:i" }}</span>
-        </small>
+  <div class="row mb-5">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h4 class="card-title mb-0">🥷 Personal Statement</h4>
+          <h5 class="card-subtitle mb-0 jp-text japanese-text">🥷 <ruby>個人<rt>こじん</rt></ruby><ruby>声明<rt>せいめい</rt></ruby></h5>
+        </div>
+        <div class="card-body">
+          <div class="card-text">{{ rirekisho.personal_statement|markdown }}</div>
+          <div class="text-muted">
+            <small>
+              📅 Created: {{ rirekisho.created_at|date:"M d, Y H:i" }}
+            </small>
+          </div>
+          <div class="text-muted jp-text japanese-text">
+            <small>
+              📅 <ruby>作成<rt>さくせい</rt></ruby><ruby>日時<rt>にちじ</rt></ruby>: {{ rirekisho.created_at|date:"Y年m月d日 H:i" }}
+            </small>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
   {% else %}
-    <div class="homepage-jumbotron">
-      <div class="text-center">
-        <h3 class="ninja-text mb-3">🥷 Welcome to the Digital Dojo</h3>
-        <p class="ninja-text">No Rirekisho data available. Please check back later.</p>
+  <div class="row mb-5">
+    <div class="col-md-12">
+      <div class="card border">
+        <div class="card-body text-center">
+          <h4 class="card-title">🥷 Welcome to the Digital Dojo</h4>
+          <p class="card-text">No Rirekisho data available. Please check back later.</p>
+          <div class="jp-text japanese-text">
+            <h5 class="card-title">🥷 <ruby>デジタル<rt>Digital</rt></ruby><ruby>道場<rt>どうじょう</rt></ruby>へようこそ</h5>
+            <p class="card-text"><ruby>履歴書<rt>りれきしょ</rt></ruby><ruby>データ<rt>Data</rt></ruby>が<ruby>利用<rt>りよう</rt></ruby>できません。<ruby>後<rt>あと</rt></ruby>でご<ruby>確認<rt>かくにん</rt></ruby>ください。</p>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
   {% endif %}
-  
-  <!-- LinkedIn Section -->
-  <section class="linkedin-section mt-5 mb-4">
-    <div class="text-center">
-      <h3 class="ninja-text mb-3">🥷 Connect with the Digital Samurai</h3>
-      <p class="ninja-text mb-3">
-        Join my professional network on LinkedIn, where I share insights about pharmacy, technology, and the art of continuous learning. If there's anything I can help you with, please don't hesitate to send me a message!
-      </p>
-      <p class="ninja-text mb-4 jp-text japanese-text">
-        <ruby>LinkedIn<rt>リンクトイン</rt></ruby>で<ruby>私<rt>わたし</rt></ruby>の<ruby>プロフェッショナル<rt>Professional</rt></ruby><ruby>ネットワーク<rt>Network</rt></ruby>に<ruby>参加<rt>さんか</rt></ruby>し、<ruby>薬学<rt>やくがく</rt></ruby>、<ruby>技術<rt>ぎじゅつ</rt></ruby>、<ruby>継続<rt>けいぞく</rt></ruby><ruby>学習<rt>がくしゅう</rt></ruby>の<ruby>技<rt>わざ</rt></ruby>について<ruby>洞察<rt>どうさつ</rt></ruby>を<ruby>共有<rt>きょうゆう</rt></ruby>しています。<ruby>何<rt>なに</rt></ruby>かお<ruby>手伝<rt>てつだ</rt></ruby>いできることがあれば、お<ruby>気軽<rt>きがる</rt></ruby>に<ruby>メッセージ<rt>Message</rt></ruby>をお<ruby>送<rt>おく</rt></ruby>りください！
-      </p>
-      <a href="https://www.linkedin.com/in/syafiqkay/" target="_blank" rel="noopener" class="btn btn-linkedin btn-lg">
-        <i class="fab fa-linkedin"></i> Connect on LinkedIn
-      </a>
-    </div>
-  </section>
-  
+  <!-- LinkedIn section removed - now in footer -->
   <!-- Statistics Section -->
-  <section class="statistics-section mt-5 mb-4">
-    <div class="text-center">
-      <h3 class="ninja-text mb-4">📊 Dojo Statistics | <ruby>道場<rt>どうじょう</rt></ruby><ruby>統計<rt>とうけい</rt></ruby></h3>
-      <div class="row">
-        <div class="col-lg-3 col-md-6 mb-3">
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-users"></i>
-            </div>
-            <div class="stat-content">
-              <div class="stat-number">{{ statistics.daily_visitors }}</div>
-              <div class="stat-label">
-                <span>Today's Visitors</span>
-                <br>
-                <span class="jp-text japanese-text"><ruby>本日<rt>ほんじつ</rt></ruby>の<ruby>訪問者<rt>ほうもんしゃ</rt></ruby></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6 mb-3">
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-globe"></i>
-            </div>
-            <div class="stat-content">
-              <div class="stat-number">{{ statistics.total_visitors }}</div>
-              <div class="stat-label">
-                <span>Total Visitors</span>
-                <br>
-                <span class="jp-text japanese-text"><ruby>総<rt>そう</rt></ruby><ruby>訪問者<rt>ほうもんしゃ</rt></ruby><ruby>数<rt>すう</rt></ruby></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6 mb-3">
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-calendar-week"></i>
-            </div>
-            <div class="stat-content">
-              <div class="stat-number">{{ statistics.weekly_visitors }}</div>
-              <div class="stat-label">
-                <span>Weekly Visitors</span>
-                <br>
-                <span class="jp-text japanese-text"><ruby>週間<rt>しゅうかん</rt></ruby><ruby>訪問者<rt>ほうもんしゃ</rt></ruby><ruby>数<rt>すう</rt></ruby></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6 mb-3">
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-scroll"></i>
-            </div>
-            <div class="stat-content">
-              <div class="stat-number">{{ statistics.total_posts }}</div>
-              <div class="stat-label">
-                <span>Total Posts</span>
-                <br>
-                <span class="jp-text japanese-text"><ruby>総<rt>そう</rt></ruby><ruby>投稿<rt>とうこう</rt></ruby><ruby>数<rt>すう</rt></ruby></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Content Breakdown -->
-      <div class="content-breakdown mt-4">
-        <h4 class="ninja-text mb-3">📚 Content Arsenal | <ruby>コンテンツ<rt>Contents</rt></ruby><ruby>武器庫<rt>ぶきこ</rt></ruby></h4>
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <div class="content-stat">
-              <div class="content-icon">
-                <i class="fas fa-book"></i>
-              </div>
-              <div class="content-details">
-                <div class="content-number">{{ statistics.journal_count }}</div>
-                <div class="content-label">
-                  <span>Journal Entries</span>
-                  <br>
-                  <span class="jp-text japanese-text"><ruby>日記<rt>にっき</rt></ruby>エントリー</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-4 mb-3">
-            <div class="content-stat">
-              <div class="content-icon">
-                <i class="fas fa-sticky-note"></i>
-              </div>
-              <div class="content-details">
-                <div class="content-number">{{ statistics.note_count }}</div>
-                <div class="content-label">
-                  <span>Garden Notes</span>
-                  <br>
-                  <span class="jp-text japanese-text"><ruby>ガーデン<rt>Garden</rt></ruby>ノート</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-4 mb-3">
-            <div class="content-stat">
-              <div class="content-icon">
-                <i class="fas fa-bookmark"></i>
-              </div>
-              <div class="content-details">
-                <div class="content-number">{{ statistics.reference_count }}</div>
-                <div class="content-label">
-                  <span>References</span>
-                  <br>
-                  <span class="jp-text japanese-text"><ruby>参考<rt>さんこう</rt></ruby><ruby>文献<rt>ぶんけん</rt></ruby></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Noto Garden Tag Cloud -->
-      {% if statistics.tag_cloud %}
-      <div class="tag-cloud-section mt-4">
-        <h4 class="ninja-text mb-3">🌸 Garden Tag Cloud | <ruby>ガーデン<rt>Garden</rt></ruby><ruby>タグ<rt>Tag</rt></ruby><ruby>クラウド<rt>Cloud</rt></ruby></h4>
-        <div class="tag-cloud-container">
-          {% for tag_data in statistics.tag_cloud %}
-            <span class="tag-cloud-item" 
-                  style="font-size: {{ tag_data.size }}rem; opacity: {{ tag_data.opacity }}; {% if tag_data.color %}border-left: 3px solid {{ tag_data.color }};{% endif %}">
-              {{ tag_data.name }}
-              <small class="tag-count">({{ tag_data.count }})</small>
-            </span>
-          {% endfor %}
-        </div>
-        <small class="text-muted mt-2 d-block">
-          <span class="jp-text japanese-text"><ruby>最<rt>もっと</rt></ruby>も<ruby>使用<rt>しよう</rt></ruby>されている<ruby>タグ<rt>Tag</rt></ruby> | Most frequently used tags</span>
-        </small>
-      </div>
-      {% endif %}
-      
-      <small class="text-muted mt-3 d-block">
-        <i class="fas fa-chart-line"></i> 
-        <span class="jp-text japanese-text"><ruby>統計<rt>とうけい</rt></ruby><ruby>更新<rt>こうしん</rt></ruby><ruby>日<rt>び</rt></ruby>: {{ statistics.today_date|date:"Y年m月d日" }}</span> | 
-        <span>Statistics updated: {{ statistics.today_date|date:"jS F Y" }}</span>
-      </small>
+  <div class="row mb-5">
+    <div class="col-12">
+      <h3 class="mb-4 text-center">📊 Dojo Statistics</h3>
+      <h4 class="mb-4 jp-text japanese-text text-center">📊 <ruby>道場<rt>どうじょう</rt></ruby><ruby>統計<rt>とうけい</rt></ruby></h4>
     </div>
-  </section>
+  </div>
+  
+  <!-- Statistics Cards -->
+  <div class="row mb-5">
+    <div class="col-md-3">
+      <div class="card border">
+        <div class="card-body text-center">
+          <h3 class="card-title text-primary">{{ statistics.daily_visitors }}</h3>
+          <p class="card-text">Today's Visitors</p>
+          <small class="jp-text japanese-text"><ruby>本日<rt>ほんじつ</rt></ruby>の<ruby>訪問者<rt>ほうもんしゃ</rt></ruby></small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border">
+        <div class="card-body text-center">
+          <h3 class="card-title text-success">{{ statistics.total_visitors }}</h3>
+          <p class="card-text">Total Visitors</p>
+          <small class="jp-text japanese-text"><ruby>総<rt>そう</rt></ruby><ruby>訪問者<rt>ほうもんしゃ</rt></ruby><ruby>数<rt>すう</rt></ruby></small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border">
+        <div class="card-body text-center">
+          <h3 class="card-title text-warning">{{ statistics.weekly_visitors }}</h3>
+          <p class="card-text">Weekly Visitors</p>
+          <small class="jp-text japanese-text"><ruby>週間<rt>しゅうかん</rt></ruby><ruby>訪問者<rt>ほうもんしゃ</rt></ruby><ruby>数<rt>すう</rt></ruby></small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border">
+        <div class="card-body text-center">
+          <h3 class="card-title text-danger">{{ statistics.total_posts }}</h3>
+          <p class="card-text">Total Posts</p>
+          <small class="jp-text japanese-text"><ruby>総<rt>そう</rt></ruby><ruby>投稿<rt>とうこう</rt></ruby><ruby>数<rt>すう</rt></ruby></small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Content Breakdown Section -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h3 class="mb-4 text-center">📚 Content Arsenal</h3>
+      <h4 class="mb-4 jp-text japanese-text text-center">📚 <ruby>コンテンツ<rt>Content</rt></ruby><ruby>武器庫<rt>ぶきこ</rt></ruby></h4>
+    </div>
+  </div>
+  
+  <div class="row mb-5 content-arsenal">
+    <div class="col-md-4 mb-3 mb-md-0">
+      <div class="card border-primary">
+        <div class="card-body text-center">
+          <h3 class="card-title text-primary">{{ statistics.journal_count }}</h3>
+          <p class="card-text">Journal Entries</p>
+          <small class="jp-text japanese-text"><ruby>日記<rt>にっき</rt></ruby>エントリー</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3 mb-md-0">
+      <div class="card border-success">
+        <div class="card-body text-center">
+          <h3 class="card-title text-success">{{ statistics.note_count }}</h3>
+          <p class="card-text">Garden Notes</p>
+          <small class="jp-text japanese-text"><ruby>ガーデン<rt>Garden</rt></ruby>ノート</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-info">
+        <div class="card-body text-center">
+          <h3 class="card-title text-info">{{ statistics.reference_count }}</h3>
+          <p class="card-text">References</p>
+          <small class="jp-text japanese-text"><ruby>参考<rt>さんこう</rt></ruby><ruby>文献<rt>ぶんけん</rt></ruby></small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Tag Cloud Section Removed as requested -->
+  <!-- Statistics Update Info -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card border-secondary stats-update-block">
+        <div class="card-body text-center py-4">
+          <h5 class="text-muted mb-3">📊 Statistics Information</h5>
+          <p class="mb-1">
+            Last updated: {{ statistics.today_date|date:"M d, Y" }}
+          </p>
+          <p class="jp-text japanese-text mb-0">
+            <ruby>統計<rt>とうけい</rt></ruby><ruby>更新<rt>こうしん</rt></ruby><ruby>日<rt>び</rt></ruby>: {{ statistics.today_date|date:"Y年m月d日" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <style>
-/* Statistics Section Styles */
-.statistics-section {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 15px;
-  padding: 2rem;
-  margin: 2rem 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+/* Removed a4-width constraint for full-width layout */
+
+.jp-text {
+    font-size: 0.9em;
+    color: #666;
 }
 
-.stat-card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.japanese-text {
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out;
 }
 
-.stat-icon {
-  font-size: 2rem;
-  color: #E91E63;
-  margin-bottom: 1rem;
-}
-
-.stat-content {
-  flex: 1;
-}
-
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.4;
-}
-
-.content-breakdown {
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 2rem;
-}
-
-.content-stat {
-  display: flex;
-  align-items: center;
-  background: white;
-  border-radius: 10px;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-}
-
-.content-stat:hover {
-  transform: translateX(5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.content-icon {
-  font-size: 2rem;
-  color: #FFB6C1;
-  margin-right: 1rem;
-  width: 60px;
-  text-align: center;
-}
-
-.content-details {
-  flex: 1;
-}
-
-.content-number {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 0.3rem;
-}
-
-.content-label {
-  font-size: 0.85rem;
-  color: #666;
-  line-height: 1.3;
-}
-
-/* Tag Cloud Styles */
-.tag-cloud-section {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .tag-cloud-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 120px;
-  padding: 1rem;
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.badge {
+    font-size: 0.8em;
 }
 
 .tag-cloud-item {
-  display: inline-block;
-  background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
-  color: #333;
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-weight: 600;
@@ -414,10 +282,46 @@
 }
 
 /* Japanese text styling */
-.jp-text japanese-text {
+.jp-text.japanese-text {
   font-size: 0.9em;
   color: #666;
   font-style: italic;
+}
+
+/* Improved contrast for Japanese text on colored backgrounds */
+.card.bg-info .jp-text.japanese-text,
+.card.bg-secondary .jp-text.japanese-text,
+.card.bg-dark .jp-text.japanese-text {
+  color: #e9ecef;
+}
+
+/* Markdown content styling */
+.card-text h2 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.card-text h3 {
+  font-size: 1.3rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: #555;
+}
+
+.card-text ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card-text li {
+  margin-bottom: 0.5rem;
+}
+
+.card-text p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
 }
 </style>
 

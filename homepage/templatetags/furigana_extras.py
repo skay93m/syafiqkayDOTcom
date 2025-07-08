@@ -1,4 +1,5 @@
 import re
+import markdown
 from django import template
 from django.utils.safestring import mark_safe
 
@@ -42,3 +43,23 @@ def simple_furigana(value):
     
     result = re.sub(pattern, replace_simple, value)
     return mark_safe(result)
+
+@register.filter(name='markdown')
+def markdown_filter(value):
+    """Convert markdown text to HTML."""
+    if not value:
+        return value
+    
+    # Convert markdown to HTML
+    html_content = markdown.markdown(
+        value,
+        extensions=['extra', 'codehilite'],
+        extension_configs={
+            'codehilite': {
+                'css_class': 'highlight',
+                'use_pygments': False,
+            }
+        }
+    )
+    
+    return mark_safe(html_content)
