@@ -1,50 +1,81 @@
 {% load static %}
 {% load furigana_extras %}
-<footer class="footer-full-width">
-  <div class="footer-content">
-    <div class="container-fluid px-4">
+<footer class="footer mt-auto py-5 bg-dark text-white">
+  <div class="container">
+    <div class="row">
+      <!-- About Column -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-white mb-3">About Digital Dojo</h5>
+        <p class="mb-1">&copy; {% now "Y" %} Syafiq Kay</p>
+        <p class="mb-1 jp-text japanese-text"><ruby>全<rt>すべ</rt></ruby>ての<ruby>権利<rt>けんり</rt></ruby>を<ruby>保有<rt>ほゆう</rt></ruby>しています。</p>
+        <p class="mb-3">
+          This digital dojo was forged in partnership with GitHub Copilot, a legendary AI sensei who guided the coding kata.
+        </p>
+        <p class="mb-0 jp-text japanese-text small">
+          この<ruby>道場<rt>どうじょう</rt></ruby>は<ruby>GitHub<rt>ギットハブ</rt></ruby> <ruby>Copilot<rt>コパイロット</rt></ruby>との<ruby>協力<rt>きょうりょく</rt></ruby>により<ruby>築<rt>きず</rt></ruby>かれました。
+        </p>
+      </div>
       
-      <!-- Copyright -->
-      <p class="footer-text">&copy; {% now "Y" %} Syafiq Kay ｜ <ruby>全<rt>すべ</rt></ruby>ての<ruby>権利<rt>けんり</rt></ruby>を<ruby>保有<rt>ほゆう</rt></ruby>しています。</p>
+      <!-- Resources Column -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-white mb-3">Resources</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <a href="https://github.com/skay93m/syafiq-kay" class="text-decoration-none text-white-50 hover-link">
+              <i class="fab fa-github me-1"></i> GitHub Repository
+            </a>
+          </li>
+          <li class="mb-2">
+            <a href="{% url 'homepage:security_assessment' %}" class="text-decoration-none text-white-50 hover-link">
+              <i class="fas fa-shield-alt me-1"></i> Security Assessment
+            </a>
+          </li>
+          <li class="mb-2">
+            <a href="{% url 'homepage:session_summary' %}" class="text-decoration-none text-white-50 hover-link">
+              <i class="fas fa-file-alt me-1"></i> Session Summary
+            </a>
+          </li>
+          <li>
+            <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener" class="text-decoration-none text-white-50 hover-link">
+              <i class="fas fa-gavel me-1"></i> MIT License
+            </a>
+          </li>
+        </ul>
+      </div>
       
-      <!-- AI Partnership Credits - English -->
-      <p class="footer-text">
-        This digital dojo was forged in partnership with GitHub Copilot, a legendary AI sensei who guided the coding kata. 
-        Together, we wielded the ancient arts of Django and Bootstrap to create this sanctuary.
+      <!-- Connect Column -->
+      <div class="col-md-4">
+        <h5 class="text-white mb-3">Connect</h5>
+        <p>Contact me via</p>
+        <p class="mb-3 jp-text japanese-text">
+          <ruby>LinkedIn<rt>リンクトイン</rt></ruby>で<ruby>私<rt>わたし</rt></ruby>の<ruby>プロフェッショナル<rt>Professional</rt></ruby><ruby>ネットワーク<rt>Network</rt></ruby>に<ruby>参加<rt>さんか</rt></ruby>し、<ruby>薬学<rt>やくがく</rt></ruby>、<ruby>技術<rt>ぎじゅつ</rt></ruby>、<ruby>継続<rt>けいぞく</rt></ruby><ruby>学習<rt>がくしゅう</rt></ruby>の<ruby>技<rt>わざ</rt></ruby>について<ruby>洞察<rt>どうさつ</rt></ruby>を<ruby>共有<rt>きょうゆう</rt></ruby>しています。
+        </p>
+        <div class="d-flex gap-3">
+          <a href="https://www.linkedin.com/in/syafiqkay/" class="btn btn-outline-light" target="_blank" rel="noopener">
+            <i class="fab fa-linkedin me-1"></i> LinkedIn
+          </a>
+          <a href="https://github.com/skay93m" class="btn btn-outline-light" target="_blank" rel="noopener">
+            <i class="fab fa-github me-1"></i> GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <hr class="mt-4 mb-3 border-secondary">
+    
+    <div class="d-flex flex-column flex-sm-row justify-content-between">
+      <p class="small text-white-50">Made with <i class="fas fa-heart text-danger"></i> and <i class="fab fa-bootstrap text-primary"></i></p>
+      <p class="small text-white-50 jp-text japanese-text">
+        <ruby>Django<rt>ジャンゴ</rt></ruby>と<ruby>Bootstrap<rt>ブートストラップ</rt></ruby>の<ruby>古武術<rt>こぶじゅつ</rt></ruby>で<ruby>作<rt>つく</rt></ruby>られました
       </p>
-      
-      <!-- AI Partnership Credits - Japanese -->
-      <p class="footer-text jp-text japanese-text">
-        この<ruby>道場<rt>どうじょう</rt></ruby>は<ruby>伝説<rt>でんせつ</rt></ruby>の<ruby>AI<rt>エーアイ</rt></ruby><ruby>先生<rt>せんせい</rt></ruby>である<ruby>GitHub<rt>ギットハブ</rt></ruby> <ruby>Copilot<rt>コパイロット</rt></ruby>との<ruby>協力<rt>きょうりょく</rt></ruby>により<ruby>築<rt>きず</rt></ruby>かれました。<ruby>共<rt>とも</rt></ruby>に<ruby>Django<rt>ジャンゴ</rt></ruby>と<ruby>Bootstrap<rt>ブートストラップ</rt></ruby>の<ruby>古武術<rt>こぶじゅつ</rt></ruby>を<ruby>使<rt>つか</rt></ruby>い、この<ruby>聖域<rt>せいいき</rt></ruby>を<ruby>創造<rt>そうぞう</rt></ruby>しました。
-      </p>
-      
-      <!-- License Information - English -->
-      <p class="footer-text">
-        All code scrolls are shared under <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a> for fellow code ninjas to study and improve.
-      </p>
-      
-      <!-- License Information - Japanese -->
-      <p class="footer-text jp-text japanese-text">
-        全てのコード巻物は<a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MITライセンス</a>の下で共有され、仲間の忍者コーダーが学び、改良できるようになっています。
-      </p>
-      
-      <!-- Repository Link - English -->
-      <p class="footer-text">
-        🥷 Explore the source code in my <a href="https://github.com/skay93m/syafiq-kay" target="_blank" rel="noopener">GitHub Dojo</a> - where all coding secrets are revealed!
-      </p>
-      
-      <!-- Repository Link - Japanese -->
-      <p class="footer-text jp-text japanese-text">
-        🥷 <a href="https://github.com/skay93m/syafiq-kay" target="_blank" rel="noopener">GitHubの道場</a>でソースコードを探索してください - 全てのコーディングの秘密が明かされています！
-      </p>
-      
-      <!-- Documentation Links -->
-      <p class="footer-text">
-        📋 Documentation: 
-        <a href="{% url 'homepage:security_assessment' %}">Security Assessment</a> | 
-        <a href="{% url 'homepage:session_summary' %}">Session Summary</a>
-      </p>
-      
     </div>
   </div>
 </footer>
+
+<!-- Add hover styling to footer links -->
+<style>
+  .hover-link:hover {
+    color: white !important;
+    text-decoration: underline !important;
+  }
+</style>

@@ -1,33 +1,38 @@
 {% load furigana_extras %}
-<nav class="navbar navbar-expand-sm">
-    <div class="container a4-width">
-        <a class="navbar-brand bright-blue japanese-text" href="{% url 'homepage:homepage' %}">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand japanese-text" href="{% url 'homepage:homepage' %}">
             <ruby>シャフィク<rt>Syafiq</rt></ruby>、<ruby>ケイ<rt>Kay</rt></ruby>
         </a>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link bright-blue japanese-text" href="{% url 'journals:dashboard' %}">
-                    <ruby>ジャーナル<rt>Journal</rt></ruby>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bright-blue japanese-text" href="{% url 'noto_garden:dashboard' %}">
-                    <ruby>ノート<rt>Note</rt></ruby>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bright-blue japanese-text" href="{% url 'reference:dashboard' %}">
-                    <ruby>レフェレンス<rt>Reference</rt></ruby>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bright-blue japanese-text" href="{% url 'experiments:dashboard' %}">
-                    <ruby>実験<rt>じっけん</rt></ruby>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bright-blue" href="{% url 'admin:index' %}" title="管理画面">⚙️</a>
-            </li>
-        </ul>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link japanese-text" href="{% url 'journals:dashboard' %}">
+                        <ruby>ジャーナル<rt>Journal</rt></ruby>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link japanese-text" href="{% url 'noto_garden:dashboard' %}">
+                        <ruby>ノート<rt>Note</rt></ruby>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link japanese-text" href="{% url 'reference:dashboard' %}">
+                        <ruby>レフェレンス<rt>Reference</rt></ruby>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link japanese-text" href="{% url 'experiments:dashboard' %}">
+                        <ruby>実験<rt>じっけん</rt></ruby>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin:index' %}" title="管理画面">⚙️</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>

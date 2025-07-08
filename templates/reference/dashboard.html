@@ -4,154 +4,159 @@
 {% block title %}Reference Library{% endblock %}
 
 {% block content %}
-<div class="container a4-width mt-4">
+<div class="container mt-5">
+    <!-- Header Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 mb-3">📚 <ruby>レフェレンス<rt>Reference</rt></ruby><ruby>図書館<rt>としょかん</rt></ruby> 📚</h1>
+        <h2 class="h3 text-muted mb-4">Reference Library</h2>
+        <p class="lead">A curated collection of knowledge and resources for continuous learning and reference.</p>
+        <p class="japanese-text jp-text text-center mb-4">
+            📚 <ruby>継続<rt>けいぞく</rt></ruby><ruby>学習<rt>がくしゅう</rt></ruby>と<ruby>参考<rt>さんこう</rt></ruby>のための<ruby>厳選<rt>げんせん</rt></ruby>された<ruby>知識<rt>ちしき</rt></ruby>と<ruby>資料<rt>しりょう</rt></ruby>の<ruby>コレクション<rt>Collection</rt></ruby>。
+        </p>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="card-title mb-0">🔍 Categories & Search</h4>
+                    <h5 class="card-subtitle mb-0 jp-text japanese-text">🔍 <ruby>カテゴリー<rt>Category</rt></ruby>と<ruby>検索<rt>けんさく</rt></ruby></h5>
+                </div>
+                <div class="card-body">
+                    <!-- Category Filter Buttons -->
+                    {% if categories %}
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-2">Categories:</h6>
+                        <div class="category-filter-buttons">
+                            {% for category in categories %}
+                                <a href="{% url 'reference:dashboard' %}?category={{ category }}" 
+                                   class="btn btn-sm btn-outline-primary me-2 mb-2 {% if current_category == category %}active{% endif %}">
+                                    {{ category }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Search Box -->
+                    <div class="mb-3">
+                        <form method="GET" class="row g-3">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="search" placeholder="Search references..." 
+                                       value="{{ search_query }}" aria-label="Search references">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-success w-100">🔍 Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- References List -->
+    {% if references %}
     <div class="row">
-        <div class="col-md-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="h2">Reference Library</h1>
-            </div>
-            
-            <!-- Category Filter Section (Tag-style) -->
-            {% if categories %}
-            <div class="mb-4">
-                <h6 class="text-muted mb-2">
-                    <i class="fas fa-tags"></i> Filter by Categories:
-                </h6>
-                <div class="category-filter-buttons">
-                    {% for category in categories %}
-                        <a href="{% url 'reference:dashboard' %}?category={{ category }}" 
-                           class="btn btn-sm btn-outline-primary me-2 mb-2 {% if current_category == category %}active{% endif %}"
-                           style="{% if current_category == category %}background-color: #FFB6C1 !important; color: #333 !important; border-color: #FFB6C1 !important;{% endif %}">
-                            {{ category }}
-                        </a>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endif %}
-            
-            <!-- Current Filters Display -->
-            {% if current_category or search_query %}
-            <div class="mb-3">
-                <h6 class="text-muted">Active Filters:</h6>
-                <div class="d-flex align-items-center">
-                    {% if current_category %}
-                        <span class="badge bg-primary me-2" style="background-color: #FFB6C1 !important; color: #333 !important;">Category: {{ current_category }}</span>
-                    {% endif %}
-                    {% if search_query %}
-                        <span class="badge bg-info me-2">Search: {{ search_query }}</span>
-                    {% endif %}
-                    <a href="{% url 'reference:dashboard' %}" class="btn btn-sm btn-outline-secondary">Clear All</a>
-                </div>
-            </div>
-            {% endif %}
-            
-            <!-- Search Box -->
-            <div class="mb-4">
-                <form method="GET" class="row g-3">
-                    <div class="col-md-8">
-                        <input type="text" name="search" class="form-control" placeholder="Search references..." value="{{ search_query }}">
-                    </div>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-outline-secondary w-100">
-                            <i class="fas fa-search"></i> Search
-                        </button>
-                    </div>
-                </form>
-            </div>
-            
-            <!-- Purpose Description -->
-            <div class="purpose-description mb-4">
-                <p class="ninja-text">
-                    📚 Behold the Sacred Reference Vault, where ancient scrolls of knowledge and modern digital wisdom converge. 
-                    This arsenal contains the essential tools and references that guide a code ninja's path to mastery.
-                </p>
-                <p class="ninja-text">
-                    📚 <ruby>古代<rt>こだい</rt></ruby>の<ruby>知識<rt>ちしき</rt></ruby>の<ruby>巻物<rt>まきもの</rt></ruby>と<ruby>現代<rt>げんだい</rt></ruby>の<ruby>デジタル<rt>Digital</rt></ruby><ruby>智慧<rt>ちえ</rt></ruby>が<ruby>融合<rt>ゆうごう</rt></ruby>する<ruby>聖<rt>せい</rt></ruby>なる<ruby>参考<rt>さんこう</rt></ruby><ruby>資料<rt>しりょう</rt></ruby><ruby>庫<rt>こ</rt></ruby>をご<ruby>覧<rt>らん</rt></ruby>ください。
-                    この<ruby>武器庫<rt>ぶきこ</rt></ruby>には、<ruby>コード<rt>Code</rt></ruby><ruby>忍者<rt>にんじゃ</rt></ruby>が<ruby>熟練<rt>じゅくれん</rt></ruby>への<ruby>道<rt>みち</rt></ruby>を<ruby>歩<rt>あゆ</rt></ruby>むために<ruby>不可欠<rt>ふかけつ</rt></ruby>な<ruby>ツール<rt>Tool</rt></ruby>と<ruby>参考<rt>さんこう</rt></ruby><ruby>資料<rt>しりょう</rt></ruby>が<ruby>収<rt>おさ</rt></ruby>められています。
-                </p>
-            </div>
-            
-            {% if references %}
-                <div class="reference-list">
-                    {% for reference in references %}
-                        <div class="card mb-3 reference-card-horizontal">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-md-8">
-                                        <h5 class="card-title mb-2">
-                                            <a href="{% url 'reference:reference_detail' reference.pk %}" class="text-decoration-none">
-                                                {{ reference.title }}
-                                            </a>
-                                        </h5>
-                                        {% if reference.category %}
-                                            {% for category in reference.get_categories %}
-                                                <span class="badge bg-secondary me-1" style="background-color: #FFB6C1 !important; color: #333 !important;">{{ category }}</span>
-                                            {% endfor %}
-                                        {% endif %}
-                                        {% if reference.summary %}
-                                            <p class="card-text mt-2">{{ reference.summary|truncatewords:25 }}</p>
-                                        {% endif %}
-                                        {% if reference.url %}
-                                            <p class="card-text">
-                                                <a href="{{ reference.url }}" target="_blank" class="text-muted">
-                                                    <i class="fas fa-external-link-alt"></i> External Link
-                                                </a>
-                                            </p>
-                                        {% endif %}
-                                    </div>
-                                    <div class="col-md-4 text-end">
-                                        <small class="text-muted">
-                                            <span class="jp-text japanese-text"><ruby>作成<rt>さくせい</rt></ruby>: {{ reference.created_at|date:"Y年m月d日" }}</span>
-                                            <br>
-                                            <span>Created: {{ reference.created_at|date:"jS M Y" }}</span>
-                                        </small>
-                                    </div>
+        <div class="col-12">
+            <div class="reference-list">
+                {% for reference in references %}
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="card-title mb-3">
+                                <a href="{% url 'reference:reference_detail' reference.pk %}" class="text-decoration-none text-primary">
+                                    {{ reference.title }}
+                                </a>
+                            </h3>
+                            {% if reference.category %}
+                                <div class="mb-3">
+                                {% for category in reference.get_categories %}
+                                    <span class="badge bg-primary me-1 mb-1">{{ category }}</span>
+                                {% endfor %}
                                 </div>
+                            {% endif %}
+                            {% if reference.summary %}
+                                <p class="card-text lead">{{ reference.summary|truncatewords:30 }}</p>
+                            {% endif %}
+                            {% if reference.url %}
+                                <p class="card-text">
+                                    <a href="{{ reference.url }}" target="_blank" class="text-primary">
+                                        <i class="fas fa-external-link-alt"></i> External Link
+                                    </a>
+                                </p>
+                            {% endif %}
+                            
+                            <div class="d-flex justify-content-end mt-4">
+                                <a href="{% url 'reference:reference_detail' reference.pk %}" class="btn btn-outline-primary">View Reference</a>
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
-                
-                <!-- Pagination -->
-                {% if references.has_other_pages %}
-                <nav aria-label="Page navigation" class="mt-4">
-                    <ul class="pagination justify-content-center">
-                        {% if references.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ references.previous_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">&laquo; Previous</a>
-                            </li>
-                        {% endif %}
-                        
-                        {% for num in references.paginator.page_range %}
-                            {% if references.number == num %}
-                                <li class="page-item active">
-                                    <span class="page-link">{{ num }}</span>
-                                </li>
-                            {% elif num > references.number|add:'-3' and num < references.number|add:'3' %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ num }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">{{ num }}</a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                        
-                        {% if references.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ references.next_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Next &raquo;</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-                {% endif %}
-            {% else %}
-                <div class="text-center">
-                    <div class="alert alert-info">
-                        <h4>No references found</h4>
-                        <p>{% if current_category %}No references in the "{{ current_category }}" category yet.{% else %}No references have been added yet.{% endif %}</p>
                     </div>
-                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <nav class="mt-4" aria-label="Reference pagination">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if num == page_obj.number %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% else %}
+                            {% if num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">{{ num }}</a>
+                            </li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
             {% endif %}
         </div>
     </div>
+    {% else %}
+    <!-- No References Found -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="alert alert-info">
+                <h4 class="alert-heading">No References Found</h4>
+                <p>There are no references matching your criteria.</p>
+                <p class="jp-text japanese-text">
+                    <ruby>条件<rt>じょうけん</rt></ruby>に<ruby>一致<rt>いっち</rt></ruby>する<ruby>参考文献<rt>さんこうぶんけん</rt></ruby>はありません。
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 <style>

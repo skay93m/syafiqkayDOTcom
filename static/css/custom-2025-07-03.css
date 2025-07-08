@@ -1,53 +1,100 @@
-/* Sakura & Mount Fuji Pastel Palette - 2025-07-03 */
+/* Bootstrap 5 Compatibility Update - 2025-07-08 */
+/* Define colors using Bootstrap 5 default palette */
 :root {
-  --sakura-pink: #FADADD;
-  --fuji-blue: #B3CDE0;
-  --pastel-yellow: #FFF9C4;
-  --pastel-brown: #D7CCC8;
-  --pastel-green: #C8E6C9;
-  --pastel-purple: #E1BEE7;
-  --cloud-white: #FAFAFA;
-  --accent-gray: #546E7A; /* Darker grey for better readability */
+  /* Base colors mapped to Bootstrap 5 equivalents */
+  --sakura-pink: #ffdee5;
+  /* More obvious sakura pink for background */
+  --fuji-blue: #cfe2ff;
+  /* Similar to bootstrap primary-subtle */
+  --pastel-yellow: #fff3cd;
+  /* Similar to bootstrap warning-subtle */
+  --pastel-brown: #e9ecef;
+  /* Similar to bootstrap gray-200 */
+  --pastel-green: #d1e7dd;
+  /* Similar to bootstrap success-subtle */
+  --pastel-purple: #e2d9f3;
+  /* Custom light purple */
+  --cloud-white: #f8f9fa;
+  /* Similar to bootstrap gray-100 */
+  --accent-gray: #6c757d;
+  /* Similar to bootstrap secondary */
 
-  /* Darker versions for better readability */
-  --dark-sakura: #C2185B;
-  --dark-fuji: #1976D2;
-  --dark-brown: #5D4037;
-  --dark-green: #388E3C;
-  --ninja-dark: #2C3E50;
+  /* Darker versions */
+  --dark-sakura: #dc3545;
+  /* Bootstrap danger */
+  --dark-fuji: #0d6efd;
+  /* Bootstrap primary */
+  --dark-brown: #6c757d;
+  /* Bootstrap secondary */
+  --dark-green: #198754;
+  /* Bootstrap success */
+  --ninja-dark: #212529;
+  /* Bootstrap gray-900 */
   --text-dark: #212529;
-  --muted-text: #495057; /* Darker muted text */
-
-  /* Bootstrap variable overrides */
-  --bs-primary: var(--sakura-pink);
-  --bs-secondary: var(--fuji-blue);
-  --bs-success: var(--pastel-green);
-  --bs-info: var(--pastel-purple);
-  --bs-warning: var(--pastel-yellow);
-  --bs-danger: var(--pastel-brown);
-  --bs-light: var(--cloud-white);
-  --bs-dark: var(--accent-gray);
+  /* Bootstrap gray-900 */
+  --muted-text: #6c757d;
+  /* Bootstrap secondary */
 }
 
 body {
-  background: var(--cloud-white);
+  background: var(--sakura-pink);
   font-family:
-    'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 
+    'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
     'Yu Gothic UI', 'Yu Gothic', 'Meiryo UI', 'Meiryo',
     'BIZ UDPGothic', 'BIZ UDGothic',
     'Noto Sans CJK JP', 'Noto Sans JP',
     'Source Han Sans JP', 'Source Han Sans',
-    'Roboto', 'Helvetica Neue', Arial, 
+    'Roboto', 'Helvetica Neue', Arial,
     sans-serif;
   font-feature-settings: "kern" 1, "liga" 1;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.8;
+  /* Increased for furigana accommodation */
+}
+
+/* Enhanced line spacing for text elements */
+p,
+.card-text,
+.lead,
+.text-muted {
+  line-height: 1.9;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Specific spacing for Japanese text */
+.japanese-text,
+.jp-text {
+  line-height: 2.2;
+  margin-bottom: 1.2rem;
+}
+
+/* Ruby text improvements */
+ruby {
+  ruby-align: center;
+  ruby-position: over;
+}
+
+rt {
+  font-size: 0.6em;
+  color: #666;
+  font-weight: 400;
+  line-height: 1;
 }
 
 /* Japanese text specific styling */
 .jp-text {
-  font-family: 
+  font-family:
     'Hiragino Mincho ProN', 'Hiragino Mincho Pro',
     'Yu Mincho', 'YuMincho', 'Meiryo',
     'BIZ UDPMincho', 'BIZ UDMincho',
@@ -62,23 +109,26 @@ body {
 .navbar {
   background: var(--fuji-blue) !important;
   font-family:
-    'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 
+    'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
     'Yu Gothic UI', 'Yu Gothic', 'Meiryo UI', 'Meiryo',
     'BIZ UDPGothic', 'BIZ UDGothic',
     'Noto Sans CJK JP', 'Noto Sans JP',
     'Source Han Sans JP', 'Source Han Sans',
-    'Roboto', 'Helvetica Neue', Arial, 
+    'Roboto', 'Helvetica Neue', Arial,
     sans-serif;
   font-weight: 500;
   letter-spacing: 0.3px;
 }
 
-.navbar, .navbar .navbar-brand, .navbar .nav-link {
+.navbar,
+.navbar .navbar-brand,
+.navbar .nav-link {
   color: #333 !important;
   font-family: inherit;
 }
 
-.navbar .nav-link:hover, .navbar .nav-link:focus {
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
   color: #111 !important;
   transform: translateY(-1px);
   transition: all 0.3s ease;
@@ -114,7 +164,8 @@ body {
 }
 
 .a4-width {
-  max-width: 621px; /* Increased by 15% from 540px */
+  max-width: 621px;
+  /* Increased by 15% from 540px */
   margin-left: auto;
   margin-right: auto;
 }
@@ -135,17 +186,21 @@ body {
 }
 
 .footer-content {
-  padding: 2rem 0; /* Increased from 1.5rem */
+  padding: 2rem 0;
+  /* Increased from 1.5rem */
   text-align: center;
 }
 
 .footer-text {
-  font-size: 0.85rem; /* Increased from 0.75rem */
-  line-height: 1.5; /* Increased from 1.4 */
-  margin-bottom: 0.75rem; /* Increased from 0.5rem */
+  font-size: 0.85rem;
+  /* Increased from 0.75rem */
+  line-height: 1.5;
+  /* Increased from 1.4 */
+  margin-bottom: 0.75rem;
+  /* Increased from 0.5rem */
   color: #333 !important;
-  font-family: 
-    'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 
+  font-family:
+    'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
     'Yu Gothic UI', 'Yu Gothic', 'Meiryo UI', 'Meiryo',
     'BIZ UDPGothic', 'BIZ UDGothic',
     'Noto Sans CJK JP', 'Noto Sans JP',
@@ -156,7 +211,7 @@ body {
 }
 
 .footer-text.jp-text {
-  font-family: 
+  font-family:
     'Hiragino Mincho ProN', 'Hiragino Mincho Pro',
     'Yu Mincho', 'YuMincho', 'Meiryo',
     'BIZ UDPMincho', 'BIZ UDMincho',
@@ -186,14 +241,19 @@ body {
 }
 
 /* Japanese Typography Enhancements */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family:
-    'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 
+    'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
     'Yu Gothic UI', 'Yu Gothic', 'Meiryo UI', 'Meiryo',
     'BIZ UDPGothic', 'BIZ UDGothic',
     'Noto Sans CJK JP', 'Noto Sans JP',
     'Source Han Sans JP', 'Source Han Sans',
-    'Roboto', 'Helvetica Neue', Arial, 
+    'Roboto', 'Helvetica Neue', Arial,
     sans-serif;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -215,7 +275,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Emoji styling for better rendering */
 .emoji {
-  font-family: 
+  font-family:
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols',
     sans-serif;
@@ -233,7 +293,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Small text elements with better contrast */
-small, .small {
+small,
+.small {
   color: var(--muted-text);
 }
 
@@ -249,7 +310,8 @@ small, .small {
 }
 
 /* Enhanced readability for all text elements */
-.card-text, .card-body p {
+.card-text,
+.card-body p {
   color: var(--text-dark);
 }
 
@@ -304,7 +366,7 @@ small, .small {
     line-height: 1.3;
     margin-bottom: 0.4rem;
   }
-  
+
   .footer-content {
     padding: 1rem 0;
   }
@@ -324,7 +386,8 @@ small, .small {
 /* Footer ninja-style content */
 .footer-ninja-credits {
   font-size: 0.85rem;
-  color: var(--muted-text); /* Using darker muted text variable */
+  color: var(--muted-text);
+  /* Using darker muted text variable */
   text-align: center;
   margin-top: 2rem;
   padding: 1.5rem;
@@ -346,8 +409,10 @@ small, .small {
 
 .footer-ninja-credits .license-text {
   font-size: 0.8rem;
-  opacity: 0.9; /* Slightly more opaque for better readability */
-  color: var(--text-dark); /* Darker color for license text */
+  opacity: 0.9;
+  /* Slightly more opaque for better readability */
+  color: var(--text-dark);
+  /* Darker color for license text */
 }
 
 /* ASCII Art Styling */
@@ -359,7 +424,7 @@ small, .small {
   border: none;
   margin: 1rem 0;
   line-height: 1.2;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Banner ninja text styling */
@@ -401,7 +466,7 @@ small, .small {
   background: linear-gradient(135deg, var(--sakura-pink) 0%, var(--cloud-white) 50%, var(--sakura-pink) 100%);
   border-radius: 15px;
   padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--dark-sakura);
 }
 
@@ -417,13 +482,13 @@ small, .small {
   align-items: center;
   gap: 10px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0,119,181,0.3);
+  box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
 }
 
 .btn-linkedin:hover {
   background: linear-gradient(135deg, #005885 0%, #003d5c 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,119,181,0.4);
+  box-shadow: 0 6px 20px rgba(0, 119, 181, 0.4);
   color: white;
   text-decoration: none;
 }
@@ -437,7 +502,7 @@ small, .small {
   background: linear-gradient(135deg, var(--sakura-pink) 0%, var(--cloud-white) 50%, var(--sakura-pink) 100%);
   border-radius: 15px;
   padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--dark-sakura);
   margin: 2rem 0;
 }
@@ -446,7 +511,7 @@ small, .small {
   background: linear-gradient(135deg, var(--sakura-pink) 0%, var(--cloud-white) 50%, var(--sakura-pink) 100%);
   border-radius: 15px;
   padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--dark-sakura);
   margin: 2rem 0;
 }
@@ -457,17 +522,18 @@ small, .small {
   font-weight: 700;
   color: var(--ninja-dark);
   margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive adjustments for banner and jumbotron */
 @media (max-width: 768px) {
+
   .homepage-banner,
   .homepage-jumbotron {
     padding: 1.5rem;
     margin: 1rem 0;
   }
-  
+
   .homepage-banner h1 {
     font-size: 2rem;
   }
@@ -480,14 +546,14 @@ small, .small {
   border-radius: 12px;
   padding: 1.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
 }
 
 .journal-entry:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   border-color: var(--dark-green);
 }
 
@@ -539,7 +605,7 @@ small, .small {
   border-radius: 8px;
   padding: 1.5rem;
   margin: 1.5rem 0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .purpose-description .ninja-text {
@@ -558,7 +624,7 @@ small, .small {
   border-radius: 15px;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .note-card {
@@ -567,13 +633,13 @@ small, .small {
   border-radius: 12px;
   padding: 1.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   margin-bottom: 1rem;
 }
 
 .note-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   border-color: var(--dark-fuji);
 }
 
@@ -693,10 +759,10 @@ small, .small {
   position: absolute;
   top: 20px;
   left: 20px;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .search-result {
@@ -719,7 +785,7 @@ small, .small {
   margin-bottom: 1rem;
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb-item+.breadcrumb-item::before {
   content: "🌸";
   color: var(--dark-sakura);
 }
@@ -732,12 +798,12 @@ small, .small {
   border-radius: 25px;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .btn-zettel:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   color: white;
 }
 
@@ -787,7 +853,7 @@ small, .small {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
@@ -818,7 +884,7 @@ small, .small {
   position: relative;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   background: linear-gradient(135deg, var(--sakura-pink) 0%, var(--cloud-white) 100%);
   padding: 1rem;
 }
@@ -888,15 +954,15 @@ small, .small {
   .zen-image {
     height: 200px;
   }
-  
+
   .zen-caption {
     padding: 1rem 0.75rem 0.75rem;
   }
-  
+
   .zen-caption .ninja-text {
     font-size: 0.85rem;
   }
-  
+
   .zen-caption .ninja-text.jp-text {
     font-size: 0.8rem;
   }
@@ -906,11 +972,11 @@ small, .small {
   .zen-image {
     height: 180px;
   }
-  
+
   .zen-caption .ninja-text {
     font-size: 0.8rem;
   }
-  
+
   .zen-caption .ninja-text.jp-text {
     font-size: 0.75rem;
   }
@@ -921,15 +987,15 @@ small, .small {
   .noto-garden-header {
     padding: 1.5rem;
   }
-  
+
   .note-card {
     padding: 1rem;
   }
-  
+
   .zettelkasten-stats {
     margin-bottom: 1rem;
   }
-  
+
   .zettelkasten-stats .stat-value {
     font-size: 1.5rem;
   }
@@ -978,16 +1044,59 @@ small, .small {
   .a4-width .btn-group {
     flex-direction: column;
   }
-  
+
   .a4-width .btn-group .btn {
     margin-bottom: 0.25rem;
   }
-  
+
   .a4-width .d-flex {
     flex-direction: column;
   }
-  
-  .a4-width .d-flex > * {
+
+  .a4-width .d-flex>* {
     margin-bottom: 0.5rem;
   }
 }
+
+/* Content Arsenal Cards - Enhanced for Bootstrap 5 */
+.content-arsenal .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-width: 2px;
+}
+
+.content-arsenal .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.content-arsenal .card .card-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Bootstrap 5 color adjustments for better readability */
+.text-primary {
+  color: #0d6efd !important;
+}
+
+.text-success {
+  color: #198754 !important;
+}
+
+.text-info {
+  color: #0dcaf0 !important;
+}
+
+.border-primary {
+  border-color: #0d6efd !important;
+}
+
+.border-success {
+  border-color: #198754 !important;
+}
+
+.border-info {
+  border-color: #0dcaf0 !important;
+}
+
+/* Body styling */

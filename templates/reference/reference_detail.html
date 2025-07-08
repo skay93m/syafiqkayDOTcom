@@ -4,79 +4,285 @@
 {% block title %}{{ reference.title }} - Reference Library{% endblock %}
 
 {% block content %}
-<div class="container mt-4 a4-width">
-    <div class="row">
-        <div class="col-md-8 mx-auto">
+<div class="container">
+    <!-- Navigation -->
+    <div class="navigation-card mb-4">
+        <div class="card-body">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
+                <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="{% url 'homepage:homepage' %}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'reference:dashboard' %}">Reference Library</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'reference:dashboard' %}">
+                        <span class="jp-text japanese-text"><ruby>参考<rt>さんこう</rt></ruby><ruby>図書館<rt>としょかん</rt></ruby></span>
+                        <span class="d-none d-md-inline">Reference Library</span>
+                    </a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ reference.title }}</li>
                 </ol>
             </nav>
+        </div>
+    </div>
+    
+    <!-- Reference Header -->
+    <div class="reference-header-card mb-4">
+        <div class="card-body">
+            <h1 class="reference-title mb-3">{{ reference.title }}</h1>
             
-            <article class="card">
-                <div class="card-body">
-                    <header class="mb-4">
-                        <h1 class="h2">{{ reference.title }}</h1>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                {% if reference.category %}
-                                    <div class="mb-2">
-                                        {% for category in reference.get_categories %}
-                                            <span class="badge bg-secondary me-1" style="background-color: #FFB6C1 !important; color: #333 !important;">{{ category }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                                <small class="text-muted">
-                                    By {{ reference.author.get_full_name|default:reference.author.username }}
-                                </small>
-                            </div>
-                            <div class="text-muted">
-                                <small>
-                                    <span class="jp-text">作成: {{ reference.created_at|date:"Y年m月d日" }}</span>
-                                    <br>
-                                    <span>Created: {{ reference.created_at|date:"jS F Y" }}</span>
-                                    {% if reference.updated_at != reference.created_at %}
-                                        <br>
-                                        <span class="jp-text">更新: {{ reference.updated_at|date:"Y年m月d日" }}</span>
-                                        <br>
-                                        <span>Updated: {{ reference.updated_at|date:"jS F Y" }}</span>
-                                    {% endif %}
-                                </small>
-                            </div>
-                        </div>
-                    </header>
-                    
-                    {% if reference.url %}
-                        <div class="alert alert-info">
-                            <strong>External Link:</strong> 
-                            <a href="{{ reference.url }}" target="_blank" class="alert-link">
-                                {{ reference.url }} <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    {% endif %}
-                    
-                    {% if reference.summary %}
-                        <div class="mb-4">
-                            <h3 class="h5">Summary</h3>
-                            <p class="lead">{{ reference.summary|linebreaks }}</p>
-                        </div>
-                    {% endif %}
-                    
-                    <div class="content">
-                        <h3 class="h5">Content</h3>
-                        {{ reference.content|linebreaks }}
-                    </div>
+            <div class="reference-meta mb-3">
+                <div class="meta-item">
+                    <i class="fas fa-user"></i>
+                    <span class="jp-text japanese-text"><ruby>著者<rt>ちょしゃ</rt></ruby>:</span>
+                    <span>{{ reference.author.get_full_name|default:reference.author.username }}</span>
                 </div>
-            </article>
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span class="jp-text japanese-text"><ruby>作成<rt>さくせい</rt></ruby>:</span>
+                    <span class="jp-text japanese-text">{{ reference.created_at|date:"Y年m月d日" }}</span>
+                    <span class="d-none d-md-inline">/ {{ reference.created_at|date:"jS F Y" }}</span>
+                </div>
+                {% if reference.updated_at != reference.created_at %}
+                <div class="meta-item">
+                    <i class="fas fa-edit"></i>
+                    <span class="jp-text japanese-text"><ruby>更新<rt>こうしん</rt></ruby>:</span>
+                    <span class="jp-text japanese-text">{{ reference.updated_at|date:"Y年m月d日" }}</span>
+                    <span class="d-none d-md-inline">/ Updated {{ reference.updated_at|date:"jS F Y" }}</span>
+                </div>
+                {% endif %}
+            </div>
             
-            <div class="mt-4">
-                <a href="{% url 'reference:dashboard' %}" class="btn btn-outline-secondary">
-                    <i class="fas fa-arrow-left"></i> Back to Reference Library
-                </a>
+            {% if reference.category %}
+            <div class="reference-categories mb-3">
+                <i class="fas fa-folder text-muted me-2"></i>
+                <span class="jp-text japanese-text"><ruby>カテゴリー<rt>Category</rt></ruby>:</span>
+                {% for category in reference.get_categories %}
+                    <span class="badge bg-primary me-1">{{ category }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            {% if reference.url %}
+            <div class="reference-url">
+                <div class="alert alert-info">
+                    <strong>
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="jp-text japanese-text"><ruby>外部<rt>がいぶ</rt></ruby><ruby>リンク<rt>Link</rt></ruby></span>
+                        <span class="d-none d-md-inline">External Link</span>:
+                    </strong>
+                    <a href="{{ reference.url }}" target="_blank" class="alert-link">
+                        {{ reference.url }} <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Reference Summary -->
+    {% if reference.summary %}
+    <div class="reference-summary-card mb-4">
+        <div class="card-body">
+            <h3 class="card-title">
+                <span class="jp-text japanese-text"><ruby>概要<rt>がいよう</rt></ruby></span>
+                <span class="text-muted">/ Summary</span>
+            </h3>
+            <p class="lead">{{ reference.summary|linebreaks }}</p>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Reference Content -->
+    <div class="reference-content-card mb-4">
+        <div class="card-body">
+            <h3 class="card-title">
+                <span class="jp-text japanese-text"><ruby>内容<rt>ないよう</rt></ruby></span>
+                <span class="text-muted">/ Content</span>
+            </h3>
+            <div class="reference-content">
+                {{ reference.content|linebreaks }}
             </div>
         </div>
     </div>
+    
+    <!-- Back Navigation -->
+    <div class="back-navigation-card">
+        <div class="card-body text-center">
+            <a href="{% url 'reference:dashboard' %}" class="btn btn-outline-secondary btn-lg">
+                <i class="fas fa-arrow-left"></i>
+                <span class="jp-text japanese-text"><ruby>参考<rt>さんこう</rt></ruby><ruby>図書館<rt>としょかん</rt></ruby>に<ruby>戻<rt>もど</rt></ruby>る</span>
+                <br><small>Back to Reference Library</small>
+            </a>
+        </div>
+    </div>
 </div>
+
+<style>
+/* Card styling to match experiments app */
+.navigation-card, .reference-header-card, .reference-summary-card, .reference-content-card, .back-navigation-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+}
+
+.navigation-card .card-body {
+    padding: 1rem;
+}
+
+.reference-header-card .card-body,
+.reference-summary-card .card-body,
+.reference-content-card .card-body {
+    padding: 2rem;
+}
+
+.back-navigation-card .card-body {
+    padding: 1.5rem;
+}
+
+/* Reference header styling */
+.reference-title {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.reference-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.meta-item i {
+    width: 16px;
+    text-align: center;
+}
+
+/* Japanese text styling */
+.jp-text.japanese-text {
+    font-weight: 400;
+    color: inherit;
+}
+
+.jp-text.japanese-text ruby {
+    ruby-align: center;
+}
+
+.jp-text.japanese-text rt {
+    font-size: 0.6em;
+    color: #6c757d;
+}
+
+/* Categories styling */
+.reference-categories .badge {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 4px;
+}
+
+/* Alert styling */
+.alert {
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 0;
+}
+
+.alert-info {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+
+.alert-link {
+    color: #0d47a1;
+    font-weight: 600;
+}
+
+/* Content styling */
+.reference-content {
+    line-height: 1.7;
+    font-size: 1.05rem;
+    color: #495057;
+}
+
+.reference-content p {
+    margin-bottom: 1rem;
+}
+
+/* Breadcrumb styling */
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: #6c757d;
+}
+
+.breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: #6c757d;
+}
+
+/* Card title styling */
+.card-title {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Button styling */
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+}
+
+.btn-lg small {
+    display: block;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .reference-header-card .card-body,
+    .reference-summary-card .card-body,
+    .reference-content-card .card-body {
+        padding: 1.5rem;
+    }
+    
+    .reference-title {
+        font-size: 1.5rem;
+    }
+    
+    .reference-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .reference-content {
+        font-size: 1rem;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+</style>
 {% endblock %}

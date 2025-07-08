@@ -2,82 +2,162 @@
 {% load static %}
 {% load journal_extras %}
 {% block content %}
-<div class="container a4-width mt-5">
-    <a href="{% url 'journals:dashboard' %}" class="btn btn-secondary mb-3">&larr; Back to Dashboard</a>
+<div class="container">
+    <!-- Navigation -->
+    <div class="navigation-card mb-4">
+        <div class="card-body">
+            <a href="{% url 'journals:dashboard' %}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> 
+                <span class="jp-text japanese-text"><ruby>戻<rt>もど</rt></ruby>る</span>
+                <span class="d-none d-md-inline">Back to Dashboard</span>
+            </a>
+        </div>
+    </div>
     
     <!-- Journal Header -->
-    <div class="journal-header mb-4">
-        <h1 class="journal-title">{{ journal.title }}</h1>
-        <div class="journal-meta">
-            <span class="text-muted">
-                <i class="fas fa-user"></i> {{ journal.author.get_full_name|default:journal.author.username }}
-            </span>
-            <span class="text-muted ms-3">
-                <i class="fas fa-calendar"></i> 
-                <span class="jp-text">{{ journal.created_at|date:"Y年m月d日" }}</span> / 
-                <span>{{ journal.created_at|date:"jS F Y" }}</span>
-            </span>
-            {% if journal.updated_at != journal.created_at %}
-            <span class="text-muted ms-3">
-                <i class="fas fa-edit"></i> 
-                <span class="jp-text">更新: {{ journal.updated_at|date:"Y年m月d日" }}</span> / 
-                <span>Updated {{ journal.updated_at|date:"jS F Y" }}</span>
-            </span>
+    <div class="journal-header-card mb-4">
+        <div class="card-body">
+            <h1 class="journal-title mb-3">{{ journal.title }}</h1>
+            <div class="journal-meta">
+                <div class="meta-item">
+                    <i class="fas fa-user"></i> 
+                    <span class="jp-text japanese-text"><ruby>著者<rt>ちょしゃ</rt></ruby>:</span>
+                    <span>{{ journal.author.get_full_name|default:journal.author.username }}</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i> 
+                    <span class="jp-text japanese-text"><ruby>作成<rt>さくせい</rt></ruby>:</span>
+                    <span class="jp-text japanese-text">{{ journal.created_at|date:"Y年m月d日" }}</span>
+                    <span class="d-none d-md-inline">/ {{ journal.created_at|date:"jS F Y" }}</span>
+                </div>
+                {% if journal.updated_at != journal.created_at %}
+                <div class="meta-item">
+                    <i class="fas fa-edit"></i> 
+                    <span class="jp-text japanese-text"><ruby>更新<rt>こうしん</rt></ruby>:</span>
+                    <span class="jp-text japanese-text">{{ journal.updated_at|date:"Y年m月d日" }}</span>
+                    <span class="d-none d-md-inline">/ Updated {{ journal.updated_at|date:"jS F Y" }}</span>
+                </div>
+                {% endif %}
+            </div>
+            {% if journal.tags %}
+            <div class="journal-tags mt-3">
+                <i class="fas fa-tags text-muted me-2"></i>
+                <span class="jp-text japanese-text"><ruby>タグ<rt>Tag</rt></ruby>:</span>
+                {% for tag in journal.get_tags %}
+                    <span class="badge bg-primary me-1">{{ tag }}</span>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
-        {% if journal.tags %}
-        <div class="journal-tags mt-2">
-            <i class="fas fa-tags text-muted me-2"></i>
-            {% for tag in journal.get_tags %}
-                <span class="badge bg-success me-1" style="background-color: #C8E6C9 !important; color: #333 !important;">{{ tag }}</span>
-            {% endfor %}
-        </div>
-        {% endif %}
     </div>
     
     <!-- Journal Content -->
-    <div class="journal-content">
-        {{ journal.content|markdown_safe }}
+    <div class="journal-content-card">
+        <div class="card-body">
+            <div class="journal-content">
+                {{ journal.content|markdown_safe }}
+            </div>
+        </div>
     </div>
 </div>
 
 <style>
-/* Journal-specific styling */
-.journal-header {
-    border-bottom: 3px solid #C8E6C9;
-    padding-bottom: 1rem;
+/* Card styling to match experiments app */
+.navigation-card, .journal-header-card, .journal-content-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
 }
 
+.navigation-card .card-body {
+    padding: 1rem;
+}
+
+.journal-header-card .card-body {
+    padding: 2rem;
+}
+
+.journal-content-card .card-body {
+    padding: 2rem;
+}
+
+/* Journal header styling */
 .journal-title {
-    color: #2F4F2F;
+    color: #495057;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
 }
 
 .journal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6c757d;
     font-size: 0.9rem;
 }
 
+.meta-item i {
+    width: 16px;
+    text-align: center;
+}
+
+/* Japanese text styling */
+.jp-text.japanese-text {
+    font-weight: 400;
+    color: inherit;
+}
+
+.jp-text.japanese-text ruby {
+    ruby-align: center;
+}
+
+.jp-text.japanese-text rt {
+    font-size: 0.6em;
+    color: #6c757d;
+}
+
+/* Tags styling */
+.journal-tags .badge {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 4px;
+}
+
+/* Content styling */
 .journal-content {
     line-height: 1.7;
     font-size: 1.05rem;
+    color: #495057;
 }
 
 .journal-content h1,
 .journal-content h2,
-.journal-content h3 {
-    color: #2F4F2F;
+.journal-content h3,
+.journal-content h4,
+.journal-content h5,
+.journal-content h6 {
+    color: #495057;
     margin-top: 2rem;
     margin-bottom: 1rem;
+    font-weight: 600;
 }
 
 .journal-content h1 {
-    border-bottom: 2px solid #C8E6C9;
+    border-bottom: 2px solid #dee2e6;
     padding-bottom: 0.5rem;
 }
 
 .journal-content h2 {
-    border-bottom: 1px solid #E8F5E8;
+    border-bottom: 1px solid #e9ecef;
     padding-bottom: 0.3rem;
 }
 
@@ -86,37 +166,41 @@
     padding: 0.2rem 0.4rem;
     border-radius: 3px;
     font-family: 'Consolas', 'Monaco', monospace;
-    color: #d63384;
+    color: #e83e8c;
+    font-size: 0.9em;
 }
 
 .journal-content pre {
     background-color: #f8f9fa;
     padding: 1rem;
     border-radius: 5px;
-    border-left: 4px solid #C8E6C9;
+    border-left: 4px solid #007bff;
     overflow-x: auto;
+    margin: 1rem 0;
 }
 
 .journal-content pre code {
     background-color: transparent;
     padding: 0;
-    color: #212529;
+    color: #495057;
 }
 
 .journal-content blockquote {
-    border-left: 4px solid #C8E6C9;
+    border-left: 4px solid #007bff;
     padding-left: 1rem;
     margin-left: 0;
     font-style: italic;
-    color: #666;
+    color: #6c757d;
     background-color: #f8f9fa;
     padding: 1rem;
     border-radius: 0 5px 5px 0;
+    margin: 1rem 0;
 }
 
 .journal-content ul,
 .journal-content ol {
     margin-left: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .journal-content li {
@@ -127,24 +211,27 @@
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .journal-content th,
 .journal-content td {
-    border: 1px solid #ddd;
-    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    padding: 0.75rem;
     text-align: left;
 }
 
 .journal-content th {
     background-color: #f8f9fa;
     font-weight: 600;
+    color: #495057;
 }
 
-/* Emoji styling */
-.emoji {
-    font-size: 1.2em;
-    vertical-align: middle;
+.journal-content tbody tr:hover {
+    background-color: #f8f9fa;
 }
 
 /* Syntax highlighting for code blocks */
@@ -153,7 +240,7 @@
     border-radius: 5px;
     padding: 1rem;
     margin: 1rem 0;
-    border-left: 4px solid #C8E6C9;
+    border-left: 4px solid #007bff;
 }
 
 .journal-content .codehilite pre {
@@ -165,6 +252,20 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    .journal-header-card .card-body,
+    .journal-content-card .card-body {
+        padding: 1.5rem;
+    }
+    
+    .journal-title {
+        font-size: 1.5rem;
+    }
+    
+    .journal-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
     .journal-content {
         font-size: 1rem;
     }
