@@ -26,7 +26,7 @@ Set DEBUG based on environment variable DJANGO_DEBUG.
 If not set, default to False for safety.
 Set DJANGO_DEBUG=True in your .env for local development.
 """
-DEBUG = False
+DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() in ["true", "1", "yes"]
 
 ALLOWED_HOSTS = [
     'syafiqkay.com',
@@ -148,9 +148,7 @@ else:
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
->>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
     }
-}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
