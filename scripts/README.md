@@ -1,26 +1,24 @@
-# Scripts Directory
+# Scripts
 
-This directory contains utility scripts for the Django website project.
+Utility scripts for the Django manual rebuild project.
 
 ## Files
 
-### `create_journal_entry.py`
-A one-time utility script that was used to import the development journal markdown file (`/static/development_journal.md`) into the Django database as a journal entry.
+- **[clean_project.sh](clean_project.sh)** - Interactive script to clean up existing Django code and start fresh
 
-**Purpose**: Creates a journal entry with the GitHub Copilot user as the author, containing the development journey documentation.
+## Usage
 
-**Usage**: 
+### Cleanup Script
 ```bash
-cd /workspaces/syafiq-kay
-python scripts/create_journal_entry.py
+# Make executable (if needed)
+chmod +x scripts/clean_project.sh
+
+# Run the cleanup script
+./scripts/clean_project.sh
 ```
 
-**Note**: This script was already executed during the initial setup and is kept here for reference and documentation purposes.
-
-## Adding New Scripts
-
-When adding new utility scripts:
-1. Place them in this directory
-2. Add proper documentation headers
-3. Update this README with a description
-4. Make sure to set proper Django environment if needed
+The cleanup script will:
+- Show you what will be removed
+- Ask for confirmation before each step
+- Preserve documentation and essential files
+- Create a fresh requirements.txt for new start
