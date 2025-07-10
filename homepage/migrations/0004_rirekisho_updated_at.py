@@ -13,10 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='rirekisho',
             name='updated_at',
-<<<<<<< HEAD
-            field=models.DateTimeField(null=True, blank=True, verbose_name='更新日時'),
-=======
             field=models.DateTimeField(auto_now=True, verbose_name='更新日時'),
->>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
         ),
     ]
