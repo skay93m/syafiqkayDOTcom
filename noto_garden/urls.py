@@ -4,10 +4,6 @@ from . import views
 app_name = "noto_garden"
 
 urlpatterns = [
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
     path("", views.garden_dashboard, name="dashboard"),
     path("guide/", views.guide_view, name="guide"),
     path("note/<str:unique_id>/", views.note_detail, name="note_detail"),
@@ -16,10 +12,4 @@ urlpatterns = [
     path("graph/", views.graph_view, name="graph"),
     path("search/", views.search_notes, name="search_notes"),
     path("coming-soon/", views.coming_soon, name="coming_soon"),
-<<<<<<< HEAD
-=======
-    path("", views.coming_soon, name="coming_soon"),
->>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
-=======
->>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
 ]
