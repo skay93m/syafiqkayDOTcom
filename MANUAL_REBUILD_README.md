@@ -9,6 +9,7 @@ This branch is for manually rebuilding the Django application from scratch while
 ├── docs/                          # Documentation
 │   ├── DJANGO_REBUILD_MANUAL.md   # Complete manual with concepts & steps
 │   ├── MANUAL_REBUILD_WORKFLOW.md # 22-day structured workflow
+│   ├── STYLE_GUIDE.md             # Coding standards and naming conventions
 │   └── GITHUB_ISSUE_TEMPLATE.md   # GitHub issue template
 ├── scripts/                       # Utility scripts
 │   └── clean_project.sh           # Project cleanup script
@@ -19,10 +20,11 @@ This branch is for manually rebuilding the Django application from scratch while
 ## Getting Started
 
 1. **Review Documentation**: Start with `docs/DJANGO_REBUILD_MANUAL.md` for concepts and `docs/MANUAL_REBUILD_WORKFLOW.md` for the implementation plan
-2. **Clean Slate**: Run `scripts/clean_project.sh` to remove existing Django code (optional)
-3. **Create GitHub Issue**: Use `docs/GITHUB_ISSUE_TEMPLATE.md` to track your progress
-4. **Begin Phase 1**: Start with Project Foundation as outlined in the workflow
-5. **Use Reference**: Check the main branch when you need guidance
+2. **Study Style Guide**: Review `docs/STYLE_GUIDE.md` for coding standards and naming conventions to follow
+3. **Clean Slate**: Run `scripts/clean_project.sh` to remove existing Django code (optional)
+4. **Create GitHub Issue**: Use `docs/GITHUB_ISSUE_TEMPLATE.md` to track your progress
+5. **Begin Phase 1**: Start with Project Foundation as outlined in the workflow
+6. **Use Reference**: Check the main branch when you need guidance
 
 ## Branch Purpose
 
