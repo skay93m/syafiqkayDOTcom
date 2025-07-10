@@ -2,7 +2,6 @@
 <html lang="en" xml:lang="en-ja">
 {% load static %}
 <head>
-<<<<<<< HEAD
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Welcome | syafiqkay.com{% endblock %}</title>
@@ -19,7 +18,7 @@
           <a class="nav-link" href="{% url 'journals:coming_soon' %}">ジャーナル / Journal</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'notoGarden:coming_soon' %}">ノート / Notes</a>
+          <a class="nav-link" href="{% url 'noto_garden:coming_soon' %}">ノート / Notes</a>
         </li>
       </ul>
     </nav>
@@ -43,7 +42,6 @@
       このサイトのコードは <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MITライセンス</a> のもとで公開されています。
     </small>
   </footer>
-=======
   <meta charset="UTF-8" />
   <title>{% block title %} Welcome | syafiqkay.com {% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -57,7 +55,7 @@
     <nav style="margin-top: 2rem;">
       <a href="{% url 'homepage:homepage' %}">ホーム</a> |
       <a href="{% url 'journals:coming_soon' %}">ジャーナル</a> |
-      <a href="{% url 'notoGarden:coming_soon' %}">ノート</a>
+      <a href="{% url 'noto_garden:coming_soon' %}">ノート</a>
     </nav>
   </header>
 
@@ -77,14 +75,10 @@
     </p>
     </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-honoka@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-<<<<<<< HEAD
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Add any JavaScript functionality here if needed
     });
   </script>
->>>>>>> 896496c (Refactor code structure and remove redundant changes for improved clarity and maintainability)
-=======
->>>>>>> 8435d0e (Remove unused JavaScript functionality and ensure CSS is properly linked in base template)
 </body>
 </html>

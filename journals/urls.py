@@ -6,6 +6,7 @@ app_name = "journals"
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('<int:pk>/', views.journal_detail, name='journal_detail'),
+    path('coming-soon/', views.coming_soon, name='coming_soon'),
     path('trigger-400/', views.trigger_400, name='trigger_400'),
     path('trigger-401/', views.trigger_401, name='trigger_401'),
     path('trigger-402/', views.trigger_402, name='trigger_402'),

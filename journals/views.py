@@ -139,3 +139,8 @@ def get_tags_json(request):
             all_tags.extend(tags)
     unique_tags = sorted(list(set(all_tags)))
     return JsonResponse({'tags': unique_tags})
+
+
+def coming_soon(request):
+    """Coming soon page for journals"""
+    return render(request, 'journals/coming_soon.html')

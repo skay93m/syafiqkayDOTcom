@@ -1,35 +1,7 @@
 {% extends "base/index.html" %}
 {% load static %}
-<<<<<<< HEAD
 {% load furigana_extras %}
-{% block content %}
-<div class="container mt-5">
-  <!-- Header Section -->
-  <div class="text-center mb-5">
-    <h1 class="display-4 mb-3">🥷 <ruby>道場<rt>どうじょう</rt></ruby> 🥷</h1>
-    <h2 class="h3 text-muted mb-4">Digital Dojo</h2>
-    <p class="lead">Where ancient wisdom meets modern technology in the pursuit of mastery.</p>
-    <p class="japanese-text jp-text text-center mb-4">
-      🥷 <ruby>古代<rt>こだい</rt></ruby>の<ruby>知恵<rt>ちえ</rt></ruby>と<ruby>現代<rt>げんだい</rt></ruby>の<ruby>技術<rt>ぎじゅつ</rt></ruby>が<ruby>熟練<rt>じゅくれん</rt></ruby>の<ruby>追求<rt>ついきゅう</rt></ruby>で<ruby>出会<rt>であ</rt></ruby>う<ruby>場所<rt>ばしょ</rt></ruby>。
-    </p>
-  </div>
 
-  <!-- Philosophy Section -->
-  <div class="row mb-5">
-    <div class="col-md-12">
-      <div class="card border-primary">
-        <div class="card-body text-center">
-          <h3 class="card-title mb-3 text-primary">「<ruby>七転<rt>ななころ</rt></ruby>び<ruby>八起<rt>やお</rt></ruby>き」</h3>
-          <p class="card-text">Fall seven times, stand up eight.</p>
-          <small class="jp-text japanese-text">
-            <ruby>薬学<rt>やくがく</rt></ruby>、<ruby>法律<rt>ほうりつ</rt></ruby>、<ruby>技術<rt>ぎじゅつ</rt></ruby>の<ruby>古武術<rt>こぶじゅつ</rt></ruby>を<ruby>修<rt>おさ</rt></ruby>める<ruby>デジタル<rt>Digital</rt></ruby><ruby>侍<rt>さむらい</rt></ruby>
-          </small>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Personal Statement Section -->
-=======
 {% block content %}
 <div class="container a4-width mt-5 justify-content-center">
   {% include "components/banner.html" %}
@@ -53,8 +25,8 @@
       </div>
     </div>
   </section>
-  
->>>>>>> 87187f4 (Add utility scripts and reorganize templates for improved structure)
+
+  <!-- Personal Statement Section -->
   {% if rirekisho %}
   <div class="row mb-5">
     <div class="col-md-12">
@@ -95,8 +67,7 @@
     </div>
   </div>
   {% endif %}
-<<<<<<< HEAD
-  <!-- LinkedIn section removed - now in footer -->
+  
   <!-- Statistics Section -->
   <div class="row mb-5">
     <div class="col-12">
@@ -199,7 +170,6 @@
       </div>
     </div>
   </div>
-=======
   
   <!-- LinkedIn Section -->
   <section class="linkedin-section mt-5 mb-4">
@@ -216,7 +186,6 @@
       </a>
     </div>
   </section>
->>>>>>> af068c0 (Add Noto Garden dashboard, graph, guide, note detail, and note form templates)
 </div>
 
 <style>
