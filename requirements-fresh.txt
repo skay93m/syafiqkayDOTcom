@@ -1,0 +1,18 @@
+# Fresh Start Requirements for Django Rebuild
+# These are the minimal packages you'll need to begin
+
+# Essential packages to start with:
+Django==5.0.14
+python-dotenv==1.0.1
+
+# Add these packages as you progress through the phases:
+# dj-database-url==2.2.0       # Phase 1: Database configuration
+# django-storages==1.14.4      # Phase 7: Static files (production)
+# azure-storage-blob==12.23.1  # Phase 7: Azure storage (production)
+# pillow==10.4.0               # If you add ImageField to models
+
+# Optional enhancement packages (add when you want to experiment):
+# django-ckeditor==6.7.1       # Rich text editing
+# djangorestframework==3.15.2  # API development
+# django-debug-toolbar==4.4.6  # Development debugging
+# pytest-django==4.9.0         # Better testing
