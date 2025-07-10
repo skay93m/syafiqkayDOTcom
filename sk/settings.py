@@ -9,27 +9,32 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+# Path settings
 from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-9@_-(b5f3k-h9*7b19#v*b-f3bp8+rikb&r+jlax1^@5vh30qj"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+# security setup
+from dotenv import load_dotenv
+load_dotenv()
+import os
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key")
+DEBUG = False
+CSRF_TRUSTED_ORIGINS = [
+    "https://syafiqkay.com",
+    "https://www.syafiqkay.com",
+    "https://syafiq-kay-1.onrender.com",
+    "https://syafiq-kay.onrender.com",
+]
+ALLOWED_HOSTS = [
+    "syafiqkay.com",
+    "*.syafiqkay.com",
+    "localhost",
+    "127.0.0.1",
+    "syafiq-kay.onrender.com",
+    "syafiq-kay-1.onrender.com",
+]
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -37,18 +42,26 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Project Apps
+    "home",
+    "blog",
+    "references",
+    "notes",
+    "projects",
+    "storages",
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.security.SecurityMiddleware',          # Security enhancements (e.g., HTTPS, HSTS)
+    'django.contrib.sessions.middleware.SessionMiddleware',   # Session management
+    'django.middleware.common.CommonMiddleware',              # Common HTTP features (e.g., URL normalization)
+    'django.middleware.csrf.CsrfViewMiddleware',              # CSRF protection
+    'django.contrib.auth.middleware.AuthenticationMiddleware',# Associates users with requests using sessions
+    'django.contrib.messages.middleware.MessageMiddleware',   # Temporary messages for users
+    'django.middleware.clickjacking.XFrameOptionsMiddleware', # Prevent clickjacking
 ]
 
+# ? potential issue - was syafiqkay.urls
 ROOT_URLCONF = "sk.urls"
 
 TEMPLATES = [
@@ -66,23 +79,29 @@ TEMPLATES = [
     },
 ]
 
+# wsgi
 WSGI_APPLICATION = "sk.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# --- Azure SQL Database Configuration ---
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
+        'USER': os.environ.get('AZURE_SQL_DB_USER'),
+        'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
+        'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
+        'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
+        'OPTIONS': {
+            'driver': 'ODBC Driver 18 for SQL Server',
+            'encrypt': True,
+            'trust_server_certificate': False,
+            'connection_timeout': 30,
+        },
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -98,25 +117,22 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
-LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "UTC"
-
+LANGUAGE_CODE = 'en-gb'
+TIME_ZONE = 'UTC'
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-STATIC_URL = "static/"
+# --- static files configuration for Azure Blob Storage ---
+AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME")
+AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")
+AZURE_CONTAINER = os.environ.get("AZURE_CONTAINER", "static")
+STATIC_LOCATION = AZURE_CONTAINER
+STATIC_URL = f"https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{STATIC_LOCATION}/"
+STATICFILES_STORAGE = "storages.backends.azure_storage.AzureStorage"
+AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
+AZURE_SSL = True
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
