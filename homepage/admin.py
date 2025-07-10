@@ -1,11 +1,5 @@
 from django.contrib import admin
-<<<<<<< HEAD
-from .models import Rirekisho
-<<<<<<< HEAD
-=======
-=======
 from .models import Rirekisho, VisitorTracking, VisitorSession
->>>>>>> bb55f45 (feat: Populate Noto Garden with Zettelkasten notes and visualization commands)
 
 class CustomAdminSite(admin.AdminSite):
     class Media:
@@ -14,7 +8,6 @@ class CustomAdminSite(admin.AdminSite):
         }
 
 admin.site.__class__ = CustomAdminSite
->>>>>>> fec6094 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
 
 @admin.register(Rirekisho)
 class RirekishoAdmin(admin.ModelAdmin):

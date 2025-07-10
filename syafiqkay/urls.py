@@ -26,7 +26,6 @@ urlpatterns = [
     path("", include("homepage.urls")),
     path("journals/", include("journals.urls")),
     path("noto_garden/", include("noto_garden.urls")),
-<<<<<<< HEAD
     path("reference/", include("reference.urls")),
     path("experiments/", include("experiments.urls")),
     # Favicon handling
@@ -45,8 +44,6 @@ urlpatterns = [
     path("test-503/", error_handlers.custom_503, name="test_503"),
     path("test-504/", error_handlers.custom_504, name="test_504"),
     path("test-505/", error_handlers.custom_505, name="test_505"),
-=======
->>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
 ]
 
 # Add static files serving for development

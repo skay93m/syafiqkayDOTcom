@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 from django.contrib import admin
 from .models import Journal
 from .forms import JournalForm
@@ -45,10 +43,3 @@ class JournalAdmin(admin.ModelAdmin):
         css = {
             'all': ['css/admin-extra.css']
         }
-=======
-from django.contrib import admin
-# from .models import YourModel  # Replace 'YourModel' with your actual model class
-
-# Register your models here.
-# admin.site.register(YourModel)  # Register your model with the admin site
->>>>>>> 1b750c1 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings)
