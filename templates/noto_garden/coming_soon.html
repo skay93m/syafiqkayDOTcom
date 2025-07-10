@@ -1,20 +1,10 @@
-<<<<<<< HEAD
-<<<<<<< HEAD:templates/notoGarden/coming_soon.html
-{% extends "base.html" %}
-{% block title %}Note Garden | ノートの庭{% endblock %}
-{% block content %}
-<h1 class="display-1 text-center">Note Garden | ノートの庭</h1>
-<p>Seeds have been planted. Notes are sprouting. The Garden is quiet, but alive — a tangle of thoughts just beginning to bloom. Soon you’ll stroll among ideas with dirt on your hands.</p>
-<p>種は蒔かれ、ノートは芽吹き始めました。庭はまだ静かで、しかし確かに息づいています。思考が花咲くその日まで、どうぞお待ちください。</p>
-{% endblock %}
-=======
-{% extends "index.html" %}
-=======
 {% extends "base/index.html" %}
->>>>>>> 19515ac (Add utility scripts and reorganize templates for improved structure)
+
+{% block title %}Note Garden | ノートの庭{% endblock %}
+
 {% block content %}
-  <div class="container justify-content-center mt-5">
-    <h1>Note Garden | ノートの庭</h1>
+<div class="container justify-content-center mt-5">
+    <h1 class="display-1 text-center">Note Garden | ノートの庭</h1>
     
     <!-- Purpose Description -->
     <div class="purpose-description mb-4">
@@ -30,13 +20,5 @@
     
     <p>Seeds have been planted. Notes are sprouting. The Garden is quiet, but alive — a tangle of thoughts just beginning to bloom. Soon you'll stroll among ideas with dirt on your hands.</p>
     <p>種は蒔かれ、ノートは芽吹き始めました。庭はまだ静かで、しかし確かに息づいています。思考が花咲くその日まで、どうぞお待ちください。</p>
-  </div>
-{% endblock %}ds "index.html" %}
-{% block content %}
-  <div class="container justify-content-center mt-5">
-    <h1>Note Garden | ノートの庭</h1>
-    <p>Seeds have been planted. Notes are sprouting. The Garden is quiet, but alive — a tangle of thoughts just beginning to bloom. Soon you’ll stroll among ideas with dirt on your hands.</p>
-    <p>種は蒔かれ、ノートは芽吹き始めました。庭はまだ静かで、しかし確かに息づいています。思考が花咲くその日まで、どうぞお待ちください。</p>
-  </div>
+</div>
 {% endblock %}
->>>>>>> fec6094 (Refactor notoGarden app: rename to noto_garden, remove unused files, and update settings):templates/noto_garden/coming_soon.html
