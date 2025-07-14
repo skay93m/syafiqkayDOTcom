@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Syafiq Kay - personal website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Welcome | syafiqkay.com{% endblock %}</title>
     {% include "_css.html" %}
     {% block extra_css %}
     {% endblock %}
 </head>
 <body>
-    {% include "taskmanager/_header.html" %}
+    {% include "homepage/_header.html" %}
     <main class="container">
         {% block content %}
         {% endblock %}
     </main>
-    {% include "taskmanager/_footer.html" %}
+    {% include "homepage/_footer.html" %}
     {% include "_script.html" %}
     {% block extra_scripts %}
     {% endblock %}
