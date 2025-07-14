@@ -508,6 +508,14 @@ sudo apt-get install git-flow
 # On macOS:
 brew install git-flow-avh
 
+<<<<<<< HEAD
+=======
+# Alternative installation (if package manager fails):
+curl -L -O https://raw.githubusercontent.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh
+bash gitflow-installer.sh install stable
+rm gitflow-installer.sh
+
+>>>>>>> develop
 # Verify installation
 git flow version
 
@@ -515,6 +523,51 @@ git flow version
 git flow init
 ```
 
+<<<<<<< HEAD
+=======
+#### 11. Manual Feature Finish (Without Git Flow)
+
+**When Git Flow is not available, you can manually finish a feature:**
+
+```bash
+# 1. Ensure all changes are committed on feature branch
+git add .
+git commit -m "Complete feature implementation"
+
+# 2. Switch to develop branch and update
+git checkout develop
+git pull origin develop
+
+# 3. Merge feature branch into develop
+git merge feature/feature-name
+
+# 4. Delete the feature branch
+git branch -d feature/feature-name
+
+# 5. Push updated develop branch
+git push origin develop
+
+# 6. If feature branch exists on remote, delete it
+git push origin --delete feature/feature-name
+```
+
+#### 12. Environment Setup Issues
+
+**Error:** Git Flow installation fails in containerized environments
+
+**Solution:**
+```bash
+# Check if running in Docker/container
+cat /proc/1/cgroup
+
+# If in container, you may need to install build tools first
+apt update && apt install -y build-essential git
+
+# Or use manual git workflow instead of git-flow
+# See "Manual Feature Finish" above
+```
+
+>>>>>>> develop
 ### Checking Current State
 
 ```bash

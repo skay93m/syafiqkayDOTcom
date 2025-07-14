@@ -1,0 +1,42 @@
+[project]
+name = "syafiqkaydotcom"
+version = "0.1.0"
+description = "source code for my website"
+authors = [
+    {name = "Syafiq Kay",email = "syafiq@syafiqkay.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "requests (>=2.32.4,<3.0.0)",
+    "asgiref (==3.9.1)",
+    "django (==5.0.14)",
+    "mssql-django (==1.5)",
+    "pyodbc (==5.2.0)",
+    "python-dotenv (==1.1.1)",
+    "pytz (==2025.2)",
+    "sqlparse (==0.5.3)",
+    "psycopg (>=3.2.9,<4.0.0)",
+    "django-storages (>=1.14.6,<2.0.0)",
+    "azure-storage-blob (>=12.25.1,<13.0.0)"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "pep440"
+version_provider = "pep621"
+update_changelog_on_bump = true
+major_version_zero = true
+
+[tool.poetry]
+package-mode = false
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+commitizen = "^3.14.1"
+
