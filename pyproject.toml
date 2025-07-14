@@ -36,4 +36,5 @@ major_version_zero = true
 package-mode = false
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
+commitizen = "^3.14.1"
 
