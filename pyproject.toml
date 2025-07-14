@@ -16,7 +16,8 @@ dependencies = [
     "pyodbc (==5.2.0)",
     "python-dotenv (==1.1.1)",
     "pytz (==2025.2)",
-    "sqlparse (==0.5.3)"
+    "sqlparse (==0.5.3)",
+    "psycopg (>=3.2.9,<4.0.0)"
 ]
 
 [build-system]
@@ -33,3 +34,6 @@ major_version_zero = true
 
 [tool.poetry]
 package-mode = false
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+
