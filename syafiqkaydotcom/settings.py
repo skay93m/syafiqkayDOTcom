@@ -74,31 +74,42 @@ WSGI_APPLICATION = 'syafiqkaydotcom.wsgi.application'
 
 import dj_database_url
 database_url = os.environ.get("DATABASE_URL")
-if database_url:
-    DATABASES = {
-        'default': dj_database_url.parse(database_url, conn_max_age=600)
+DB_ENGINE = os.environ.get('DJANGO_DB_ENGINE', 'django.db.backends.postgresql')
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': os.environ.get('AZURE_SQL_DB_NAME'),
+        'USER': os.environ.get('AZURE_SQL_DB_USER'),
+        'PASSWORD': os.environ.get('AZURE_SQL_DB_PASSWORD'),
+        'HOST': os.environ.get('AZURE_SQL_DB_HOST'),
+        'PORT': os.environ.get('AZURE_SQL_DB_PORT', '1433'),
+        'OPTIONS': {
+            'driver': 'ODBC Driver 18 for SQL Server',
+            'encrypt': True,
+            'trust_server_certificate': False,
+            'connection_timeout': 30,
+        },
+    },
+    'secondary': {
+        'ENGINE': DB_ENGINE,
+        'NAME': os.environ.get('DB_NAME', 'mydatabase'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'mysecretpassword'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
+    },
+    'fallback':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-elif all(var in os.environ for var in [
-    'DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_HOST'
-]):
-    DB_ENGINE = os.environ.get('DJANGO_DB_ENGINE', 'django.db.backends.postgresql')
-    DATABASES = {
-        'default': {
-            'ENGINE': DB_ENGINE,
-            'NAME': os.environ.get('DB_NAME', 'mydatabase'),
-            'USER': os.environ.get('DB_USER', 'postgres'),
-            'PASSWORD': os.environ.get('DB_PASSWORD', 'mysecretpassword'),
-            'HOST': os.environ.get('DB_HOST', 'localhost'),
-            'PORT': os.environ.get('DB_PORT', '5432'),
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
+
+
+
+
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
