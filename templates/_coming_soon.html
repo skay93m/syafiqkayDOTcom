@@ -1,8 +1,30 @@
 {% block content %}
-    <div class="container">
-        <h2>Coming Soon</h2>
-        <p>I am working hard to bring you something amazing. Stay tuned!</p>
-        <p>In the meantime, feel free to check out <a href="{% url 'taskmanager:home' %}">Task Manager</a>.</p>
-        <p>Thank you for your patience!</p>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-4 align-self-center">
+            <div class="lc-block border-top py-4" style="letter-spacing:10px">
+                <div editable="rich">
+                    <h2><strong>COMING SOON!</strong></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="lc-block">
+                <div editable="rich">
+                    <p>It is still a work in progress as I am rebuilding the website without relying on Github Copilot as much. Stay tuned!</p>
+                </div>
+            </div>
+            <div class="lc-block">
+                <div editable="rich">
+                    <p>In the meantime, feel free to check out <a href="{% url 'taskmanager:home' %}">Task Manager</a>.</p>
+                </div>
+            </div>
+            <div class="lc-block">
+                <div editable="rich">
+                    <p><em>Thank you for your patience!</em></p>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}
