@@ -39,4 +39,7 @@ package-mode = false
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 commitizen = "^3.14.1"
+pytest-django = "^4.11.1"
+pytest-cov = "^6.2.1"
+factory-boy = "^3.3.3"
 

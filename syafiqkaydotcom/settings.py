@@ -1,19 +1,12 @@
 # Load environment variables from .env before anything else
 from dotenv import load_dotenv # type: ignore
 load_dotenv()
-
 from pathlib import Path
 import os
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key")
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = [
@@ -27,7 +20,6 @@ ALLOWED_HOSTS = [
     'sk-dxgmhag5dtcsamfh.uksouth-01.azurewebsites.net',  # Azure App Service deployment
     '0.0.0.0'
 ]
-
 # CSRF trusted origins for production and staging
 CSRF_TRUSTED_ORIGINS = [
     "https://syafiqkay.com",
@@ -36,7 +28,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://sk-dxgmhag5dtcsamfh.uksouth-01.azurewebsites.net",
     "https://syafiq-kay.onrender.com",
 ]
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,7 +50,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 ROOT_URLCONF = 'syafiqkaydotcom.urls'
 TEMPLATES = [
     {
@@ -82,7 +72,7 @@ WSGI_APPLICATION = 'syafiqkaydotcom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-import dj_database_url # type: ignore
+import dj_database_url
 database_url = os.environ.get("DATABASE_URL")
 if database_url:
     DATABASES = {
@@ -127,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

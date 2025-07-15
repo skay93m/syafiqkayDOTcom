@@ -1,10 +1,8 @@
-from django.contrib import admin
 from django.urls import path
-from django.views.generic import TemplateView
+from . import views
 
 app_name = 'taskmanager'
-
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='taskmanager/home.html'), name="home"),
-    path('help/', TemplateView.as_view(template_name='taskmanager/help.html'), name='help'),
+    path('', views.home, name='home'),
+    path('help/', views.help, name='help'),
 ]

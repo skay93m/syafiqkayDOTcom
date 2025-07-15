@@ -4,23 +4,24 @@
         <div class="row">
             <!-- About Column -->
             <div class="col-md-4 mb-4">
-                <h5 class="text-white mb-3">About syafiqkay.com</h5>
+                <h5 class="text-white mb-3">About</h5>
                 <p class="mb-1">&copy; {% now "Y" %} Syafiq Kay</p>
-                <p class="mb-3">This website was built in partnership with GitHub Copilot</p>
+                <p class="mb-3">This website was built in partnership with GitHub Copilot for the purpose of learning new things and sharing it online.</p>
             </div>
-      
             <!-- Resources Column -->
             <div class="col-md-4 mb-4">
-                <h5 class="text-white mb-3">Resources</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="https://github.com/skay93m/syafiq-kay" class="text-decoration-none text-white-50 hover-link">   <i class="fab fa-github me-1"></i> GitHub Repository</a></li>
-                    <li><a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener" class="text-decoration-none text-white-50 hover-link"><i class="fas fa-gavel me-1"></i> MIT License</a></li>
-                </ul>
+                <div>{% block extra_footer%}{% endblock %}</div>
+                <div>
+                    <h5 class="text-white mb-3">Resources</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://github.com/skay93m/syafiq-kay" class="text-decoration-none text-white-50 hover-link">   <i class="fab fa-github me-1"></i> GitHub Repository</a></li>
+                        <li><a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener" class="text-decoration-none text-white-50 hover-link"><i class="fas fa-gavel me-1"></i> MIT License</a></li>
+                    </ul>
+                </div>
             </div>
-      
             <!-- Connect Column -->
             <div class="col-md-4">
-                <h5 class="text-white mb-3">Connect</h5>
+                <h5 class="text-white mb-3">Connect With Me</h5>
                 <div class="d-flex gap-3">
                     <a href="https://www.linkedin.com/in/syafiqkay/" class="btn btn-outline-light" target="_blank" rel="noopener"><i class="fab fa-linkedin me-1"></i> LinkedIn</a><a href="https://github.com/skay93m" class="btn btn-outline-light" target="_blank" rel="noopener"><i class="fab fa-github me-1"></i> GitHub</a>
                 </div>

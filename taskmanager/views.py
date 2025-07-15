@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.urls import path
 
 def home(request):
-    return render(request, 'taskmanager/home.html')
+    return render(request, 'taskmanager/tm_home.html')
+
+def help(request):
+    return render(request, 'taskmanager/tm_help.html')
