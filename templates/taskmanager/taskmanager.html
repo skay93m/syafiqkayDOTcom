@@ -1,28 +1,14 @@
-{% extends "base.html" %}
+{% extends "taskmanager/base.html" %}
 
-{% block title %}
-    Task Manager
+<h2>Welcome to the Task Manager application!</h2>
+
+{% block page_content %}
+    <p>This is the landing page for the task manager that I am building. I am following along the exercises from the following book:</p>
+    <blockquote>  Lazzaro, L. (2024) Ultimate Django for Web App Development Using Python. [edition unavailable]. Orange Education Pvt Ltd. Available at: https://www.perlego.com/book/4334336 (Accessed: 15 July 2025).</blockquote>
+    <p>In this application, you can create, view, and manage tasks efficiently.</p>
+    <p>Use the navigation menu to explore different features of the task manager.</p>
 {% endblock %}
 
-{% block content %}
-<section class="container mt-4 mb-4">
-    <div class="container text-center mt-4 mb-4">
-        <h1>Task Manager</h1>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            {% include "taskmanager/_header.html" %}
-        </div>
-        <div class="card-body text-center">
-            <h2>Welcome to the Task Manager application!</h2>
-            <p>This is the landing page for the task manager that I am building. I am following along the exercises from the following book:</p>
-            <blockquote>  Lazzaro, L. (2024) Ultimate Django for Web App Development Using Python. [edition unavailable]. Orange Education Pvt Ltd. Available at: https://www.perlego.com/book/4334336 (Accessed: 15 July 2025).</blockquote>
-            <p>In this application, you can create, view, and manage tasks efficiently.</p>
-            <p>Use the navigation menu to explore different features of the task manager.</p>
-        </div>
-        <div class="card-footer">
-            {% include "taskmanager/_footer.html" %}
-        </div>
-    </div>
-</section>
+{% block footer_content %}
+    {% include "taskmanager/_footer.html" %} 
 {% endblock %}

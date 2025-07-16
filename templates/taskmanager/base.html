@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Task manager
+{% endblock %}
+
+{% block content %}
+<section class="card mt-5 mb-5">
+    <div class="card-header">
+        {% include "taskmanager/_header.html" %}
+    </div>
+    <div class="card-body mt-4">
+        {% block header %}
+        {% endblock %}
+        {% block page_content %}
+        {% endblock %}
+    </div>
+    <div class="card-footer mt-4">
+        <div class="center">{% block footer_content %}{% endblock %}</div>
+    </div>
+</section>
+{% endblock %}

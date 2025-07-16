@@ -1,23 +1,16 @@
-{% extends "taskmanager/taskmanager.html" %}
+{% extends "taskmanager/base.html" %}
 
-{% block content %}
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-header">
-                Help Page
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">What is a task manager?</h5>
-                <p class="card-text">A software that helps users manage tasks.</p>
-            </div>
-        </div>
-        <div class="card mt-3">
-            <div class="card-header">
-                How to use this task manager?
-            </div>
-            <div class="card-body">
-                <p class="card-text">You can create, edit, and delete tasks. Tasks can be organized into projects.</p>
-            </div>
-        </div>
-    </div>
+{% block header %}
+    <h2>Help Page</h2>
+{% endblock %}
+
+{% block page_content %}
+    <h5 class="card-title">What is a task manager?</h5>
+    <p class="card-text">A software that helps users manage tasks.</p>
+    <h5>How to use this task manager?</h5>
+    <p>You can create, edit, and delete tasks. Tasks can be organized into projects.</p>
+{% endblock %}
+
+{% block footer_content %}
+    {% include "taskmanager/_footer.html" %} 
 {% endblock %}
