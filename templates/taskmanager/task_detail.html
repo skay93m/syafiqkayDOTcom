@@ -1,0 +1,16 @@
+{% extends "taskmanager/base.html" %}
+
+{% block header %}
+    <h1>{{ task.title }}</h1>
+{% endblock %}
+
+{% block page_content %}
+    <p>Description: {{ task.description }}</p>
+    <p>Status: {{ task.status }}</p>
+{% endblock %}
+
+{% block footer_content %}
+    <a href="{% url 'taskmanager:task-update' task.id %}" class="btn btn-primary">Edit Task</a>
+    <a href="{% url 'taskmanager:task-delete' task.id %}" class="btn btn-danger">Delete Task</a>
+    <a href="{% url 'taskmanager:task-list' %}" class="btn btn-secondary">Back to Task List</a>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "taskmanager/base.html" %}
+
+{% block header %}
+    <h1>Delete Task Confirmation</h1>
+{% endblock %}
+
+{% block page_content %}
+<section class="alert alert-warning text-center">
+    <p>Are you sure you want to delete the task "{{ task.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+    </form>
+    <a href="{% url 'taskmanager:task-detail' task.id %}">No, take me back</a>
+</section>
+{% endblock %}
+
+{% block footer_content %}
+    {% include "taskmanager/_footer.html" %} 
+{% endblock %}
