@@ -16,7 +16,10 @@ class Epic(models.Model):
     )
     class Meta:
         db_table_comment = "holds Epic information"
-class Task(models.Model):
+
+class VersionMixing:
+    version = models.IntegerField(default=0)
+class Task(VersionMixing, models.Model):
     # Task model for task management.
     STATUS_CHOICES = [
         ("UNASSIGNED", "Unassigned"),

@@ -20,6 +20,7 @@ distlib==0.3.9
 dj-database-url==3.0.1
 Django==5.0.14
 django-storages==1.14.6
+djangorestframework==3.16.0
 dulwich==0.22.8
 factory_boy==3.3.3
 Faker==37.4.0
