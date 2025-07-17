@@ -14,11 +14,11 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name="taskmanager/taskmanager.html"), name='home'),
     path('help/', TemplateView.as_view(template_name="taskmanager/help.html"), name='help'),
     path('tasks/', TaskListView.as_view(), name='task-list'), # GET
-    path('tasks/new/', TaskCreateView.as_view(), name='task-create'), # POST
+    path('tasks/new/', TaskCreateView.as_view(), name='task-create'), # GET, POST
     path('tasks/<int:pk>/', TaskDetailView.as_view(), name='task-detail'), # GET
     path(
-        'tasks/<int:pk>/edit/', TaskUpdateView.as_view(), name='task-update'), # PUT/PATCH
+        'tasks/<int:pk>/edit/', TaskUpdateView.as_view(), name='task-update'), # GET/POST
     path(
-        'tasks/<int:pk>/delete/', TaskDeleteView.as_view(), name='task-delete'),
+        'tasks/<int:pk>/delete/', TaskDeleteView.as_view(), name='task-delete'), # POST
     path('tasks/sprint/add_task/<int:pk>/', create_task_on_sprint, name='task-add-to-sprint'),
 ]

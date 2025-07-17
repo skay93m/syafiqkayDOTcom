@@ -8,8 +8,12 @@ class SprintTaskMixin:
     """
 
     def dispatch(self, request, *args, **kwargs):
-        task = self.get_object() if hasattr(self, "get_object") else None # Assuming get_object() retrieves the task instance
         sprint_id = request.POST.get("sprint") # Assuming sprint ID is sent in POST data
+        
+        # Only try to get the object if this is an UpdateView (where we have a pk)
+        task = None
+        if 'pk' in kwargs and hasattr(self, "get_object"):
+            task = self.get_object()
         
         if sprint_id:
             # If a task exists (for UpdateView) or is about to be created (for CreateView)

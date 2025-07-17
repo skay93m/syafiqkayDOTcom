@@ -1,20 +1,18 @@
 {% extends "taskmanager/base.html" %}
-
+{% load i18n %}
 {% block header %}
-    <h1>Delete Task Confirmation</h1>
+    <h1>{% trans "Are you sure you want to delete the task" %} "{{ task.title }}"?</h1>
 {% endblock %}
 
 {% block page_content %}
-<section class="alert alert-warning text-center">
-    <p>Are you sure you want to delete the task "{{ task.title }}"?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Confirm Delete</button>
-    </form>
-    <a href="{% url 'taskmanager:task-detail' task.id %}">No, take me back</a>
-</section>
+<p>{% trans "This action cannot be undone." %}</p>
+<p>{% trans "Please confirm your action." %}</p>
 {% endblock %}
 
 {% block footer_content %}
-    {% include "taskmanager/_footer.html" %} 
+    <form method="post" action="{% url 'taskmanager:task-delete' task.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">{% trans "Confirm Delete" %}</button>
+    </form>
+    <a href="{% url 'taskmanager:task-detail' task.id %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
 {% endblock %}

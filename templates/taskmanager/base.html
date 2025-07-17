@@ -1,23 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}
-    Task manager
+{% block title %}SK | Task Manager{% endblock %}
+
+{% block extra_css %}
 {% endblock %}
 
 {% block content %}
-<section class="card mt-5 mb-5">
+
+{% include "taskmanager/_header.html" %}
+<section class="card text-center mb-4 mt-4">
     <div class="card-header">
-        {% include "taskmanager/_header.html" %}
-    </div>
-    <div class="card-body mt-4">
         {% block header %}
         {% endblock %}
-        {% block page_content %}
-        {% endblock %}
     </div>
-    <div class="card-footer mt-4">
-        <div class="center">{% block footer_content %}{% endblock %}</div>
+    <div class="card-body">
+        <div class="container">
+            {% block page_content %}
+            {% endblock %}
+        </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_scripts %}
 {% endblock %}
