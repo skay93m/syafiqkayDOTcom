@@ -1,73 +1,77 @@
 # taskmanager/views.py
-from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 from .models import Task
 from .mixins import SprintTaskMixin
-from django.http import Http404, HttpRequest, HttpResponseRedirect, HttpResponse, JsonResponse, HttpResponseServerError
-from .services import create_task_and_add_to_sprint, claim_task
-from rest_framework import status
 
+# Task Views
 class TaskListView(ListView):
     model = Task
     template_name = 'taskmanager/task_list.html'
     context_object_name = 'tasks'
-
 class TaskDetailView(DetailView):
     model = Task
     template_name = 'taskmanager/task_detail.html'
     context_object_name = 'task'
-
 class TaskCreateView(SprintTaskMixin, CreateView):
     model = Task
-    template_name = 'taskmanager/task_form.html'
-    fields = ['title', 'description', 'status', 'due_date', 'owner', 'epic',]
+    fields = ['title', 'description', 'status', 'due_date', 'owner', 'epic']
     
     def get_success_url(self):
         return reverse_lazy('taskmanager:task-detail', kwargs={'pk': self.object.id})
-
 class TaskUpdateView(SprintTaskMixin, UpdateView):
     model = Task
     template_name = 'taskmanager/task_form.html'
-    fields = ['title', 'description', 'status', 'due_date', 'owner', 'epic']
+    fields = ['title', 'description', 'status', 'due_date', 'owner', 'epic',]
 
     def get_success_url(self):
         return reverse_lazy('taskmanager:task-detail', kwargs={'pk': self.object.id})
-
 class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'taskmanager/task_confirm_delete.html'
-    success_url = reverse_lazy('taskmanager:task-list')
 
-def create_task_on_sprint(request: HttpRequest, sprint_id: int) -> HttpResponseRedirect:
-    if request.method == 'POST':
-        task_data: dict[str, str] = {
-            'title': request.POST.get('title', ''),
-            'description': request.POST.get('description', ''),
-            'status': request.POST.get('status', 'UNASSIGNED'),
-        }
-        task = create_task_and_add_to_sprint(task_data, sprint_id, request.user)
-        return redirect('taskmanager:task-detail', pk=task.id)
-    raise Http404("Not found")
+    def get_success_url(self):
+        return reverse_lazy('taskmanager:task-list')
 
-def claim_task_view(request, task_id):
-    user_id = request.user.id
-    try:
-        claim_task(user_id, task_id)
-        return JsonResponse({'message': 'Task claimed successfully'})
-    except Task.DoesNotExist:
-        return HttpResponse("Task does not exist", status=status.HTTP_404_NOT_FOUND)
-    except TaskAlreadyClaimedException:
-        return HttpResponse("Task already claimed or completed", status=status.HTTP_400_BAD_REQUEST)
+# Sprint Views
+class SprintCreateView(CreateView):
+    model = Sprint
+    fields = ['name', 'description', 'start_date', 'end_date', 'created_by']
 
-def custom_404(request, exception):
-    return render(request, '404.html', {}, status=404)
+    def get_success_url(self):
+        return reverse_lazy('taskmanager:sprint-detail', kwargs={'pk': self.object.id})
+class SprintUpdateView(UpdateView):
+    model = Sprint
+    fields = ['name', 'description', 'start_date', 'end_date', 'created_by']
 
-def custom_500(request):
-    return HttpResponseServerError(render(request, '500.html', {}))
+    def get_success_url(self):
+        return reverse_lazy('taskmanager:sprint-detail', kwargs={'pk': self.object.id})
 
-def trigger_error(request):
-    # Deliberately raise an exception to trigger 500 error
-    division_by_zero = 1 / 0
-    return HttpResponse("This won't be reached")
+class SprintDeleteView(DeleteView):
+    model = Sprint
+
+    def get_success_url(self):
+        return reverse_lazy('taskmanager:sprint-list')
+
+# Epic Views
+class EpicCreateView(CreateView):
+    model = Epic
+    fields = ['name', 'description', 'created_by']
+
+    def get_success_url(self):
+        return reverse_lazy('taskmanager:epic-detail', kwargs={'pk': self.object.id})
+
+class EpicUpdateView(UpdateView):
+    model = Epic
+    fields = ['name', 'description', 'created_by']
+
+    def get_success_url(self):
+        return reverse_lazy('taskmanager:epic-detail', kwargs={'pk': self.object.id})
+
+class EpicDeleteView(DeleteView):
+    model = Epic
+
+    def get_success_url(self):
+        return reverse_lazy('taskmanager:epic-list')

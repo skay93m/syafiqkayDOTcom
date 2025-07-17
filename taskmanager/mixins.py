@@ -1,6 +1,6 @@
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
-from .services import can_add_task_to_sprint
+from .services.services import can_add_task_to_sprint
 
 class SprintTaskMixin:
     """

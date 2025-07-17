@@ -1,13 +1,43 @@
-# taskmanager/services.py
-from django.shortcuts import get_object_or_404
-from .models import Sprint, Task, User
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
+# taskmanager/services/task_services.py
+
+# Standard library imports
 from datetime import datetime
+from typing import Dict
+
+# Django imports
 from django.contrib.auth.models import User
-from django.db import models, transaction
 from django.core.exceptions import ValidationError
+from django.db import models, transaction
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse, Http404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+
+# Third-party imports
+from rest_framework import status
+
+# Local imports
+from ...taskmanager.models import Sprint, Task
+
+def claim_task_view(request, task_id):
+    user_id = request.user.id
+    try:
+        claim_task(user_id, task_id)
+        return JsonResponse({'message': 'Task claimed successfully'})
+    except Task.DoesNotExist:
+        return HttpResponse("Task does not exist", status=status.HTTP_404_NOT_FOUND)
+    except TaskAlreadyClaimedException:
+        return HttpResponse("Task already claimed or completed", status=status.HTTP_400_BAD_REQUEST)
+
+def create_task_on_sprint(request: HttpRequest, sprint_id: int) -> HttpResponseRedirect:
+    if request.method == 'POST':
+        task_data: Dict[str, str] = {
+            'title': request.POST.get('title', ''),
+            'description': request.POST.get('description', ''),
+            'status': request.POST.get('status', 'UNASSIGNED'),
+        }
+        task = create_task_and_add_to_sprint(task_data, sprint_id, request.user)
+        return redirect('taskmanager:task-detail', pk=task.id)
+    raise Http404("Not found")
 
 def can_add_task_to_sprint(task, sprint_id):
     """
@@ -15,28 +45,9 @@ def can_add_task_to_sprint(task, sprint_id):
     """
     sprint = get_object_or_404(Sprint, id=sprint_id)
     return sprint.start_date <= task.created_at.date() <= sprint.end_date
-
-def check_task(request: HttpRequest) -> HttpResponse:
-    if request.method == 'POST':
-        # Extract the 'task_id' parameter from the POST data
-        task_id = request.POST.get('task_id')
-        if services.check_task(task_id):
-            return HttpResponseRedirect(reverse("success"))
-        if task_id:
-            return HttpResponseRedirect(reverse("success"))
-        else:
-            # If no ID was provided, re-render the form with an error message
-            return render(
-                request, 
-                'taskmanager/add_task_to_sprint.html', 
-                {'error': 'Task ID is required.'}
-            )
-    else:
-        # If the request method is not POST, render the form
-        return render(request, 'taskmanager/check_task.html')
     
 def create_task_and_add_to_sprint(
-    task_data: dict[str, str],
+    task_data: Dict[str, str],
     sprint_id: int,
     creator: User
 ) -> Task:
@@ -57,7 +68,7 @@ def create_task_and_add_to_sprint(
         # Create the task with the provided data
         task = Task.objects.create(
             title=task_data['title'],
-            description=task_dataget('description', ''),
+            description=task_data.get('description', ''),
             status=task_data.get('status', 'UNASSIGNED'),
             creator=creator,
         )
@@ -73,7 +84,7 @@ def claim_task(user_id: int, task_id: int) -> None:
     # Lock the task row to prevent other transactions from claiming it simultaneously
     task = Task.objects.select_for_update().get(id=task_id)
     # Check if the task is already claimed or completed
-    if task.owner_id:
+    if task.owner_id or task.status == "COMPLETED":
         raise TaskAlreadyClaimedException("Task is already claimed or completed.")
     # Claim the task
     task.status = "IN_PROGRESS"
