@@ -1,0 +1,12 @@
+Switched to a new branch 'release/getting-deployment-ready'
+
+Summary of actions:
+- A new branch 'release/getting-deployment-ready' was created, based on 'develop'
+- You are now on branch 'release/getting-deployment-ready'
+
+Follow-up actions:
+- Bump the version number now!
+- Start committing last-minute fixes in preparing your release
+- When done, run:
+
+     git flow release finish 'getting-deployment-ready'
