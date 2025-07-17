@@ -8,7 +8,8 @@ from .views import (
     TaskDeleteView,
     create_task_on_sprint,
     custom_404,
-    custom_500
+    custom_500,
+    trigger_error
 )
 
 app_name = 'taskmanager'
@@ -23,6 +24,7 @@ urlpatterns = [
     path(
         'tasks/<int:pk>/delete/', TaskDeleteView.as_view(), name='task-delete'), # POST
     path('tasks/sprint/add_task/<int:pk>/', create_task_on_sprint, name='task-add-to-sprint'),
+    # path('trigger-error/', trigger_error, name='trigger-error'),
 ]
 
 handler404 = 'taskmanager.views.custom_404'
