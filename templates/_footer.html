@@ -1,73 +1,79 @@
 {% load static %}
-<section class="text-light bg-dark">
-    <div class="container py-5">
-        <div class="row gy-5">
-            <div class="col-sm-6 col-lg-4 mw-lg-2">
-                <div class="lc-block mb-4 ">
-                    <a class="navbar-brand" href="#">
-                        Syafiq Kay, MPharm, MRPharmS, GDL, CMHP
-                    </a>
+{% load i18n %}
+<footer class="text-center text-white bg-secondary">
+    <!-- Grid container -->
+    <div class="container">
+        <!-- Section: Links -->
+        <section class="mt-5">
+            <!-- Grid row-->
+            <div class="row text-center d-flex justify-content-center pt-5">
+                <!-- Grid column -->
+                <div class="col-md-2">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a href="#!" class="text-white disabled">Coming Soon</a>
+                    </h6>
                 </div>
-                <div class="lc-block text">
-                    <p class="mb-1">&copy; {% now "Y" %} Syafiq Kay</p>
-                    <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener" class="text-decoration-none text-white-50 hover-link"><i class="fas fa-gavel me-1"></i> MIT License</a>
+                <!-- Grid column -->
+                <div class="col-md-2">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a href="#!" class="text-white disabled">Coming Soon</a>
+                    </h6>
                 </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 ms-lg-auto">
-                <!-- First Column: Primary Menu -->
-                <div class="lc-block">
-                    <h4 class="fs-6 fw-bold">Connect</h4>
-                    <ul class="nav d-flex gap-2">
-                        <!-- Loop to display the Primary Menu -->
-                        <li class="nav-item"><a href="https://www.linkedin.com/in/syafiqkay/" class="btn btn-outline-light" target="_blank" rel="noopener"><i class="fab fa-linkedin me-1"></i> LinkedIn</a></li>
-                        <li class="nav-item"><a href="https://github.com/skay93m" class="btn btn-outline-light" target="_blank" rel="noopener"><i class="fab fa-github me-1"></i> GitHub</a></li>
-                    </ul>
+                <!-- Grid column -->
+                <div class="col-md-2">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a href="#!" class="text-white disabled">Coming Soon</a>
+                    </h6>
                 </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <!-- Secondary Menu -->
-                <div class="lc-block">
-                    <h4 class="fs-6 fw-bold">Quick Links</h4>
-                    <ul class="nav flex-column">
-                        <!-- Loop to display the Primary Menu -->
-                        <li class="nav-item">
-                            <a class="nav-link link-light ps-0" href="#">
-                                coming soon
-                            </a>
-                            <a class="nav-link link-light ps-0" href="#">
-                                coming soon
-                            </a>
-                            <a class="nav-link link-light ps-0" href="#">
-                                coming soon
-                            </a>
-                        </li>
-                    </ul>
+                <!-- Grid column -->
+                <div class="col-md-2">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a href="#!" class="text-white disabled">Coming Soon</a>
+                    </h6>
+                </div>
+                <!-- Grid column -->
+                <div class="col-md-2">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a href="{% url 'admin:index' %}" class="text-white "><i class="fa-solid fa-gear"></i> Admin</a>
+                    </h6>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-2">
-                <!-- Secondary Menu -->
-                <div class="lc-block">
-                    <h4 class="fs-6 fw-bold">Resources</h4>
-                    <ul class="nav flex-column">
-                        <!-- Loop to display the Primary Menu -->
-                        <li class="nav-item">
-                            <a class="nav-link link-light ps-0" href="#">
-                                coming soon
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link link-light ps-0" href="#">
-                                coming soon
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link link-light ps-0" href="#">
-                                coming soon
-                            </a>
-                        </li>
-                    </ul>
+            <!-- Grid row-->
+        </section>
+        <!-- Section: Links -->
+        <hr class="my-5" />
+        <!-- Section: Text -->
+        <section class="mb-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <h6 class="text-uppercase font-weight-bold mb-4">Disclaimer</h6>
+                    <p>
+                        The information presented here is intended solely for personal reference and general interest. 
+                        It does not constitute clinical, legal, or professional advice, and should not be relied upon in such contexts. 
+                        No guarantees or warranties, express or implied, are provided regarding the accuracy or completeness of the content.
+                    </p>
                 </div>
             </div>
-        </div>
+        </section>
+        <!-- Section: Text -->
+        <!-- Section: Social -->
+        <section class="text-center mb-5" style="gap: 2rem; display: flex; justify-content: center;">
+            <a href="https://www.linkedin.com/in/syafiqkay/" target="_blank" rel="noopener" class="text-white me-4">
+                <i class="fab fa-linkedin fa-3x"></i>
+            </a>
+            <a href="https://github.com/skay93m" target="_blank" rel="noopener" class="text-white me-4">
+                <i class="fab fa-github fa-3x"></i>
+            </a>
+        </section>
+        <!-- Section: Social -->
     </div>
-</section>
+    <!-- Grid container -->
+    <!-- Copyright -->
+    <div class="text-center p-3">
+        <p>Made with Django, <i class="fa-brands fa-python"></i> Python, <i class="fa-brands fa-bootstrap"></i> Bootstrap, <i class="fa-brands fa-font-awesome"></i> Font Awesome, and <i class="fa-brands fa-docker"></i> Docker. More to come ...</p>
+        <p>
+            <i class="fa-solid fa-copyright"></i> {% now "Y" %} Syafiq Kay{% comment %}, MPharm, MRPharmS, GDL, CMHP{% endcomment %} |
+            <a class="text-white text-decoration-none" href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a>
+        </p>
+    </div>
+</footer>

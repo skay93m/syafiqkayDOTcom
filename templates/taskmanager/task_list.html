@@ -7,18 +7,14 @@
 
 {% block page_content %}
 <section class="container">
-    <ul class="list-group">
-    {% for task in tasks %}
-        <li>
-            <a href="{% url 'taskmanager:task-detail' task.id %}">{{ task.title }}</a>: {{ task.status }}
-        </li>
-    {% empty %}
-        <li>No tasks available.</li>
-    {% endfor %}
-        </ul>
+    <div class="list-group">
+        {% for task in tasks %}
+            <a href="{% url 'taskmanager:task-detail' task.id %}" class="list-group-item list-group-item-action{% if task.status == 'active' %} active{% endif %}">
+                {{ task.title }}: {{ task.status }}
+            </a>
+        {% empty %}
+            <div class="list-group-item">No tasks available.</div>
+        {% endfor %}
+    </div>
 </section>
-{% endblock %}
-
-{% block footer_content %}
-    {% include "taskmanager/_footer.html" %} 
 {% endblock %}

@@ -1,11 +1,13 @@
-{% extends "base.html" %}
-
-{% block title %}
-    Home - SK
+{% extends "homepage/base.html" %}
+{% block header %}
+    <h1 class="display-4 text-center">Syafiq Kay, MPharm, MRPharmS, GDL, CMHP</h1>
 {% endblock %}
-
+{% block title %}SK | Homepage{% endblock %}
 {% block content %}
-    {% include "homepage/_banner.html" %}
-    {% include "homepage/_rirekisho.html" %}
-    {% include "_coming_soon.html" %}
+    <div class="container">
+        <!-- Rirekisho Section -->
+        {% include "homepage/_rirekisho.html" %}
+        <!-- cv Section -->
+        {% include "homepage/_cv.html" %}
+    </div>
 {% endblock %}

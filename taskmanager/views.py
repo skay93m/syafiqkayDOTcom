@@ -25,7 +25,7 @@ class TaskCreateView(SprintTaskMixin, CreateView):
     fields = ['title', 'description', 'status', 'due_date', 'owner', 'epic',]
     
     def get_success_url(self):
-        return reverse_lazy('task-detail', kwargs={'pk': self.object.id})
+        return reverse_lazy('taskmanager:task-detail', kwargs={'pk': self.object.id})
 
 class TaskUpdateView(SprintTaskMixin, UpdateView):
     model = Task
@@ -33,12 +33,12 @@ class TaskUpdateView(SprintTaskMixin, UpdateView):
     fields = ['title', 'description', 'status', 'due_date', 'owner', 'epic']
 
     def get_success_url(self):
-        return reverse_lazy('task-detail', kwargs={'pk': self.object.id})
+        return reverse_lazy('taskmanager:task-detail', kwargs={'pk': self.object.id})
 
 class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'taskmanager/task_confirm_delete.html'
-    success_url = reverse_lazy('task-list')
+    success_url = reverse_lazy('taskmanager:task-list')
 
 def create_task_on_sprint(request: HttpRequest, sprint_id: int) -> HttpResponseRedirect:
     if request.method == 'POST':
@@ -48,7 +48,7 @@ def create_task_on_sprint(request: HttpRequest, sprint_id: int) -> HttpResponseR
             'status': request.POST.get('status', 'UNASSIGNED'),
         }
         task = create_task_and_add_to_sprint(task_data, sprint_id, request.user)
-        return redirect('task-detail', task_id=task.id)
+        return redirect('taskmanager:task-detail', pk=task.id)
     raise Http404("Not found")
 
 def claim_task_view(request, task_id):
