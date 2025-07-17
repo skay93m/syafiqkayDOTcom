@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Task
 from .mixins import SprintTaskMixin
-from django.http import Http404, HttpRequest, HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import Http404, HttpRequest, HttpResponseRedirect, HttpResponse, JsonResponse, Http500
 from .services import create_task_and_add_to_sprint, claim_task
 from rest_framework import status
 
@@ -60,3 +60,9 @@ def claim_task_view(request, task_id):
         return HttpResponse("Task does not exist", status=status.HTTP_404_NOT_FOUND)
     except TaskAlreadyClaimedException:
         return HttpResponse("Task already claimed or completed", status=status.HTTP_400_BAD_REQUEST)
+
+def custom_404(request, exception):
+    return render(request, '404.html', {}, status=404)
+
+def custom_500(request, exception):
+    return render(request, '500.html', {}, status=500)
