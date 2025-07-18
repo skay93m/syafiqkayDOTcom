@@ -20,8 +20,6 @@ from .views import (
     custom_404,
     custom_500,
 )
-)
-
 
 app_name = 'taskmanager'
 urlpatterns = [
@@ -62,6 +60,6 @@ urlpatterns = [
     # Uncomment the next line to enable the error trigger endpoint
     # from .views import trigger_error
     # path('trigger-error/', trigger_error, name='trigger-error'),
-
+]
 handler404 = 'taskmanager.views.custom_404'
 handler500 = 'taskmanager.views.custom_500'
