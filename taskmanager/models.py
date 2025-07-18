@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-import datetime
 
 class Epic(models.Model):
     '''
@@ -38,7 +37,7 @@ class VersionMixing(object):
     class Meta:
         abstract = True
 
-class Task(VersionMixin, models.Model):
+class Task(VersionMixing, models.Model):
     '''
     Task model for task management.
     A Task is a single unit of work that needs to be completed.

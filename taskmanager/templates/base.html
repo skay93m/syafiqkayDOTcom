@@ -1,0 +1,27 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}SK | Task Manager{% endblock %}
+
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+
+{% include "taskmanager/_header.html" %}
+<section class="card text-center mb-4 mt-4">
+    <div class="card-header">
+        {% block header %}
+        {% endblock %}
+    </div>
+    <div class="card-body">
+        <div class="container">
+            {% block page_content %}
+            {% endblock %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}
