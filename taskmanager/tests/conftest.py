@@ -68,15 +68,6 @@ def anonymous_client(client):
     return client
 
 # Model fixtures
-'''
-sample_task
-sample_sprint
-sample_epic
-task_with_sprint
-task_with_epic
-sprint_with_tasks
-epic_with_tasks
-'''
 
 # Relationship fixtures
 
