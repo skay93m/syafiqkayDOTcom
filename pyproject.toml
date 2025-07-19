@@ -1,6 +1,6 @@
 [project]
 name = "syafiqkaydotcom"
-version = "0.1.0"
+version = "0.2.0"
 description = "source code for my website"
 authors = [
     {name = "Syafiq Kay",email = "syafiq@syafiqkay.com"}
