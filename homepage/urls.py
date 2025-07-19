@@ -8,6 +8,7 @@ app_name = "homepage"
 urlpatterns = [
     # homepage
     path('', ViewHomepage.as_view(), name='homepage'),
+    path('home/', ViewHomepage.as_view(), name='home'),
     # cv
     path('cv/', ViewCV.as_view(), name='cv')
     # path ('cv/employment/', ViewEmployment.as_view(), name='employment-list')

@@ -3,10 +3,10 @@
     <div>
         <a href="{% url 'taskmanager:task-create' %}" class="btn btn-primary">Create</a>
         <a href="{% url 'taskmanager:task-list' %}" class="btn btn-primary">Task List</a>
-        <a href="{% url 'taskmanager:help' %}" class="btn btn-primary">Help</a>
+        <a href="{% url 'taskmanager:task-manager-help-page' %}" class="btn btn-primary">Help</a>
     </div>
     <!-- Right side -->
-    <div class="d-flex">
+    <div class="d-flex disabled">
         <input type="text" class="form-control" id="search" placeholder="Search">
         <button type="button" class="btn btn-success ms-2">Search</button>
     </div>

@@ -1,43 +1,12 @@
+# taskmanager/models.py
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from .services.models_services import VersionMixing
 
-class Epic(models.Model):
-    '''
-    Epic model for task management.
-    An Epic is a large body of work that can be broken down into smaller tasks.
-    It is used to group related tasks together.
-    '''
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    creator = models.ForeignKey(
-        User, 
-        null=True,
-        related_name='created_epics', 
-        on_delete=models.CASCADE
-    )
-    
-    def __str__(self):
-        return self.name
-    
-    class Meta:
-        db_table_comment = "holds Epic information"
 
-class VersionMixing(object):
-    """
-    VersionMixing model for versioning.
-    """
-    version = models.IntegerField(default=0)
-
-    def __str__(self):
-        return f"Version {self.version}"
-    
-    class Meta:
-        abstract = True
-
-class Task(VersionMixing, models.Model):
+# task
+class Task(models.Model):
     '''
     Task model for task management.
     A Task is a single unit of work that needs to be completed.
@@ -78,9 +47,12 @@ class Task(VersionMixing, models.Model):
         db_comment="Foreign Key to the User who currently owns the task.",
     )
     epic = models.ForeignKey(
-        Epic,
+        'Epic',
+        related_name="tasks",
+        on_delete=models.CASCADE,
         null=True,
-        on_delete=models.SET_NULL
+        blank=True,
+        db_comment="Foreign Key to the Epic this task belongs to."
     )
     
     def __str__(self):
@@ -107,6 +79,7 @@ class Task(VersionMixing, models.Model):
             ),
         ]
     
+# sprint
 class Sprint(models.Model):
     '''
     Sprint model for task management.
@@ -141,3 +114,27 @@ class Sprint(models.Model):
                 name='end_date_after_start_date'
             ),
         ]
+
+# epic
+class Epic(models.Model):
+    '''
+    Epic model for task management.
+    An Epic is a large body of work that can be broken down into smaller tasks.
+    It is used to group related tasks together.
+    '''
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    creator = models.ForeignKey(
+        User, 
+        null=True,
+        related_name='created_epics', 
+        on_delete=models.CASCADE
+    )
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        db_table_comment = "holds Epic information"

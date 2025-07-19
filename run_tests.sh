@@ -62,13 +62,15 @@ export COVERAGE_FILE=.tests_output/.coverage
 # 🧪 Step 4: Run tests with clean output formatting
 echo "🚀 Running tests..."
 pytest \
-    --quiet \
-    --tb=no \
+    --tb=short \
     --color=yes \
     --disable-warnings \
     --strict-markers \
     --maxfail=3 \
-    --cache-clear
+    --cache-clear \
+    --verbose \
+    -p no:warnings \
+    --junitxml=.tests_output/results.xml "$@" 2>&1 
 
 # ✅ Final summary
 echo ""
