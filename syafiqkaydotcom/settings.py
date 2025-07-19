@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'homepage',
     'taskmanager',
-    'storages',  # For Azure Blob Storage
+    'storages',  # Used for Azure Blob Storage (can support other backends)
 ]
 
 MIDDLEWARE = [
@@ -54,7 +54,11 @@ ROOT_URLCONF = 'syafiqkaydotcom.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [
+            BASE_DIR / 'templates',                      # Root-level templates
+            BASE_DIR / 'homepage' / 'templates',         # Homepage app templates
+            BASE_DIR / 'taskmanager' / 'templates',      # Taskmanager app templates
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

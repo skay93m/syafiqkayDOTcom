@@ -1,31 +1,9 @@
 from django.urls import path
-from django.views.generic import TemplateView
-from .views import (
-    TaskListView,
-    TaskDetailView,
-    TaskCreateView,
-    TaskUpdateView,
-    TaskDeleteView,
-    create_task_on_sprint,
-    custom_404,
-    custom_500,
-    trigger_error
-)
+from .views.views import HomePageView, HelpPageView
 
 app_name = 'taskmanager'
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="taskmanager/taskmanager.html"), name='home'),
-    path('help/', TemplateView.as_view(template_name="taskmanager/help.html"), name='help'),
-    path('tasks/', TaskListView.as_view(), name='task-list'), # GET
-    path('tasks/new/', TaskCreateView.as_view(), name='task-create'), # GET, POST
-    path('tasks/<int:pk>/', TaskDetailView.as_view(), name='task-detail'), # GET
-    path(
-        'tasks/<int:pk>/edit/', TaskUpdateView.as_view(), name='task-update'), # GET/POST
-    path(
-        'tasks/<int:pk>/delete/', TaskDeleteView.as_view(), name='task-delete'), # POST
-    path('tasks/sprint/add_task/<int:pk>/', create_task_on_sprint, name='task-add-to-sprint'),
-    # path('trigger-error/', trigger_error, name='trigger-error'),
+    # Home and Help Pages
+    path('', HomePageView.as_view(), name='home'),
+    path('help/', HelpPageView.as_view(), name='help'),
 ]
-
-handler404 = 'taskmanager.views.custom_404'
-handler500 = 'taskmanager.views.custom_500'

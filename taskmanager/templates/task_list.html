@@ -1,0 +1,20 @@
+{% extends "templates/base.html" %}
+
+{% block header %}
+    <h2>Task List</h2>
+{% endblock %}
+
+
+{% block page_content %}
+<section class="container">
+    <div class="list-group">
+        {% for task in tasks %}
+            <a href="{% url 'taskmanager:task-detail' task.id %}" class="list-group-item list-group-item-action{% if task.status == 'active' %} active{% endif %}">
+                {{ task.title }}: {{ task.status }}
+            </a>
+        {% empty %}
+            <div class="list-group-item">No tasks available.</div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
