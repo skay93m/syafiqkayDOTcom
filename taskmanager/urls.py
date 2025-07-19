@@ -6,6 +6,8 @@ from .views import (
     ViewTaskList,
     ViewTaskCreate,
     ViewTaskDetail,
+    ViewTaskDelete,
+    ViewTaskUpdate
 )
 
 app_name = 'taskmanager'
@@ -16,7 +18,9 @@ urlpatterns = [
     # Tasks pages
     path('task/list/', ViewTaskList.as_view(), name='task-list'),
     path('task/new/', ViewTaskCreate.as_view(), name='task-create'),
-    path('task/detail/<int:pk>/', ViewTaskDetail.as_view(), name='task-detail'),
+    path('task/<int:pk>/', ViewTaskDetail.as_view(), name='task-detail'),
+    path('task/<int:pk>/delete/', ViewTaskDelete.as_view(), name='task-delete'),
+    path('task/<int:pk>/update/', ViewTaskUpdate.as_view(), name='task-update'),
     # Sprints pages
     # Epic pages
 ]

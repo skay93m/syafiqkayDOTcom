@@ -1,7 +1,8 @@
 # taskmanager/views.py
 
-from django.views.generic import TemplateView, ListView, CreateView, DetailView
+from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView, UpdateView
 from django.utils.decorators import method_decorator
+from django.urls import reverse, reverse_lazy
 from syafiqkaydotcom.decorators import ensure_200_status
 from .models import Task, Sprint, Epic
 
@@ -28,11 +29,21 @@ class ViewTaskCreate(CreateView):
     model = Task
     template_name = 'task/task_form.html'
     fields = '__all__'
-    success_url = '/tasks/'
+    def get_success_url(self):
+        return reverse('taskmanager:task-detail', kwargs={'pk': self.object.pk})
     
 @method_decorator(ensure_200_status, name='get') 
 class ViewTaskDetail(DetailView):
     template_name = "task/task_detail.html"
     model = Task
     context_object_name = 'task'
+
+@method_decorator(ensure_200_status, name='get') 
+class ViewTaskDelete(DeleteView):
+    template_name = "task/task_confirm_delete.html"
+    model = Task
+    success_url = reverse_lazy('taskmanager:task-list')
     
+@method_decorator(ensure_200_status, name='get')
+class ViewTaskUpdate(UpdateView):
+    pass
