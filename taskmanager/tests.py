@@ -2,7 +2,7 @@
 
 import pytest
 from django.urls import reverse, resolve
-from syafiqkaydotcom.tests.utils import get_named_class_based_endpoints
+from syafiqkaydotcom.utils import get_named_class_based_endpoints
 
 class TestTaskmanagerEndpoints:
     ENDPOINTS = get_named_class_based_endpoints('taskmanager')

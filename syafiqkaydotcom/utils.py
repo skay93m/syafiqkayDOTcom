@@ -1,4 +1,4 @@
-# syafiqkaydotcom/tests/utils.py
+# syafiqkaydotcom/utils.py
 
 from django.urls import get_resolver
 from django.views.generic import View

@@ -134,33 +134,40 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# --- Static Files Configuration (CSS, JS, Images) ---
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
+# NOTE: Requires django-storages with Azure support:
+# pip install 'django-storages[azure]'
 
-# --- static files configuration for Azure Blob Storage ---
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 AZURE_ACCOUNT_NAME = os.environ.get("AZURE_ACCOUNT_NAME")
 AZURE_ACCOUNT_KEY = os.environ.get("AZURE_ACCOUNT_KEY")
 AZURE_CONTAINER = os.environ.get("AZURE_CONTAINER", "static")
-STATIC_LOCATION = AZURE_CONTAINER
-STATIC_URL = f"https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{STATIC_LOCATION}/"
-# NOTE: To use AzureStorage, you must install django-storages with Azure support:
-# pip install 'django-storages[azure]'
-STATICFILES_STORAGE = "storages.backends.azure_storage.AzureStorage"
 AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
 AZURE_SSL = True
-STATICFILES_DIRS = [BASE_DIR / 'static']
-if not AZURE_ACCOUNT_NAME:
-    if DEBUG:
-        STATIC_URL = '/static/'
-        STATICFILES_DIRS = [BASE_DIR / 'static']
-        STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-    else:
-        STATIC_URL = f"https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{STATIC_LOCATION}/"
-        STATICFILES_STORAGE = "storages.backends.azure_storage.AzureStorage"
-        AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
-        AZURE_SSL = True
-        # STATICFILES_DIRS is not needed for Azure Blob Storage
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATIC_LOCATION = AZURE_CONTAINER
+STATIC_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
+
+# -- Modular Storage Backends (Django 5.1+)
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": (
+            "storages.backends.azure_storage.AzureStorage"
+            if AZURE_ACCOUNT_NAME
+            else "django.contrib.staticfiles.storage.StaticFilesStorage"
+        ),
+    },
+}
+
+# -- Local Development Overrides
+if not AZURE_ACCOUNT_NAME and DEBUG:
+    STATIC_URL = "/static/"
+    STATICFILES_DIRS = [BASE_DIR / "static"]
+else:
+    # For Azure Blob Storage, local staticfiles dirs aren't used
+    STATICFILES_DIRS = []
