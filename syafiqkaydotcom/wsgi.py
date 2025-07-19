@@ -1,3 +1,5 @@
+# syafiqkaydotcom/wsgi.py
+
 """
 WSGI config for syafiqkaydotcom project.
 

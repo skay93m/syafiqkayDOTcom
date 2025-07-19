@@ -1,13 +1,18 @@
-{% extends "homepage/base.html" %}
+<!-- homepage.html -->
+
+{% extends "homepage_base.html" %}
+
 {% block header %}
     <h1 class="display-4 text-center">Syafiq Kay, MPharm, MRPharmS, GDL, CMHP</h1>
 {% endblock %}
+
 {% block title %}SK | Homepage{% endblock %}
+
 {% block content %}
     <div class="container">
         <!-- Rirekisho Section -->
         {% include "homepage/_rirekisho.html" %}
         <!-- cv Section -->
-        {% include "homepage/_cv.html" %}
+        <p> Check out my cv <a href={% url "homepage:cv" %}>here</a>.</p>
     </div>
 {% endblock %}

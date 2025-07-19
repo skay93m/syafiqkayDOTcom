@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Task
-from .views.mixins import SprintTaskMixin
+from ..taskmanager.views.views import SprintTaskMixin
 
 # Task Views
 class TaskListView(ListView):

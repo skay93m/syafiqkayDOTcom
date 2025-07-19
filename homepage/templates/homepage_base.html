@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}SK | Homepage{% endblock %}
+
+{% block header %}
+<header class="bg-white border-bottom py-4">
+    <div class="container text-center">
+        <h1 class="display-4">Syafiq Kay, MPharm, MRPharmS, GDL, CMHP</h1>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+    {% block page_content %}
+        <!-- Homepage-specific content goes here -->
+    {% endblock %}
+</main>
+{% endblock %}
+
+{% block footer_content %}
+<footer class="text-muted py-3 border-top">
+    <div class="container text-center">
+        <small>© {{ now|date:"Y" }} Syafiq Kay. Crafted with clarity and purpose.</small>
+    </div>
+</footer>
+{% endblock %}
