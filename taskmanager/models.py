@@ -6,18 +6,12 @@ from .services.models_services import VersionMixing
 
 # task
 class Task(models.Model):
-    '''
-    Task model for task management.
-    A Task is a single unit of work that needs to be completed.
-    It can be assigned to a user and has a status.
-    '''
     STATUS_CHOICES = [
         ("UNASSIGNED", "Unassigned"),
         ("IN_PROGRESS", "In Progress"),
         ("DONE", "Completed"),
         ("ARCHIVED", "Archived"),
     ]
-    
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=False, default="")
     status = models.CharField(
@@ -80,11 +74,6 @@ class Task(models.Model):
     
 # sprint
 class Sprint(models.Model):
-    '''
-    Sprint model for task management.
-    A Sprint is a time-boxed period during which a specific set of tasks are completed.
-    It is used to manage the progress of tasks in an agile development process.
-    '''
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     start_date = models.DateField()
