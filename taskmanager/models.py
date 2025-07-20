@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from .services.models_services import VersionMixing
 
-
 # task
 class Task(models.Model):
     '''

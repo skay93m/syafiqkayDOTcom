@@ -23,7 +23,6 @@ class ViewTaskList(ListView):
     template_name = 'task/task_list.html'
     context_object_name = 'tasks'
     
-
 @method_decorator(ensure_200_status, name='get') 
 class ViewTaskCreate(CreateView):
     model = Task
@@ -37,6 +36,9 @@ class ViewTaskDetail(DetailView):
     template_name = "task/task_detail.html"
     model = Task
     context_object_name = 'task'
+    
+    def get_success_url(self):
+        return reverse_lazy('taskmanager:task-detail', kwargs={'pk': self.object.id})
 
 @method_decorator(ensure_200_status, name='get') 
 class ViewTaskDelete(DeleteView):
@@ -46,4 +48,9 @@ class ViewTaskDelete(DeleteView):
     
 @method_decorator(ensure_200_status, name='get')
 class ViewTaskUpdate(UpdateView):
-    pass
+    model = Task
+    template_name = 'task/task_form.html'
+    fields = ['title', 'description', 'status', 'due_date', 'owner', 'epic']
+    
+    def get_success_url(self):
+        return reverse_lazy('taskmanager:task-detail', kwargs={'pk': self.object.id})

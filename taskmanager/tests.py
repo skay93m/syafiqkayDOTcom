@@ -4,7 +4,7 @@ from django.urls import reverse, resolve
 from syafiqkaydotcom.utils import get_named_class_based_endpoints
 from .models import Task
 
-# some helper functions
+# helper functions
 @pytest.fixture(scope="session")
 def django_db_setup():
     return {
@@ -16,9 +16,17 @@ class TestTaskmanagerEndpoints:
     ENDPOINTS = get_named_class_based_endpoints('taskmanager')
     ENDPOINT_URL_NAMES = [name for name, _ in ENDPOINTS]
     
-    @pytest.mark.parametrize("url_name, expected_class", ENDPOINTS)
+    @pytest.mark.parametrize(
+        ("url_name", "expected_class",),
+        ENDPOINTS
+    )
     def test_view_resolves_to_correct_class(self, url_name, expected_class):
-        resolved = resolve(reverse(url_name))
+        # URLs that require parameters
+        url_kwargs = {}
+        if 'detail' in url_name or 'update' in url_name or 'delete' in url_name:
+            url_kwargs = {'pk': 1}
+        
+        resolved = resolve(reverse(url_name, kwargs=url_kwargs))
         assert resolved.func.view_class == expected_class
 
 # test models.py
@@ -37,26 +45,36 @@ class TestTaskModel:
         with pytest.raises(Task.DoesNotExist):
             Task.objects.get(id=task_id)
     
-# class TestSprintModel:
+class TestSprintModel:
+    pass
 
-# class TestEpicModel:
+class TestEpicModel:
+    pass
 
 # test views.py
-# class TestTaskView:
+class TestTaskView:
+    pass
 
-# class TestSprintView:
+class TestSprintView:
+    pass
     
-# class TestEpicView:
-    
+class TestEpicView:
+    pass    
+
 # test services.py
-# class TestTaskService:
+class TestTaskService:
+    pass
     
-# class TestSprintService:
+class TestSprintService:
+    pass
 
-# class TestEpicService:
+class TestEpicService:
+    pass
 
 # test integration
-# class TestTaskManagerIntegration:
+class TestTaskManagerIntegration:
+    pass
 
 # test function
-# class TestTaskManagerFunctional:
+class TestTaskManagerFunctional:
+    pass

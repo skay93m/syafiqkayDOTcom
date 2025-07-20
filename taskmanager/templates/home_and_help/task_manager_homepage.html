@@ -1,6 +1,8 @@
 {% extends "task_manager_base/task_manager_base.html" %}
 
-<h2>Welcome to the Task Manager application!</h2>
+{% block taskmanager_header %}
+    <h1>Welcome to the Task Manager application!</h1>
+{% endblock %}
 
 {% block page_content %}
     <p>This is the landing page for the task manager that I am building. I am following along the exercises from the following book:</p>
@@ -8,3 +10,7 @@
     <p>In this application, you can create, view, and manage tasks efficiently.</p>
     <p>Use the navigation menu to explore different features of the task manager.</p>
 {% endblock %}
+
+{% block footer_content %}
+    <p class="text-muted small">Built with Django • Python • HTML/CSS</p>
+{% endblock footer_content %}
