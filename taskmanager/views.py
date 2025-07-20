@@ -54,3 +54,27 @@ class ViewTaskUpdate(UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('taskmanager:task-detail', kwargs={'pk': self.object.id})
+    
+@method_decorator(ensure_200_status, name='get')
+class ViewSprintList(ListView):
+    model = Sprint
+    template_name = 'sprint/sprint_list.html'
+    context_object_name = 'sprints'
+
+@method_decorator(ensure_200_status, name='get')
+class ViewSprintDetail(DetailView):
+    template_name = "sprint/sprint_detail.html"
+    model = Sprint
+    context_object_name = 'sprint'
+    
+    def get_success_url(self):
+        return reverse_lazy('taskmanager:sprint-detail', kwargs={'pk': self.object.id})
+
+@method_decorator(ensure_200_status, name='get')
+class ViewSprintCreate(CreateView):
+    model = Sprint
+    template_name = 'sprint/sprint_form.html'
+    fields = '__all__'
+    
+    def get_success_url(self):
+        return reverse('taskmanager:sprint-detail', kwargs={'pk': self.object.pk})

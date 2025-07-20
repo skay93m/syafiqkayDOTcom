@@ -203,9 +203,14 @@ class TestEpicModel:
 class TestTaskView:
     pass
 
-@pytest.mark.xfail(reason="Models tests are not implemented yet")
+
 class TestSprintView:
-    pass
+    @pytest.mark.xfail(reason="building the Sprint view")
+    def test_sprint_list_view(self, client):
+        response = client.get(reverse('taskmanager:sprint-list'))
+        assert response.status_code == 200
+        assert 'sprints' in response.context
+        assert response.template_name == ['sprint/sprint_list.html']
 
 @pytest.mark.xfail(reason="Models tests are not implemented yet")
 class TestEpicView:

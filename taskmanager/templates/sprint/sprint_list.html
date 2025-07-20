@@ -1,0 +1,27 @@
+{% extends "task_manager_base/task_manager_base.html" %}
+{% load static %}
+
+{% block title %}
+    Sprint List
+{% endblock title %}
+
+{% block taskmanager_header %}
+    <h1>Sprint List</h1>
+{% endblock %}
+
+{% block page_content %}
+<section class="container">
+    <div class="list-group">
+        {% if sprints %}
+            <p>Here are the sprints:</p>
+            {% for sprint in sprints %}
+                <li>
+                    {{ sprint.name }}
+                </li>
+            {% endfor %}
+        {% else %}
+            <p>No sprints available.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

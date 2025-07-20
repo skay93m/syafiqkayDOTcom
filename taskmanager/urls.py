@@ -7,7 +7,10 @@ from .views import (
     ViewTaskCreate,
     ViewTaskDetail,
     ViewTaskDelete,
-    ViewTaskUpdate
+    ViewTaskUpdate,
+    ViewSprintList,
+    ViewSprintDetail,
+    ViewSprintCreate,
 )
 
 app_name = 'taskmanager'
@@ -22,5 +25,8 @@ urlpatterns = [
     path('task/<int:pk>/delete/', ViewTaskDelete.as_view(), name='task-delete'),
     path('task/<int:pk>/update/', ViewTaskUpdate.as_view(), name='task-update'),
     # Sprints pages
+    path('sprint/list/', ViewSprintList.as_view(), name='sprint-list'),
+    path('sprint/<int:pk>/', ViewSprintDetail.as_view(), name='sprint-detail'),
+    path('sprint/new/', ViewSprintCreate.as_view(), name='sprint-create'),
     # Epic pages
 ]
