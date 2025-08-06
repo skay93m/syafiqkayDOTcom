@@ -15,6 +15,3 @@ class ViewHomepage(TemplateView):
 CV
 '''
 
-@method_decorator(ensure_200_status, name='get')
-class ViewCV(TemplateView):
-    template_name = 'cv/cv_dashboard.html'
